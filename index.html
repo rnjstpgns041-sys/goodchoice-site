@@ -83,6 +83,22 @@ header .mark{background:rgba(255,255,255,.2)}
 
 /* Views */
 [hidden]{display:none!important}
+.gal{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+@media(min-width:640px){.gal{grid-template-columns:repeat(3,1fr);gap:14px}}
+.gal figure{margin:0;min-width:0}
+.gal .gbtn{display:block;width:100%;padding:0;border:0;background:var(--accent-soft);border-radius:14px;overflow:hidden;aspect-ratio:1;cursor:zoom-in}
+.gal img{width:100%;height:100%;object-fit:cover;display:block}
+@media (prefers-reduced-motion:no-preference){.gal img{transition:transform .4s}.gal .gbtn:hover img{transform:scale(1.05)}}
+.gal figcaption{font-size:13px;color:var(--muted);margin-top:8px;display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.gal figcaption a{color:var(--accent);font-weight:700;text-decoration:none}
+.lb{position:fixed;inset:0;z-index:100;background:rgba(12,14,34,.92);display:grid;grid-template-columns:56px 1fr 56px;align-items:center;padding:16px}
+.lb figure{margin:0;display:grid;justify-items:center;gap:12px;min-width:0}
+.lb img{max-width:100%;max-height:80vh;border-radius:12px;object-fit:contain}
+.lb .lbcap{color:#fff;font-size:15px;text-align:center}
+.lb button{background:rgba(255,255,255,.12);color:#fff;border:0;border-radius:999px;width:44px;height:44px;font-size:26px;line-height:1;cursor:pointer;justify-self:center}
+.lb .lbx{position:absolute;top:16px;right:16px;font-size:20px}
+@media(max-width:600px){.lb{grid-template-columns:40px 1fr 40px;padding:8px}.lb button{width:36px;height:36px;font-size:22px}}
+
 
 /* Hero (home) */
 .hero{background:var(--night);color:var(--on-night);padding-block:72px 96px;position:relative;overflow:hidden}
@@ -652,11 +668,11 @@ var SVC=[
   lead:'전월세로 살다 이사할 때는 설치하며 뚫었던 구멍이 문제가 됩니다. 정수기·식기세척기 철거부터 남은 흔적 복원까지, 처음 상태에 가깝게 되돌려 드립니다.',
   who:['정수기 호스 때문에 싱크대 상판에 구멍을 뚫어둔 세입자','샤워부스·선반을 떼고 남은 벽 구멍을 정리해야 할 때','퇴거 점검 전에 설치했던 것들을 한 번에 정리하고 싶을 때'],
   scope:[['정수기 철거','급수 호스·밸브 분리, 누수 확인'],['상판 타공 복원','싱크대 상판 구멍 메움'],['벽면 구멍 정리','고정 자국·타공 흔적 복원'],['가전 철거','식기세척기 등 이사 전 철거']]},
- {id:'kitchen',icon:'sink',name:'주방·싱크대',img:'photos/224425527882_before.jpg',short:'하부장 철거·재배치, 세제 디스펜서 교체 등 주방의 작은 불편.',
+ {id:'kitchen',icon:'sink',name:'주방·싱크대',img:'photos/224325847991_after.jpg',short:'하부장 철거·재배치, 세제 디스펜서 교체 등 주방의 작은 불편.',
   lead:'매일 쓰는 주방은 작은 불편이 크게 느껴집니다. 하부장 구조 변경부터 고장 난 세제 디스펜서 교체까지, 실사용 기준으로 손봐드립니다.',
   who:['세제 디스펜서 펌프가 뻑뻑하거나 세제가 안 올라올 때','하부장을 빼서 다른 가전을 넣고 싶을 때','싱크대 상판의 구멍·흔적을 정리하고 싶을 때'],
   scope:[['디스펜서 교체','펌프 불량·노후 제품 교체'],['하부장 철거·재배치','가전 설치 공간 확보'],['상판 보수','타공 흔적 복원'],['싱크볼 부속','부속 교체·정리']]},
- {id:'furniture',icon:'door',name:'문·가구',img:'',short:'문 여는 방향 변경, 가구 리폼, 선반과 수납 설치까지.',
+ {id:'furniture',icon:'door',name:'문·가구',img:'photos/224369548827_after.jpg',short:'문 여는 방향 변경, 가구 리폼, 선반과 수납 설치까지.',
   lead:'생활하면서 불편했던 작은 부분부터 손봅니다. 문이 여는 방향 때문에 동선이 꼬이거나, 가구를 공간에 맞게 고치고 싶을 때 맡겨주세요.',
   who:['문이 열리는 방향 때문에 동선이 불편할 때','가구 크기나 모양을 공간에 맞게 고치고 싶을 때','선반·수납장을 원하는 자리에 달고 싶을 때'],
   scope:[['문 방향 변경','여닫는 방향 바꾸기'],['가구 리폼','공간에 맞게 수정'],['선반 설치','벽면·장 내부 선반'],['수납 설치','철거한 가구 재활용 포함']]}
@@ -691,8 +707,71 @@ var CASES=[
   info:[['분야','세탁실 · 건조기'],['제품','삼성 AI콤보'],['작업','기존 장 안 설치']],
   before:'고객님이 구매한 AI콤보를 기존 세탁기 장 안에 넣어야 했습니다. 일반 세탁기보다 크고 무거워 장 안에 들어갈 수 있는지부터 확인이 필요했습니다.',
   work:['세탁기 장 내부 치수를 먼저 측정','급수·배수 위치와 제품 진입 시 간섭 여부 점검','제품을 장 안에 설치하고 급·배수 연결'],
-  after:'기존 장을 그대로 살리면서 큰 제품을 깔끔하게 설치했습니다.'}
+  after:'기존 장을 그대로 살리면서 큰 제품을 깔끔하게 설치했습니다.'},
+ {id:'224471235220',svc:'bath',cat:'욕실 · 하남',title:'샤워부스 프로파일·쫄대 교체',sum:'유리는 멀쩡한데 테두리만 낡은 샤워부스. 부스 전체가 아니라 프로파일과 쫄대만 새로 바꿨습니다.',
+  info:[['지역','경기 하남 위례'],['분야','욕실 · 샤워부스'],['작업','프로파일 · 쫄대 교체']],
+  before:'샤워부스는 유리보다 유리를 잡아주는 테두리 부분이 먼저 낡습니다. 습기와 물에 계속 닿다 보니 프로파일과 쫄대가 변색되고 들뜬 상태였습니다.',
+  work:['교체 전 프로파일과 쫄대 상태, 물이 닿는 위치 확인','기존 쫄대를 유리와 부스가 상하지 않게 분리','새 프로파일·쫄대 설치 후 문 개폐와 마감 상태 확인'],
+  after:'부스를 통째로 바꾸지 않고도 테두리가 새것처럼 깔끔해졌습니다.'},
+ {id:'224468666985',svc:'dish',cat:'식기세척기 · 송파',title:'빌트인 식기세척기 철거, 새 제품 설치 준비',sum:'오래 쓴 빌트인 식기세척기를 철거하고, 새 제품이 바로 들어갈 수 있게 급수·배수까지 정리했습니다.',
+  info:[['지역','서울 송파'],['분야','식기세척기'],['작업','철거 · 급배수 정리']],
+  before:'오래 사용한 빌트인 식기세척기를 새 제품으로 바꾸기로 하신 현장입니다. 새 제품 설치 날짜에 맞춰 기존 제품을 미리 빼 두어야 했습니다.',
+  work:['철거 전 급수 연결 상태부터 확인','기존 식기세척기를 하부장과 상판이 상하지 않게 철거','급수·배수 연결을 정리하고 설치 공간 상태 확인'],
+  after:'새 식기세척기가 바로 들어갈 수 있는 깨끗한 빈자리가 준비됐습니다.'},
+ {id:'224456253568',svc:'bath',cat:'욕실 · 강동',title:'세면대 배수 팝업·트랩 교체',sum:'물이 천천히 내려가던 세면대. 오래된 팝업과 하부 트랩까지 새것으로 바꿔 시원하게 내려갑니다.',
+  info:[['지역','서울 강동'],['분야','욕실'],['작업','배수 팝업 · 트랩 교체']],
+  before:'세면대 물이 예전보다 천천히 내려가고, 팝업을 눌러도 제대로 움직이지 않았습니다. 이물질만의 문제가 아니라 오래된 부속 자체가 낡은 상태였습니다.',
+  work:['하부 배관을 분리하고 기존 팝업 철거','새 팝업과 트랩을 규격에 맞게 준비','새 팝업 설치 후 물을 받아 배수 테스트'],
+  after:'팝업이 부드럽게 움직이고 물도 막힘 없이 내려갑니다.'},
+ {id:'224424461321',svc:'furniture',cat:'가구 · 중랑',title:'붙박이장 슬라이딩 문 롤러 수리',sum:'갑자기 뻑뻑해진 붙박이장 슬라이딩 도어. 문짝을 내려 롤러 베어링을 복원하고 다시 달았습니다.',
+  info:[['지역','서울 중랑'],['분야','문 · 가구'],['작업','롤러 베어링 복원']],
+  before:'붙박이장 슬라이딩 문은 크고 무거워서 상·하부 롤러가 제대로 굴러야 부드럽게 열립니다. 어느 날부터 문이 걸리고 뻑뻑해져 열고 닫기가 힘든 상태였습니다.',
+  work:['문짝을 분리해 레일과 문 상태 확인','롤러 베어링을 점검하고 복원','슬라이딩 도어를 다시 달고 작동 테스트'],
+  after:'장 전체를 바꾸지 않고 문이 다시 부드럽게 열고 닫힙니다.'},
+ {id:'224369548827',svc:'furniture',cat:'문 방향 · 성남',title:'세탁실 문 여는 방향 변경',sum:'안쪽으로 열리던 세탁실 문이 세탁기와 부딪히던 현장. 여는 방향을 바꿔 좁은 공간을 넓게 쓰게 됐습니다.',
+  info:[['지역','경기 성남'],['분야','문 방향 변경'],['작업','철거 · 가공 · 재설치']],
+  before:'세탁기·건조기·수납장이 함께 있는 좁은 세탁실인데 문이 안쪽으로 열리는 구조였습니다. 문을 열면 세탁기와 바로 부딪혀 드나들기가 불편했습니다.',
+  work:['기존 문과 문틀 상태 확인 후 문 철거','반대 방향으로 열리도록 문과 문틀 가공','재설치 후 걸림 없이 닫히도록 조정'],
+  after:'문이 바깥으로 열려 세탁실 안 공간을 온전히 쓸 수 있게 됐습니다.'},
+ {id:'224200184402',svc:'furniture',cat:'문 방향 · 강남',title:'방문 열림 방향 변경으로 동선 정리',sum:'복도 동선과 겹쳐 불편하던 방문. 여닫는 방향을 바꿔 출입과 가구 배치가 편해졌습니다.',
+  info:[['지역','서울 강남'],['분야','문 방향 변경'],['작업','방문 개폐 방향 변경']],
+  before:'방문이 열리는 방향 때문에 복도와 다른 출입구 동선이 겹쳐 드나들 때마다 불편했고, 가구 배치에도 제약이 있었습니다.',
+  work:['문과 문틀, 경첩 위치 확인','반대 방향으로 열리도록 경첩과 문틀 가공','재설치 후 손잡이·닫힘 상태 조정'],
+  after:'문 하나 방향을 바꿨을 뿐인데 집 안 동선이 훨씬 편해졌습니다.'},
+ {id:'224235324262',svc:'furniture',cat:'가구 · 강동',title:'파손된 장롱 문 맞춤 제작 교체',sum:'한쪽 문이 부서진 채 쓰던 붙박이장. 같은 크기로 문을 맞춤 제작해 새로 달았습니다.',
+  info:[['지역','서울 강동'],['분야','문 · 가구'],['작업','문 맞춤 제작 · 교체']],
+  before:'붙박이장 문 한쪽이 완전히 파손된 상태로 오랫동안 사용하던 현장이었습니다. 장 전체를 바꾸기엔 부담이 커서 문만 새로 하기로 했습니다.',
+  work:['기존 문 크기와 경첩 위치 실측','같은 규격으로 문을 맞춤 제작','새 문을 달고 기존 문들과 높이·간격 맞춤'],
+  after:'장롱을 바꾸지 않고도 처음처럼 반듯한 붙박이장이 됐습니다.'},
+ {id:'224365853425',svc:'laundry',cat:'세탁실 · 용인',title:'세탁기·건조기 직렬화, 맞춤 선반 설치',sum:'건조기 진동과 흔들림이 심했던 탕비실. 튼튼한 선반을 짜서 건조기를 세탁기 위로 올렸습니다.',
+  info:[['지역','경기 용인 처인구'],['분야','세탁실 · 건조기'],['작업','선반 조립 · 건조기 상부 설치']],
+  before:'공장 탕비실에 세탁기와 건조기가 있었는데, 건조기를 돌릴 때마다 진동과 흔들림이 심했습니다. 좁은 공간도 더 효율적으로 쓰고 싶어 하셨습니다.',
+  work:['설치 공간과 제품 크기 확인 후 설치 준비','세탁기를 감싸는 튼튼한 선반 조립','리프트로 건조기를 안전하게 올려 상부에 설치'],
+  after:'흔들림 없이 건조기를 쓰고, 바닥 공간도 넉넉해졌습니다.'},
+ {id:'224219219612',svc:'laundry',cat:'세탁실 · 성남',title:'좁은 세탁실 선반 설치, 건조기 올리기',sum:'세탁기만 겨우 들어가던 좁은 세탁실. 랙 선반을 설치해 새 건조기를 위에 올렸습니다.',
+  info:[['지역','경기 성남'],['분야','세탁실 · 건조기'],['작업','건조기 랙 설치']],
+  before:'세탁실 안에 기존 세탁기가 있었지만, 새로 산 건조기를 놓을 자리가 부족했습니다.',
+  work:['세탁실 폭·높이와 급배수 위치 확인','세탁기 위로 건조기 랙 선반 설치','건조기를 올려 고정하고 작동 확인'],
+  after:'좁은 세탁실 안에 세탁기와 건조기를 위아래로 깔끔하게 넣었습니다.'},
+ {id:'224325847991',svc:'kitchen',cat:'주방 · 강동',title:'싱크대 세제 디스펜서 교체',sum:'펌프가 고장 나 세제가 안 올라오던 디스펜서. 기존 제품을 빼고 새 제품으로 바꿨습니다.',
+  info:[['지역','서울 강동'],['분야','주방 · 싱크대'],['작업','디스펜서 교체']],
+  before:'싱크대 세제 디스펜서 펌프가 불량이라 눌러도 세제가 제대로 나오지 않았습니다. 매일 쓰는 거라 불편이 컸습니다.',
+  work:['기존 디스펜서를 상판에서 철거','새 제품 규격과 부속 확인','새 디스펜서 설치 후 작동 테스트'],
+  after:'세제가 다시 한 번에 시원하게 나옵니다.'},
+ {id:'224377017198',svc:'restore',cat:'원상복구 · 동탄',title:'TV 브라켓 철거 흔적, 타일 교체 없이 복원',sum:'벽걸이 TV를 떼고 남은 아트월 나사 구멍. 타일을 바꾸지 않고 흔적만 메워 비용을 줄였습니다.',
+  info:[['지역','경기 화성 동탄'],['분야','원상복구'],['작업','아트월 타공 흔적 복원']],
+  before:'벽걸이 TV를 철거하고 나니 아트월에 브라켓 나사 구멍과 타공 자국이 그대로 남았습니다. 타일 전체를 바꾸면 비용 부담이 컸습니다.',
+  work:['복원 전 구멍 위치와 크기 확인','주변 타일 색에 맞춰 복원 재료 준비','구멍을 하나씩 메우고 마감 상태 점검'],
+  after:'타일 교체 없이 TV 자국이 거의 보이지 않게 정리됐습니다.'},
+ {id:'224429550592',svc:'kitchen',cat:'주방 · 하남',title:'어르신을 위한 주방 안전손잡이 설치',sum:'싱크대 앞에서 몸을 지지할 곳이 없던 주방. 꼭 필요한 위치에 안전손잡이를 수평 맞춰 달았습니다.',
+  info:[['지역','경기 하남 위례'],['분야','주방'],['작업','안전손잡이 설치']],
+  before:'고령의 고객님께서 주방을 쓰실 때 몸을 지탱할 곳이 없어 불편해하셨습니다. 싱크대 주변에서 이동하거나 잠시 기댈 수 있는 손잡이가 필요했습니다.',
+  work:['실제 사용하시는 동선에 맞춰 설치 위치 확인','벽면에 단단히 고정되도록 타공 위치 잡기','수평을 맞춰 안전손잡이 설치'],
+  after:'싱크대 앞에서 손잡이를 잡고 안전하게 움직이실 수 있게 됐습니다.'}
 ];
+CASES.sort(function(a,b){return a.id<b.id?1:-1});
+var GAL={"224463095133": [[3, "작업 전"], [5, "철거 전 상황"], [7, "정수기 철거 작업"], [8, "정수기 철거 작업"], [9, "상판 타공 흔적 확인"], [14, "작업 후"]], "224457415114": [[4, "작업 중"], [7, "샤워부스 철거 작업"], [8, "철거 후 확인"], [11, "벽면 구멍 복원"], [13, "작업 후 변화"], [15, "작업 후"]], "224409039077": [[2, "작업 전"], [4, "어디에서 물이 넘어오는지 확인"], [5, "설치면 정리"], [6, "설치면 정리"], [8, "새로운 하부 쫄대 설치"], [10, "작업 후 달라진 점"]], "224425527882": [[3, "작업 전"], [6, "하부장 철거 작업"], [7, "하부장 철거 작업"], [9, "식기세척기 설치"], [11, "철거한 하부장 재활용"], [15, "작업 후"]], "224461641478": [[3, "작업 전"], [6, "작업 전 상황"], [7, "식기세척기 임시 철거"], [9, "전원 재연결 작업"], [10, "전원 재연결 작업"], [14, "작업 후"]], "224471235220": [[3, "작업 전"], [5, "교체 전 상황"], [6, "기존 쫄대 확인 및 분리"], [7, "마감 및 작동 확인"], [8, "작업 후 변화"], [10, "작업 후"]], "224468666985": [[3, "작업 전"], [5, "급수 연결부터 확인"], [6, "기존 식기세척기를 철거했습니다"], [7, "급수와 배수 연결을 정리했습니다"], [8, "철거 후 설치 공간 확인"], [10, "작업 후"]], "224456253568": [[3, "작업 전"], [7, "기존 팝업 철거"], [8, "새 팝업 준비"], [9, "새 팝업 설치"], [13, "작업 후 변화"], [17, "작업 후"]], "224424461321": [[2, "작업 전"], [5, "문짝 분리 & 상태 확인"], [7, "롤러 베어링 점검"], [8, "롤러 베어링 점검"], [9, "슬라이딩 도어 재설치"], [10, "작동 테스트"]], "224369548827": [[3, "기존 상태 확인"], [5, "문 철거 작업"], [9, "방향 변경 가공"], [12, "재설치 및 조정"], [14, "작업 중"], [17, "작업 후 변화"]], "224200184402": [[4, "작업 전"], [5, "작업 중"], [7, "작업 중"], [8, "작업 중"], [14, "작업 후"], [20, "작업 후"]], "224235324262": [[3, "작업 전"], [5, "작업 중"], [6, "작업 중"], [7, "작업 중"], [15, "작업 후"], [16, "작업 후"]], "224365853425": [[5, "설치 준비"], [7, "작업 중"], [9, "선반 조립"], [10, "선반 조립"], [12, "건조기 상부 설치"], [16, "작업 후 변화"]], "224219219612": [[4, "작업 전"], [5, "작업 중"], [6, "작업 중"], [7, "작업 중"], [14, "작업 후"], [16, "작업 후"]], "224325847991": [[3, "새 제품 확인"], [5, "기존 제품 철거"], [6, "기존 제품 철거"], [7, "본 설치 진행"], [9, "작업 후"], [10, "작업 후 변화"]], "224377017198": [[3, "복원 전 상태 확인"], [4, "복원 전 상태 확인"], [6, "복원 작업 준비"], [8, "본 복원 작업"], [9, "본 복원 작업"], [15, "작업 후"]], "224429550592": [[3, "작업 전"], [4, "작업 중"], [7, "안전손잡이 설치"], [8, "안전손잡이 설치"], [9, "작업 후 변화"], [12, "작업 후"]]};
+
 function svcById(id){for(var i=0;i<SVC.length;i++)if(SVC[i].id===id)return SVC[i]}
 function caseById(id){for(var i=0;i<CASES.length;i++)if(CASES[i].id===id)return CASES[i]}
 function esc(s){return String(s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
@@ -708,6 +787,13 @@ function caseCard(c){
 function compare(c){
   return '<div class="compare" style="--pos:50%"><img src="photos/'+c.id+'_before.jpg" alt="'+esc(c.title)+' 작업 전" width="966" height="966"><img class="after" src="photos/'+c.id+'_after.jpg" alt="'+esc(c.title)+' 작업 후" width="966" height="966"><span class="tag b">작업 전</span><span class="tag a">작업 후</span><span class="handle"></span><input type="range" min="0" max="100" value="50" aria-label="작업 전후 비교"></div>';
 }
+function galItems(ids,max){var out=[];ids.forEach(function(id){(GAL[id]||[]).forEach(function(g){out.push({src:'photos/g/'+id+'_'+(g[0]<10?'0':'')+g[0]+'.jpg',cap:g[1],id:id})})});return max?out.slice(0,max):out}
+function gallery(items,showLink){
+  return '<div class="gal">'+items.map(function(g,k){var c=caseById(g.id);return '<figure><button type="button" class="gbtn" data-k="'+k+'" aria-label="'+esc(g.cap)+' 크게 보기"><img src="'+g.src+'" alt="'+esc((c?c.title+' - ':'')+g.cap)+'" loading="lazy"></button><figcaption><span>'+esc(g.cap)+'</span>'+(showLink&&c?'<a href="#case-'+g.id+'">'+esc(c.cat)+'</a>':'')+'</figcaption></figure>'}).join('')+'</div>';
+}
+var LB_ITEMS=[],LB_I=0,lb;
+function lbShow(i){LB_I=(i+LB_ITEMS.length)%LB_ITEMS.length;var g=LB_ITEMS[LB_I];lb.querySelector('img').src=g.src;lb.querySelector('img').alt=g.cap;lb.querySelector('.lbcap').textContent=g.cap+'  ('+(LB_I+1)+' / '+LB_ITEMS.length+')'}
+function bindGallery(root,items){root.querySelectorAll('.gal').forEach(function(el){el.addEventListener('click',function(e){var b=e.target.closest('.gbtn');if(!b)return;LB_ITEMS=items;lbShow(+b.dataset.k);lb.hidden=false;document.body.style.overflow='hidden';lb.querySelector('.lbx').focus()})})}
 function bindCompare(root){
   root.querySelectorAll('.compare input').forEach(function(r){
     r.addEventListener('input',function(){r.parentNode.style.setProperty('--pos',r.value+'%')});
@@ -717,7 +803,7 @@ function bindCompare(root){
 // static lists
 document.getElementById('homeServices').innerHTML=SVC.map(svcCard).join('');
 document.getElementById('allServices').innerHTML=SVC.map(svcCard).join('');
-document.getElementById('homeCases').innerHTML=CASES.slice(0,3).map(caseCard).join('');
+document.getElementById('homeCases').innerHTML=CASES.slice(0,6).map(caseCard).join('');
 document.getElementById('footSvc').innerHTML=SVC.map(function(s){return '<a href="#svc-'+s.id+'">'+esc(s.name)+'</a>'}).join('');
 bindCompare(document);
 
@@ -733,16 +819,18 @@ renderCases('all');
 // service detail
 function renderSvc(s){
   var rel=CASES.filter(function(c){return c.svc===s.id||(s.id==='kitchen'&&(c.id==='224425527882'||c.id==='224463095133'))||(s.id==='restore'&&c.id==='224457415114')});
+  var sg=(function(){var per={},out=[];rel.forEach(function(c){per[c.id]=galItems([c.id])});for(var r=0;r<6&&out.length<12;r++)rel.forEach(function(c){var x=per[c.id][r];if(x&&out.length<12)out.push(x)});return out})();
   var tabs=SVC.map(function(x){return '<a href="#svc-'+x.id+'"'+(x.id===s.id?' aria-current="page"':'')+'>'+esc(x.name)+'</a>'}).join('');
   var heroStyle=s.img?' img" style="background-image:url('+s.img+')':'';
   var html='<section class="phero'+heroStyle+'"><div class="wrap"><div class="crumb"><a href="#home">홈</a><span>/</span><a href="#service">서비스</a><span>/</span><span>'+esc(s.name)+'</span></div><h1>'+esc(s.name)+'</h1><p class="lead">'+esc(s.lead)+'</p><nav class="tabs" aria-label="서비스 분야">'+tabs+'</nav></div></section>'+
   '<section style="padding-top:56px"><div class="wrap detail"><div>'+
     '<div class="block"><h2>이럴 때 맡겨주세요</h2><ul class="checks">'+s.who.map(function(w){return '<li>'+esc(w)+'</li>'}).join('')+'</ul></div>'+
     '<div class="block"><h2>작업 범위</h2><div class="scope">'+s.scope.map(function(x){return '<div><b>'+esc(x[0])+'</b><span>'+esc(x[1])+'</span></div>'}).join('')+'</div></div>'+
+    (sg.length?'<div class="block"><h2>현장 사진</h2>'+gallery(sg,true)+'</div>':'')+
     (rel.length?'<div class="block"><h2>관련 시공사례</h2>'+(rel[0]?compare(rel[0]):'')+'<div class="cgrid3" style="grid-template-columns:repeat(auto-fill,minmax(260px,1fr))">'+rel.map(caseCard).join('')+'</div></div>':
       '<div class="block"><h2>관련 시공사례</h2><p>이 분야의 작업 과정은 블로그에 꾸준히 올리고 있어요. <a class="link" href="https://blog.naver.com/las8015" target="_blank" rel="noopener">블로그에서 보기 '+ARR+'</a></p></div>')+
   '</div><aside class="aside"><h3>'+esc(s.name)+' 견적 받기</h3><p>사진 2장(멀리서 1장, 가까이 1장)과 지역을 문자로 보내주시면 확인 후 바로 연락드려요.</p><dl><dt>견적</dt><dd>사진 확인 후 안내</dd><dt>출장</dt><dd>서울·경기·인천·전국</dd></dl><a class="btn btn-accent" href="#contact" data-type="'+esc(s.name)+'"><svg><use href="#chat"/></svg>이 작업 문의하기</a><a class="btn btn-line" href="#process">진행 방법 보기</a></aside></div></section>';
-  var v=document.getElementById('svcView');v.innerHTML=html;bindCompare(v);
+  var v=document.getElementById('svcView');v.innerHTML=html;bindCompare(v);bindGallery(v,sg);
 }
 
 // case detail
@@ -751,13 +839,22 @@ function renderCase(c){
   var html='<section class="phero img" style="background-image:url(photos/'+c.id+'_after.jpg)"><div class="wrap"><div class="crumb"><a href="#home">홈</a><span>/</span><a href="#cases">시공사례</a><span>/</span><span>'+esc(c.cat)+'</span></div><h1>'+esc(c.title)+'</h1><p class="lead">'+esc(c.sum)+'</p></div></section>'+
   '<section style="padding-top:56px"><div class="wrap detail"><div>'+
     compare(c)+
+    (GAL[c.id]?'<div class="block" style="margin-top:56px"><h2>작업 과정 사진</h2>'+gallery(galItems([c.id]),false)+'</div>':'')+
     '<div class="block" style="margin-top:56px"><h2>작업 전 상황</h2><p>'+esc(c.before)+'</p></div>'+
     '<div class="block"><h2>이렇게 작업했습니다</h2><ol class="story">'+c.work.map(function(w,k){return '<li><h4>STEP '+(k+1)+'</h4><p>'+esc(w)+'</p></li>'}).join('')+'</ol></div>'+
     '<div class="block"><h2>결과</h2><p>'+esc(c.after)+'</p><p style="margin-top:16px"><a class="link" href="'+BLOG+c.id+'" target="_blank" rel="noopener">블로그에서 작업 과정 사진 전체 보기 '+ARR+'</a></p></div>'+
     '<div class="pager"><a href="#case-'+prev.id+'"><small>← 이전 사례</small><b>'+esc(prev.title)+'</b></a><a class="next" href="#case-'+next.id+'"><small>다음 사례 →</small><b>'+esc(next.title)+'</b></a></div>'+
   '</div><aside class="aside"><h3>현장 정보</h3><dl>'+c.info.map(function(x){return '<dt>'+esc(x[0])+'</dt><dd>'+esc(x[1])+'</dd>'}).join('')+'</dl><p>비슷한 작업이 필요하신가요? 사진 2장과 지역을 보내주시면 바로 견적을 드려요.</p><a class="btn btn-accent" href="#contact" data-type="'+esc(s?s.name:'')+'"><svg><use href="#chat"/></svg>비슷한 작업 문의하기</a>'+(s?'<a class="btn btn-line" href="#svc-'+s.id+'">'+esc(s.name)+' 서비스 보기</a>':'')+'</aside></div></section>';
-  var v=document.getElementById('caseView');v.innerHTML=html;bindCompare(v);
+  var v=document.getElementById('caseView');v.innerHTML=html;bindCompare(v);bindGallery(v,galItems([c.id]));
 }
+
+// lightbox
+lb=document.createElement('div');lb.className='lb';lb.hidden=true;lb.setAttribute('role','dialog');lb.setAttribute('aria-modal','true');lb.setAttribute('aria-label','사진 크게 보기');
+lb.innerHTML='<button type="button" class="lbx" aria-label="닫기">✕</button><button type="button" class="lbp" aria-label="이전 사진">‹</button><figure><img alt=""><figcaption class="lbcap"></figcaption></figure><button type="button" class="lbn" aria-label="다음 사진">›</button>';
+document.body.appendChild(lb);
+function lbClose(){lb.hidden=true;document.body.style.overflow=''}
+lb.addEventListener('click',function(e){if(e.target.closest('.lbx')||e.target===lb)lbClose();else if(e.target.closest('.lbp'))lbShow(LB_I-1);else if(e.target.closest('.lbn'))lbShow(LB_I+1)});
+document.addEventListener('keydown',function(e){if(lb.hidden)return;if(e.key==='Escape')lbClose();else if(e.key==='ArrowLeft')lbShow(LB_I-1);else if(e.key==='ArrowRight')lbShow(LB_I+1)});
 
 // router
 var views=document.querySelectorAll('.view');
@@ -769,7 +866,7 @@ function route(){
   else if(['service','cases','process','area','contact'].indexOf(h)>=0){show(h)}
   else{show('home');navKey='home'}
   document.querySelectorAll('[data-nav]').forEach(function(a){if(a.dataset.nav===navKey)a.setAttribute('aria-current','page');else a.removeAttribute('aria-current')});
-  closeDrawer();
+  closeDrawer();if(!lb.hidden)lbClose();
   window.scrollTo(0,0);
 }
 window.addEventListener('hashchange',route);
