@@ -6,9 +6,10 @@
 <meta name="description" content="굿초이스 집수리 · 집수리 & 리폼 전문. 식기세척기·건조기 설치, 샤워부스 철거, 이사 전 원상복구. 서울·경기·인천·전국 출장. 사진 2장이면 바로 견적.">
 <meta property="og:title" content="굿초이스 집수리 · 후회없는 선택">
 <meta property="og:description" content="식기세척기·건조기 설치, 샤워부스 철거, 이사 전 원상복구까지. 사진 2장이면 바로 견적.">
-<meta property="og:image" content="photos/hero_main.jpg">
+<meta property="og:image" content="https://las8015.com/photos/hero_main.jpg">
 <style>:root{color-scheme:light}body{margin:0}[hidden]{display:none!important}</style>
 <title>굿초이스 집수리</title>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"HomeAndConstructionBusiness","name":"굿초이스 집수리","description":"집수리 & 리폼 전문. 식기세척기·건조기 설치, 샤워부스 철거, 이사 전 원상복구, 문 방향 변경, 가구 리폼.","telephone":"+82-10-5809-9275","url":"https://las8015.com/","image":"https://las8015.com/photos/hero_main.jpg","areaServed":["서울","경기","인천","대한민국"],"sameAs":["https://blog.naver.com/las8015"]}</script>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
@@ -70,6 +71,9 @@ header .mark{background:rgba(255,255,255,.2)}
 .menu a{text-decoration:none;color:var(--on-night-muted);padding:8px 14px;border-radius:999px}
 .menu a:hover{color:var(--on-night)}
 .menu a[aria-current="page"]{color:var(--on-night);background:rgba(255,255,255,.14);font-weight:700}
+.htel{display:none;margin-left:12px;align-items:center;gap:6px;text-decoration:none;font-weight:700;font-size:15px;color:#fff;white-space:nowrap}
+.htel svg{width:16px;height:16px}
+@media(min-width:1120px){.htel{display:flex}}
 .hcall{margin-left:auto;display:none;align-items:center;gap:8px;text-decoration:none;font-weight:700;font-size:14px;padding:9px 16px;border-radius:999px;white-space:nowrap}
 .hcall svg{width:16px;height:16px}
 .burger{margin-left:auto;width:44px;height:44px;border-radius:12px;border:1px solid rgba(255,255,255,.25);background:transparent;color:#fff;display:grid;place-items:center;cursor:pointer}
@@ -455,6 +459,10 @@ footer .mark{background:rgba(255,255,255,.14)}
 footer .btn-accent{background:#fff;color:#3F4999;box-shadow:none}
 
 @media(max-width:619px){.services{grid-template-columns:1fr 1fr;gap:12px}.scard{border-radius:18px}.scard .bd{padding:28px 14px 16px;gap:4px}.scard h3{font-size:16px}.scard p{display:none}.scard .go{font-size:13px;padding-top:8px}.scard .ph .ic{width:40px;height:40px;left:12px;bottom:-18px;border-radius:12px}.scard .ph .ic svg{width:22px;height:22px}}
+.herotel{display:inline-flex;align-items:center;gap:8px;margin-top:20px;color:var(--on-night-muted);text-decoration:none;font-size:16px}
+.herotel svg{width:18px;height:18px}
+.herotel b{color:#fff;font-size:19px;letter-spacing:-.01em}
+.bigtel{color:#fff;text-decoration:none;display:block}
 /* reveal */
 @media (prefers-reduced-motion:no-preference){
 .rv{opacity:0;transform:translateY(22px);transition:opacity .7s cubic-bezier(.2,.7,.2,1) var(--d,0ms),transform .7s cubic-bezier(.2,.7,.2,1) var(--d,0ms)}
@@ -484,6 +492,7 @@ footer .btn-accent{background:#fff;color:#3F4999;box-shadow:none}
     <nav class="menu" aria-label="주요 메뉴">
       <a href="#service" data-nav="service">서비스</a><a href="#cases" data-nav="cases">시공사례</a><a href="#process" data-nav="process">진행 방법</a><a href="#area" data-nav="area">출장 지역</a><a href="#contact" data-nav="contact">견적 문의</a>
     </nav>
+    <a class="htel" href="tel:01058099275"><svg><use href="#phone"/></svg>010-5809-9275</a>
     <a class="hcall" href="#contact"><svg><use href="#chat"/></svg>사진 보내고 견적</a>
     <button class="burger" type="button" id="burger" aria-label="메뉴 열기"><svg><use href="#menu"/></svg></button>
   </div>
@@ -517,6 +526,7 @@ footer .btn-accent{background:#fff;color:#3F4999;box-shadow:none}
         <a class="btn btn-accent" href="#contact"><svg><use href="#chat"/></svg>사진 보내고 견적 받기</a>
         <a class="btn btn-ghost" href="#cases">시공사례 보기</a>
       </div>
+      <a class="herotel" href="tel:01058099275"><svg><use href="#phone"/></svg>전화·문자 <b>010-5809-9275</b></a>
       <div class="facts">
         <div><b>사진 2장</b><span>이면 바로 견적</span></div>
         <div><b>24개 지역</b><span>정기 출장</span></div>
@@ -737,8 +747,8 @@ footer .btn-accent{background:#fff;color:#3F4999;box-shadow:none}
       <div>
         <div class="telcard">
           <small>전화 · 문자 상담</small>
-          <b class="bigtel" id="tel">010-0000-0000</b>
-          <div class="ctas"><button class="btn" type="button" id="copytel" style="background:#fff;color:#3F4999"><svg><use href="#phone"/></svg><span>번호 복사</span></button><a class="btn btn-ghost" href="https://blog.naver.com/las8015" target="_blank" rel="noopener">블로그 보기</a></div>
+          <a class="bigtel" id="tel" href="tel:01058099275">010-5809-9275</a>
+          <div class="ctas"><button class="btn" type="button" id="copytel" style="background:#fff;color:#3F4999"><svg><use href="#phone"/></svg><span>번호 복사</span></button><a class="btn btn-ghost" href="https://talk.naver.com/w5i8w9" target="_blank" rel="noopener"><svg><use href="#chat"/></svg>네이버 톡톡</a></div>
         </div>
         <div class="how">
           <div><b>1</b><p>현장 사진 2장<small>멀리서 1장, 가까이 1장</small></p></div>
@@ -771,7 +781,7 @@ footer .btn-accent{background:#fff;color:#3F4999;box-shadow:none}
     <div class="wrap fgrid">
     <div>
       <a class="logo" href="#home"><span class="mark"><svg><use href="#check"/></svg></span>굿초이스 집수리</a>
-      <p>후회없는 선택 · 언제 어디서나 최고로 시공합니다<br>대표 ○○○ · 사업자등록번호 000-00-00000<br>주소 ○○시 ○○구 · 전화 010-0000-0000<br>© 2026 굿초이스 집수리</p>
+      <p>후회없는 선택 · 언제 어디서나 최고로 시공합니다<br>전화·문자 <a href="tel:01058099275" style="color:#fff;text-decoration:none;font-weight:700">010-5809-9275</a> · <a href="https://talk.naver.com/w5i8w9" target="_blank" rel="noopener">네이버 톡톡</a><br>서울 · 경기 · 인천 · 전국 출장<br>© 2026 굿초이스 집수리</p>
     </div>
     <div><h4>서비스</h4><nav id="footSvc"></nav></div>
     <div><h4>안내</h4><nav><a href="#cases">시공사례</a><a href="#process">진행 방법</a><a href="#area">출장 지역</a><a href="#contact">견적 문의</a><a href="https://blog.naver.com/las8015" target="_blank" rel="noopener">네이버 블로그</a></nav></div>
@@ -779,7 +789,7 @@ footer .btn-accent{background:#fff;color:#3F4999;box-shadow:none}
 </footer>
 
 <nav class="bar" aria-label="빠른 상담">
-  <a class="btn btn-ghost" href="tel:01000000000"><svg><use href="#phone"/></svg>전화</a>
+  <a class="btn btn-ghost" href="tel:01058099275"><svg><use href="#phone"/></svg>전화</a>
   <a class="btn btn-accent" href="#contact"><svg><use href="#chat"/></svg>사진 보내고 견적</a>
 </nav>
 
@@ -1047,8 +1057,9 @@ f.addEventListener('submit',function(e){
   if(!f.checkValidity()){done.hidden=false;done.textContent='이름, 연락처를 적고 개인정보 수집에 동의해 주세요.';return}
   var d=new FormData(f);
   var txt='[굿초이스 집수리 견적 문의]\n이름: '+d.get('name')+'\n연락처: '+d.get('phone')+'\n지역: '+(d.get('area')||'-')+'\n분야: '+d.get('type')+'\n내용: '+(d.get('msg')||'-');
-  done.hidden=false;done.textContent='아래 내용을 복사해 현장 사진 2장과 함께 문자로 보내주세요.';
+  done.hidden=false;done.textContent='아래 버튼을 누르면 문자창이 열려요. 현장 사진 2장을 붙여서 보내주세요. (PC에서는 내용을 복사해 010-5809-9275로 보내주세요)';
   var pre=document.createElement('pre');pre.textContent=txt;done.appendChild(pre);
+  var sms=document.createElement('a');sms.className='btn btn-accent';sms.style.marginTop='12px';sms.href='sms:01058099275'+(/iPhone|iPad|Mac/.test(navigator.userAgent)?'&':'?')+'body='+encodeURIComponent(txt);sms.textContent='이 내용으로 문자 보내기';done.appendChild(sms);
 });
 
 route();
