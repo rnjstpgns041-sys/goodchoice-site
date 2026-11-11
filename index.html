@@ -10,6 +10,8 @@
 <style>:root{color-scheme:light}body{margin:0}[hidden]{display:none!important}</style>
 <title>굿초이스 집수리</title>
 <meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=JetBrains+Mono:wght@500&display=swap">
@@ -19,7 +21,7 @@
   --bg:#F6F7FB; --surface:#FFFFFF; --ink:#12142B; --muted:#5F6480; --line:#E2E4EE;
   --night:#4F5AB6; --night-2:#3F4999; --deep:#262C6B; --on-night:#FFFFFF; --on-night-muted:#DCDFF7; --hl:#C9CEFF;
   --accent:#4F5AB6; --accent-ink:#FFFFFF; --accent-soft:#E7E9FA;
-  --f-sans:"Noto Sans KR","Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;
+  --f-sans:"Pretendard Variable",Pretendard,"Noto Sans KR","Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;
   --f-mono:"JetBrains Mono",ui-monospace,monospace;
 }
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
@@ -342,6 +344,121 @@ footer nav a:hover{color:var(--ink)}
 @media(min-width:900px){.bar{display:none}}
 @media (prefers-reduced-motion:no-preference){.view{animation:fade .35s ease}}
 @keyframes fade{from{opacity:.4;transform:translateY(6px)}to{opacity:1;transform:none}}
+
+/* ===== v8 polish ===== */
+body{letter-spacing:-.01em}
+.h2{letter-spacing:-.04em}
+.label{font-size:12px;font-weight:600}
+.btn{transition:transform .15s,box-shadow .2s,background .2s}
+.btn-accent{box-shadow:0 10px 24px -12px rgba(79,90,182,.8)}
+.btn:hover{transform:translateY(-1px)}
+.btn-line:hover{border-color:var(--accent);color:var(--accent)}
+header{transition:box-shadow .2s,background .2s}
+header.scrolled{box-shadow:0 10px 30px -18px rgba(12,14,40,.6)}
+
+/* hero */
+.hero{background:
+  radial-gradient(900px 520px at 88% 0%,rgba(140,150,240,.55),transparent 60%),
+  radial-gradient(700px 520px at -5% 105%,rgba(26,31,77,.75),transparent 60%),
+  linear-gradient(160deg,#5863C4 0%,#4652AE 45%,#323B8C 100%);padding-block:64px 104px}
+.hero::after{display:none}
+.hero-grid{position:absolute;inset:0;pointer-events:none;opacity:.5;
+  background-image:linear-gradient(rgba(255,255,255,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.07) 1px,transparent 1px);background-size:56px 56px;
+  -webkit-mask-image:radial-gradient(ellipse at 70% 30%,#000 10%,transparent 70%);mask-image:radial-gradient(ellipse at 70% 30%,#000 10%,transparent 70%)}
+.hero h1{text-shadow:0 2px 30px rgba(20,24,70,.25)}
+.hero h1 span{background:linear-gradient(90deg,#DDE1FF,#AEB6FF);-webkit-background-clip:text;background-clip:text;color:transparent}
+.facts b{font-size:28px}
+.bento{position:relative;display:grid;grid-template-columns:1.25fr 1fr;grid-template-rows:1fr 1fr;gap:14px;aspect-ratio:1/1.02;max-width:560px;width:100%;margin:0 auto}
+.bento a{position:relative;display:block;border-radius:22px;overflow:hidden;background:var(--deep);box-shadow:0 30px 60px -24px rgba(8,10,40,.65);text-decoration:none}
+.bento .b1{grid-row:1/3}
+.bento img{width:100%;height:100%;object-fit:cover;display:block}
+.bento a span{position:absolute;left:10px;bottom:10px;right:10px;width:fit-content;font-size:12px;font-weight:600;line-height:1.35;color:#fff;background:rgba(18,20,50,.62);backdrop-filter:blur(8px);padding:6px 10px;border-radius:10px}
+@media (prefers-reduced-motion:no-preference){.bento img{transition:transform .6s}.bento a:hover img{transform:scale(1.06)}}
+.bento .bubble{right:auto;left:-18px;top:auto;bottom:22%;z-index:2}
+.stamp{position:absolute;right:-14px;top:-18px;z-index:2;width:104px;height:104px;border-radius:50%;background:#fff;color:#2B3170;display:grid;place-content:center;text-align:center;box-shadow:0 18px 40px -14px rgba(0,0,0,.45);transform:rotate(8deg)}
+.stamp b{font-size:34px;font-weight:900;line-height:1;letter-spacing:-.04em;color:#4F5AB6}
+.stamp b::after{content:"+";font-size:20px;vertical-align:top}
+.stamp span{font-size:11px;font-weight:700;line-height:1.3;margin-top:4px;color:#5A61A0}
+@media(max-width:560px){.bento{gap:10px}.bento .bubble{left:-6px;bottom:8px}.stamp{width:84px;height:84px;right:-6px;top:-14px}.stamp b{font-size:27px}.bento a span{font-size:11px}}
+@media(max-width:979px){.bento{margin-top:8px}}
+.strip{background:#1E2360}
+
+/* services */
+.scard{border-radius:24px;box-shadow:0 1px 2px rgba(18,20,43,.04)}
+.scard .ph{aspect-ratio:4/3}
+.scard .ph::after{content:"";position:absolute;inset:auto 0 0;height:40%;background:linear-gradient(transparent,rgba(18,20,43,.25));pointer-events:none}
+.scard .ph .ic{z-index:1}
+
+/* before/after showcase */
+.batabs{display:flex;flex-wrap:wrap;gap:8px}
+.batabs button{font:inherit;font-size:14px;font-weight:600;padding:10px 18px;border-radius:999px;border:1px solid var(--line);background:var(--bg);color:var(--muted);cursor:pointer;transition:all .2s}
+.batabs button[aria-selected="true"]{background:var(--accent);border-color:var(--accent);color:var(--accent-ink);box-shadow:0 10px 24px -12px rgba(79,90,182,.8)}
+#baView .compare{box-shadow:0 30px 60px -30px rgba(18,20,43,.45)}
+#baView .btn svg{stroke:currentColor}
+
+/* photo reel */
+.reel{padding-bottom:88px;overflow:hidden}
+.reel .rows{display:grid;gap:14px;margin-top:44px}
+.reel .row{overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent)}
+.reel .track{display:flex;gap:14px;width:max-content}
+@media (prefers-reduced-motion:no-preference){.reel .track{animation:m 70s linear infinite}.reel .rev .track{animation-direction:reverse}.reel .row:hover .track{animation-play-state:paused}}
+.reel .track a{position:relative;flex:none;width:clamp(150px,18vw,240px);aspect-ratio:1;border-radius:18px;overflow:hidden;display:block;background:var(--accent-soft)}
+.reel .track img{width:100%;height:100%;object-fit:cover;display:block}
+.reel .track a span{position:absolute;left:8px;bottom:8px;font-size:11px;font-weight:600;color:#fff;background:rgba(18,20,50,.6);backdrop-filter:blur(6px);padding:4px 8px;border-radius:8px}
+@media(max-width:700px){.reel .row{-webkit-mask-image:none;mask-image:none}}
+
+/* why */
+.deep{background:radial-gradient(800px 500px at 100% 0%,rgba(79,90,182,.45),transparent 60%),var(--deep)}
+.why{display:grid;gap:48px}
+@media(min-width:980px){.why{grid-template-columns:.85fr 1.15fr;align-items:start}.whyhead{position:sticky;top:110px}}
+.why .princ{margin-top:0}
+@media(min-width:800px) and (max-width:979px){.why .princ{margin-top:0}}
+.whyimg{margin:36px 0 0;border-radius:22px;overflow:hidden;position:relative;aspect-ratio:4/3;box-shadow:0 30px 60px -30px rgba(0,0,0,.6)}
+.whyimg img{width:100%;height:100%;object-fit:cover;display:block}
+.whyimg figcaption{position:absolute;left:12px;bottom:12px;font-size:12px;font-weight:600;background:rgba(18,20,50,.62);backdrop-filter:blur(6px);padding:6px 10px;border-radius:10px}
+.pr{background:linear-gradient(180deg,rgba(255,255,255,.07),rgba(255,255,255,.02));transition:border-color .2s,transform .2s}
+.pr:hover{border-color:rgba(201,206,255,.4)}
+.pr b{display:inline-flex;width:fit-content;padding:4px 10px;border-radius:999px;background:rgba(201,206,255,.12)}
+
+/* case cards */
+.ccard{border-radius:24px}
+.ccard .bd{padding:22px 24px 24px}
+.ccard h3{font-size:19px;font-weight:800;letter-spacing:-.03em}
+
+/* bands */
+.band{background:linear-gradient(120deg,#4F5AB6,#3A438F)}
+.band.photo{background:linear-gradient(100deg,rgba(38,44,107,.96) 30%,rgba(79,90,182,.72)),var(--ph) center/cover;}
+.band.photo::after{display:none}
+
+/* sub heroes */
+.phero{padding-block:64px 72px}
+.phero.img{background-color:var(--deep)}
+.phero.img::before{background:linear-gradient(90deg,rgba(30,35,96,.96) 0%,rgba(52,61,150,.82) 55%,rgba(79,90,182,.5))}
+
+/* steps */
+.steps li{border-radius:22px;position:relative;box-shadow:0 1px 2px rgba(18,20,43,.04)}
+.steps li::before{font-size:13px;font-weight:600;width:fit-content;padding:5px 12px;border-radius:999px;background:var(--accent-soft)}
+.guide img{height:auto}
+.acard{border-radius:24px}
+.chips span{transition:all .2s}
+.chips span:hover{background:var(--accent-soft);border-color:var(--accent);color:var(--accent)}
+
+/* footer */
+footer{background:#14173D;color:#A9AED6;border-top:0;padding-block:64px}
+footer .logo{color:#fff}
+footer h4{color:#fff}
+footer nav a:hover{color:#fff}
+footer .mark{background:rgba(255,255,255,.14)}
+.fcta{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:24px;padding-block:56px;border-bottom:1px solid rgba(255,255,255,.1);margin-bottom:48px}
+.fcta h2{color:#fff;font-size:clamp(24px,3.4vw,36px);font-weight:900;margin-top:12px;letter-spacing:-.04em}
+.fcta .label{color:var(--hl)}
+footer .btn-accent{background:#fff;color:#3F4999;box-shadow:none}
+
+@media(max-width:619px){.services{grid-template-columns:1fr 1fr;gap:12px}.scard{border-radius:18px}.scard .bd{padding:28px 14px 16px;gap:4px}.scard h3{font-size:16px}.scard p{display:none}.scard .go{font-size:13px;padding-top:8px}.scard .ph .ic{width:40px;height:40px;left:12px;bottom:-18px;border-radius:12px}.scard .ph .ic svg{width:22px;height:22px}}
+/* reveal */
+@media (prefers-reduced-motion:no-preference){
+.rv{opacity:0;transform:translateY(22px);transition:opacity .7s cubic-bezier(.2,.7,.2,1) var(--d,0ms),transform .7s cubic-bezier(.2,.7,.2,1) var(--d,0ms)}
+.rv.in{opacity:1;transform:none}}
 </style>
 
 </head>
@@ -390,6 +507,7 @@ footer nav a:hover{color:var(--ink)}
 <!-- ================= HOME ================= -->
 <div class="view" data-view="home">
 <section class="hero on-blue">
+  <div class="hero-grid" aria-hidden="true"></div>
   <div class="wrap hgrid">
     <div>
       <span class="kicker"><i></i>집수리 &amp; 리폼 전문 · 전국 출장</span>
@@ -405,10 +523,12 @@ footer nav a:hover{color:var(--ink)}
         <div><b>전국</b><span>어디든 방문</span></div>
       </div>
     </div>
-    <div class="shots">
-      <figure class="shot main"><img src="photos/hero_main.jpg" alt="하부장 철거 후 빌트인 식기세척기를 설치한 주방" width="966" height="966" fetchpriority="high"><figcaption>하부장 철거 · 빌트인 식기세척기 설치</figcaption></figure>
-      <figure class="shot sub"><img src="photos/hero_sub.jpg" alt="샤워부스를 철거하고 벽면을 복원한 욕실" width="966" height="966"><figcaption>샤워부스 철거 · 벽면 복원</figcaption></figure>
+    <div class="bento">
+      <a class="b1" href="#case-224425527882"><img src="photos/hero_main.jpg" alt="하부장 철거 후 빌트인 식기세척기를 설치한 주방" width="966" height="966" fetchpriority="high"><span>하부장 철거 · 빌트인 식기세척기</span></a>
+      <a class="b2" href="#case-224369548827"><img src="photos/224369548827_after.jpg" alt="여는 방향을 바꾼 세탁실 문" width="966" height="966"><span>세탁실 문 방향 변경</span></a>
+      <a class="b3" href="#case-224457415114"><img src="photos/hero_sub.jpg" alt="샤워부스를 철거하고 벽면을 복원한 욕실" width="966" height="966"><span>샤워부스 철거 · 벽면 복원</span></a>
       <div class="bubble"><span class="mark"><svg><use href="#chat"/></svg></span><div><b>사진 2장이면 견적 끝</b><small>멀리서 1장 · 가까이 1장</small></div></div>
+      <div class="stamp"><b id="caseCount">18</b><span>공개한<br>시공사례</span></div>
     </div>
   </div>
 </section>
@@ -430,9 +550,11 @@ footer nav a:hover{color:var(--ink)}
 
 <section style="background:var(--surface)">
   <div class="wrap">
-    <p class="label">Before &amp; After</p>
-    <h2 class="h2">밀어서 비교해 보세요</h2>
-    <div class="feature">
+    <div class="sechead">
+      <div><p class="label">Before &amp; After</p><h2 class="h2">밀어서 비교해 보세요</h2></div>
+      <div class="batabs" id="baTabs" role="tablist" aria-label="비교할 현장"></div>
+    </div>
+    <div class="feature" id="baView">
       <div class="compare" style="--pos:50%"><img src="photos/224409039077_before.jpg" alt="물막이가 없어 물이 넘치던 샤워부스 하단" width="966" height="966"><img class="after" src="photos/224409039077_after.jpg" alt="하부 물막이를 새로 설치한 샤워부스" width="966" height="966"><span class="tag b">작업 전</span><span class="tag a">작업 후</span><span class="handle"></span><input type="range" min="0" max="100" value="50" aria-label="작업 전후 비교"></div>
       <div>
         <span class="cat">욕실 · 샤워부스</span>
@@ -445,11 +567,22 @@ footer nav a:hover{color:var(--ink)}
   </div>
 </section>
 
+<section class="reel" aria-label="현장 사진">
+  <div class="wrap sechead">
+    <div><p class="label">Field Log</p><h2 class="h2">현장마다 사진으로<br>기록합니다</h2></div>
+    <a class="link" href="https://blog.naver.com/las8015" target="_blank" rel="noopener">블로그 시공 기록 보기 <svg><use href="#arrow"/></svg></a>
+  </div>
+  <div class="rows"><div class="row" id="reel1"></div><div class="row rev" id="reel2"></div></div>
+</section>
+
 <section class="deep">
-  <div class="wrap">
+  <div class="wrap why">
+    <div class="whyhead">
     <p class="label">Why 굿초이스</p>
     <h2 class="h2">교체보다 먼저,<br>원인부터 봅니다.</h2>
     <p class="sub">물이 넘친다고 바로 실리콘부터 다시 쏘지 않습니다. 어디서 문제가 생기는지 확인하고, 꼭 필요한 만큼만 고칩니다.</p>
+    <figure class="whyimg"><img src="photos/g/224369548827_12.jpg" alt="현장에서 문짝을 직접 가공하는 모습" loading="lazy"><figcaption>현장에서 직접 가공 · 세탁실 문 방향 변경</figcaption></figure>
+    </div>
     <div class="princ">
       <div class="pr"><b>01 · 견적</b><h3>사진 2장이면 바로 견적</h3><p>멀리서 1장, 가까이 1장. 문자로 사진과 지역을 보내주시면 확인 후 바로 견적과 일정을 잡아드립니다.</p></div>
       <div class="pr"><b>02 · 범위</b><h3>필요한 부분만 정확하게</h3><p>샤워부스 물넘침은 없어진 쫄대만, 철거 뒤 구멍은 그 자리만. 멀쩡한 곳까지 바꾸지 않습니다.</p></div>
@@ -471,7 +604,7 @@ footer nav a:hover{color:var(--ink)}
 
 <section style="padding-top:0">
   <div class="wrap">
-    <div class="band on-blue">
+    <div class="band on-blue photo" style="--ph:url(photos/224471235220_after.jpg)">
       <div><h2>고칠 곳 사진, 지금 찍어 보내주세요</h2><p>멀리서 1장, 가까이 1장과 지역만 있으면 바로 견적을 드려요.</p></div>
       <div class="ctas"><a class="btn btn-accent" href="#contact"><svg><use href="#chat"/></svg>견적 문의하기</a><a class="btn btn-ghost" href="#process">진행 방법</a></div>
     </div>
@@ -481,7 +614,7 @@ footer nav a:hover{color:var(--ink)}
 
 <!-- ================= SERVICE LIST ================= -->
 <div class="view" data-view="service" hidden>
-  <section class="phero">
+  <section class="phero img" style="background-image:url(photos/224425527882_after.jpg)">
     <div class="wrap">
       <div class="crumb"><a href="#home">홈</a><span>/</span><span>서비스</span></div>
       <h1>무엇이든 맡겨주세요</h1>
@@ -525,7 +658,7 @@ footer nav a:hover{color:var(--ink)}
 
 <!-- ================= PROCESS ================= -->
 <div class="view" data-view="process" hidden>
-  <section class="phero">
+  <section class="phero img" style="background-image:url(photos/224219219612_after.jpg)">
     <div class="wrap">
       <div class="crumb"><a href="#home">홈</a><span>/</span><span>진행 방법</span></div>
       <h1>문자 한 통으로 시작합니다</h1>
@@ -569,7 +702,7 @@ footer nav a:hover{color:var(--ink)}
 
 <!-- ================= AREA ================= -->
 <div class="view" data-view="area" hidden>
-  <section class="phero">
+  <section class="phero img" style="background-image:url(photos/224235324262_after.jpg)">
     <div class="wrap">
       <div class="crumb"><a href="#home">홈</a><span>/</span><span>출장 지역</span></div>
       <h1>어디든 찾아갑니다</h1>
@@ -584,13 +717,15 @@ footer nav a:hover{color:var(--ink)}
         <div class="acard"><h3>그 외 <small>인천·충남</small></h3><div class="chips"><span>인천 연수구</span><span>인천 서구</span><span>평택시</span><span>천안시</span></div></div>
       </div>
       <div class="nation"><div><b>목록에 없는 지역도 출장 갑니다</b><p style="color:var(--muted);font-size:15px">서울 · 경기 · 인천 및 전국 어디든 문의해 주세요.</p></div><a class="btn btn-accent" href="#contact">우리 동네 가능한지 묻기</a></div>
+      <div class="sechead" style="margin-top:72px"><div><p class="label">Recent</p><h2 class="h2">최근 다녀온 동네</h2></div><a class="link" href="#cases">시공사례 전체 보기 <svg><use href="#arrow"/></svg></a></div>
+      <div class="cgrid3" id="areaCases"></div>
     </div>
   </section>
 </div>
 
 <!-- ================= CONTACT ================= -->
 <div class="view" data-view="contact" hidden>
-  <section class="phero">
+  <section class="phero img" style="background-image:url(photos/224471235220_after.jpg)">
     <div class="wrap">
       <div class="crumb"><a href="#home">홈</a><span>/</span><span>견적 문의</span></div>
       <h1>사진 한 장이면<br>견적이 나옵니다</h1>
@@ -633,7 +768,7 @@ footer nav a:hover{color:var(--ink)}
 </main>
 
 <footer>
-  <div class="wrap fgrid">
+    <div class="wrap fgrid">
     <div>
       <a class="logo" href="#home"><span class="mark"><svg><use href="#check"/></svg></span>굿초이스 집수리</a>
       <p>후회없는 선택 · 언제 어디서나 최고로 시공합니다<br>대표 ○○○ · 사업자등록번호 000-00-00000<br>주소 ○○시 ○○구 · 전화 010-0000-0000<br>© 2026 굿초이스 집수리</p>
@@ -804,6 +939,20 @@ function bindCompare(root){
 document.getElementById('homeServices').innerHTML=SVC.map(svcCard).join('');
 document.getElementById('allServices').innerHTML=SVC.map(svcCard).join('');
 document.getElementById('homeCases').innerHTML=CASES.slice(0,6).map(caseCard).join('');
+document.getElementById('areaCases').innerHTML=CASES.filter(function(c){return c.info.some(function(x){return x[0]==='지역'})}).slice(0,6).map(caseCard).join('');
+document.getElementById('caseCount').textContent=CASES.length;
+// photo reel
+(function(){var items=[];CASES.forEach(function(c){(GAL[c.id]||[]).forEach(function(g){items.push({id:c.id,cat:c.cat,src:'photos/g/'+c.id+'_'+(g[0]<10?'0':'')+g[0]+'.jpg',cap:g[1]})})});
+  var a=[],b=[];items.forEach(function(x,i){(i%2?b:a).push(x)});a=a.slice(0,16);b=b.slice(0,16);
+  function row(list){var s=list.map(function(x){return '<a href="#case-'+x.id+'" tabindex="-1"><img src="'+x.src+'" alt="'+esc(x.cat+' '+x.cap)+'" loading="lazy" width="240" height="240"><span>'+esc(x.cat)+'</span></a>'}).join('');return '<div class="track">'+s+s+'</div>'}
+  document.getElementById('reel1').innerHTML=row(a);document.getElementById('reel2').innerHTML=row(b);})();
+// before/after showcase
+(function(){var ids=['224409039077','224369548827','224457415114','224325847991'],names={'224409039077':'샤워부스 물막이','224369548827':'문 방향 변경','224457415114':'샤워부스 철거','224325847991':'디스펜서 교체'},tabs=document.getElementById('baTabs'),view=document.getElementById('baView');
+  function show(id){var c=caseById(id);if(!c)return;
+    view.innerHTML=compare(c)+'<div><span class="cat">'+esc(c.cat)+'</span><h3 style="margin-top:10px">'+esc(c.title)+'</h3><p>'+esc(c.sum)+'</p><ul class="checks">'+c.work.map(function(w){return '<li>'+esc(w)+'</li>'}).join('')+'</ul><div class="ctas"><a class="btn btn-accent" href="#case-'+c.id+'">이 현장 자세히 보기 '+ARR+'</a></div></div>';
+    bindCompare(view);tabs.querySelectorAll('button').forEach(function(b){b.setAttribute('aria-selected',b.dataset.id===id?'true':'false')})}
+  tabs.innerHTML=ids.map(function(id){var c=caseById(id);return '<button type="button" role="tab" data-id="'+id+'">'+esc(names[id])+'</button>'}).join('');
+  tabs.addEventListener('click',function(e){var b=e.target.closest('button');if(b)show(b.dataset.id)});show(ids[0]);})();
 document.getElementById('footSvc').innerHTML=SVC.map(function(s){return '<a href="#svc-'+s.id+'">'+esc(s.name)+'</a>'}).join('');
 bindCompare(document);
 
@@ -868,8 +1017,13 @@ function route(){
   document.querySelectorAll('[data-nav]').forEach(function(a){if(a.dataset.nav===navKey)a.setAttribute('aria-current','page');else a.removeAttribute('aria-current')});
   closeDrawer();if(!lb.hidden)lbClose();
   window.scrollTo(0,0);
+  reveal();
 }
 window.addEventListener('hashchange',route);
+var RV='.sechead,.services>*,.cgrid3>*,.princ>*,.whyhead,.feature,.steps>li,.band,.areagrid>*,.nation,.guide>*,.block,.scope>*,.gal>figure,.fcta';
+var io='IntersectionObserver' in window&&!matchMedia('(prefers-reduced-motion: reduce)').matches?new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{rootMargin:'0px 0px -8% 0px'}):null;
+function reveal(){if(!io)return;document.querySelectorAll('.view:not([hidden]) :is('+RV+'):not(.rv),footer :is('+RV+'):not(.rv)').forEach(function(el,i){el.classList.add('rv');el.style.setProperty('--d',(i%3)*70+'ms');io.observe(el)})}
+document.querySelector('header').classList.toggle('scrolled',scrollY>8);addEventListener('scroll',function(){document.querySelector('header').classList.toggle('scrolled',scrollY>8)},{passive:true});
 
 // preset type when coming from a service/case CTA
 document.addEventListener('click',function(e){var a=e.target.closest('a[data-type]');if(a&&a.dataset.type){var sel=document.getElementById('f-type');for(var i=0;i<sel.options.length;i++)if(sel.options[i].text===a.dataset.type)sel.selectedIndex=i}});
