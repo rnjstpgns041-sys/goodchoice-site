@@ -463,6 +463,70 @@ footer .btn-accent{background:#fff;color:#3F4999;box-shadow:none}
 .herotel svg{width:18px;height:18px}
 .herotel b{color:#fff;font-size:19px;letter-spacing:-.01em}
 .bigtel{color:#fff;text-decoration:none;display:block}
+
+/* ===== v9 home sections ===== */
+.symgrid{display:grid;gap:12px;margin-top:40px}
+@media(min-width:640px){.symgrid{grid-template-columns:repeat(2,1fr)}}
+@media(min-width:1000px){.symgrid{grid-template-columns:repeat(3,1fr)}}
+.symgrid a{display:flex;align-items:center;gap:14px;padding:12px 18px 12px 12px;border-radius:18px;background:var(--surface);border:1px solid var(--line);text-decoration:none;transition:border-color .2s,transform .2s,box-shadow .2s}
+.symgrid a:hover{border-color:var(--accent);transform:translateY(-2px);box-shadow:0 16px 30px -20px rgba(79,90,182,.6)}
+.symgrid img{width:60px;height:60px;border-radius:12px;object-fit:cover;flex:none}
+.symgrid span{flex:1;display:grid;min-width:0}
+.symgrid b{font-size:16px;font-weight:700;letter-spacing:-.02em}
+.symgrid small{font-size:13px;color:var(--accent);font-weight:600}
+.symgrid svg{width:18px;height:18px;stroke:var(--muted);flex:none}
+.nums{padding-block:0;background:var(--deep);color:#fff;position:relative}
+.nums::before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,#3A438F,#262C6B)}
+.numgrid{position:relative;display:grid;grid-template-columns:repeat(2,1fr)}
+@media(min-width:900px){.numgrid{grid-template-columns:repeat(4,1fr)}}
+.numgrid div{padding:44px 12px;text-align:center;display:grid;gap:8px;border-right:1px solid rgba(255,255,255,.1)}
+.numgrid div:last-child{border-right:0}
+@media(max-width:899px){.numgrid div:nth-child(2){border-right:0}.numgrid div:nth-child(-n+2){border-bottom:1px solid rgba(255,255,255,.1)}}
+.numgrid b{font-size:clamp(40px,5vw,60px);font-weight:900;letter-spacing:-.05em;line-height:1}
+.numgrid b i{font-style:normal;font-size:.5em;color:var(--hl);margin-left:2px}
+.numgrid span{font-size:14px;color:var(--on-night-muted);line-height:1.5}
+.whogrid{display:grid;gap:16px;margin-top:44px}
+@media(min-width:700px){.whogrid{grid-template-columns:repeat(2,1fr)}}
+@media(min-width:1100px){.whogrid{grid-template-columns:repeat(4,1fr)}}
+.whogrid a{position:relative;display:block;border-radius:24px;overflow:hidden;aspect-ratio:4/5;text-decoration:none;color:#fff;background:var(--deep)}
+@media(max-width:699px){.whogrid a{aspect-ratio:auto;min-height:300px}}
+.whogrid img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.whogrid a::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(18,20,50,0) 30%,rgba(18,20,50,.88))}
+.whogrid div{position:absolute;left:0;right:0;bottom:0;padding:24px;z-index:1;display:grid;gap:8px}
+.whogrid h3{font-size:22px;font-weight:900}
+.whogrid p{font-size:14px;color:rgba(255,255,255,.82);line-height:1.6}
+.whogrid span{display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:700;color:var(--hl)}
+.whogrid span svg{width:15px;height:15px;stroke:currentColor}
+@media (prefers-reduced-motion:no-preference){.whogrid img{transition:transform .6s}.whogrid a:hover img{transform:scale(1.06)}}
+.flowsteps{list-style:none;padding:0;margin:48px 0 0;display:grid;gap:16px;position:relative}
+@media(min-width:900px){.flowsteps{grid-template-columns:repeat(4,1fr);gap:24px}.flowsteps::before{content:"";position:absolute;left:28px;right:28px;top:28px;height:2px;background:repeating-linear-gradient(90deg,var(--accent) 0 8px,transparent 8px 16px);opacity:.35}}
+.flowsteps li{position:relative;display:grid;gap:8px;align-content:start}
+@media(max-width:899px){.flowsteps li{grid-template-columns:56px 1fr;column-gap:16px}.flowsteps li span{grid-row:1/3}}
+.flowsteps span{width:56px;height:56px;border-radius:50%;background:var(--accent);color:#fff;display:grid;place-items:center;font-weight:800;font-size:17px;box-shadow:0 0 0 8px var(--bg);position:relative}
+.flowsteps h3{font-size:19px;font-weight:800;margin-top:8px}
+.flowsteps p{color:var(--muted);font-size:15px}
+.flow .ctas{margin-top:40px}
+.posts{display:grid;gap:18px;margin-top:40px;grid-template-columns:repeat(2,1fr)}
+@media(min-width:900px){.posts{grid-template-columns:repeat(4,1fr)}}
+.posts a{display:grid;gap:8px;text-decoration:none;align-content:start;min-width:0}
+.posts img{width:100%;height:auto;aspect-ratio:1;object-fit:cover;border-radius:18px;display:block;border:1px solid var(--line)}
+@media (prefers-reduced-motion:no-preference){.posts img{transition:transform .3s}.posts a:hover img{transform:translateY(-4px)}}
+.posts small{font-size:12px;color:var(--accent);font-weight:600;margin-top:4px}
+.posts h3{font-size:15px;font-weight:700;line-height:1.45;letter-spacing:-.02em;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.areabox{display:grid;gap:40px;align-items:center}
+@media(min-width:960px){.areabox{grid-template-columns:.9fr 1.1fr;gap:64px}}
+.areabox>*{min-width:0}
+.areachips{display:grid;gap:12px}
+@media(min-width:560px){.areachips{grid-template-columns:1fr 1fr}}
+.areachips div{background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:22px 24px}
+.areachips b{font-size:18px;font-weight:800}
+.areachips p{font-size:14px;color:var(--muted);margin-top:6px;line-height:1.7}
+.areachips .all{background:var(--accent);border-color:var(--accent);color:#fff}
+.areachips .all p{color:var(--on-night-muted)}
+.faqwrap{display:grid;gap:32px}
+@media(min-width:960px){.faqwrap{grid-template-columns:.8fr 1.2fr;gap:64px;align-items:start}}
+.faqwrap>*{min-width:0}
+.faqwrap .ctas{margin-top:28px}
 /* reveal */
 @media (prefers-reduced-motion:no-preference){
 .rv{opacity:0;transform:translateY(22px);transition:opacity .7s cubic-bezier(.2,.7,.2,1) var(--d,0ms),transform .7s cubic-bezier(.2,.7,.2,1) var(--d,0ms)}
@@ -558,6 +622,15 @@ footer .btn-accent{background:#fff;color:#3F4999;box-shadow:none}
   </div>
 </section>
 
+<section class="symp">
+  <div class="wrap">
+    <div class="sechead">
+      <div><p class="label">Problem</p><h2 class="h2">이런 불편, 있으신가요?</h2><p class="sub">눌러 보시면 비슷한 문제를 실제로 어떻게 해결했는지 볼 수 있어요.</p></div>
+    </div>
+    <div class="symgrid"><a href="#case-224425527882"><img src="photos/224425527882_after.jpg" alt="" loading="lazy" width="120" height="120"><span><b>식기세척기 넣을 자리가 없어요</b><small>하부장 철거 후 빌트인</small></span><svg><use href="#arrow"/></svg></a><a href="#case-224468666985"><img src="photos/224468666985_after.jpg" alt="" loading="lazy" width="120" height="120"><span><b>이사 전에 식기세척기 떼야 해요</b><small>철거 · 급배수 정리</small></span><svg><use href="#arrow"/></svg></a><a href="#case-224219219612"><img src="photos/224219219612_after.jpg" alt="" loading="lazy" width="120" height="120"><span><b>건조기 놓을 공간이 없어요</b><small>직렬 설치 · 맞춤 선반</small></span><svg><use href="#arrow"/></svg></a><a href="#case-224409039077"><img src="photos/224409039077_after.jpg" alt="" loading="lazy" width="120" height="120"><span><b>샤워할 때 물이 넘쳐요</b><small>물막이 쫄대 새로 설치</small></span><svg><use href="#arrow"/></svg></a><a href="#case-224457415114"><img src="photos/224457415114_after.jpg" alt="" loading="lazy" width="120" height="120"><span><b>샤워부스가 답답해요</b><small>부스 철거 · 벽면 복원</small></span><svg><use href="#arrow"/></svg></a><a href="#case-224456253568"><img src="photos/224456253568_after.jpg" alt="" loading="lazy" width="120" height="120"><span><b>세면대 물이 안 내려가요</b><small>배수 팝업 · 트랩 교체</small></span><svg><use href="#arrow"/></svg></a><a href="#case-224463095133"><img src="photos/224463095133_after.jpg" alt="" loading="lazy" width="120" height="120"><span><b>정수기 떼고 구멍이 남았어요</b><small>상판 타공 복원</small></span><svg><use href="#arrow"/></svg></a><a href="#case-224369548827"><img src="photos/224369548827_after.jpg" alt="" loading="lazy" width="120" height="120"><span><b>문이 세탁기에 부딪혀요</b><small>문 여는 방향 변경</small></span><svg><use href="#arrow"/></svg></a><a href="#case-224235324262"><img src="photos/224235324262_after.jpg" alt="" loading="lazy" width="120" height="120"><span><b>장롱 문이 부서졌어요</b><small>맞춤 제작 교체</small></span><svg><use href="#arrow"/></svg></a><a href="#case-224325847991"><img src="photos/224325847991_after.jpg" alt="" loading="lazy" width="120" height="120"><span><b>세제 디스펜서가 고장 났어요</b><small>디스펜서 교체</small></span><svg><use href="#arrow"/></svg></a><a href="#case-224377017198"><img src="photos/224377017198_after.jpg" alt="" loading="lazy" width="120" height="120"><span><b>TV 떼고 벽에 구멍이 남았어요</b><small>타일 교체 없이 복원</small></span><svg><use href="#arrow"/></svg></a><a href="#case-224429550592"><img src="photos/224429550592_after.jpg" alt="" loading="lazy" width="120" height="120"><span><b>부모님 댁에 손잡이가 필요해요</b><small>주방 안전손잡이 설치</small></span><svg><use href="#arrow"/></svg></a></div>
+  </div>
+</section>
+
 <section style="background:var(--surface)">
   <div class="wrap">
     <div class="sechead">
@@ -585,6 +658,15 @@ footer .btn-accent{background:#fff;color:#3F4999;box-shadow:none}
   <div class="rows"><div class="row" id="reel1"></div><div class="row rev" id="reel2"></div></div>
 </section>
 
+<section class="nums">
+  <div class="wrap numgrid">
+    <div><b>52<i>+</i></b><span>블로그에 올린<br>시공 기록</span></div>
+    <div><b class="cc">18</b><span>사진과 과정까지<br>공개한 사례</span></div>
+    <div><b>24</b><span>정기 출장<br>지역</span></div>
+    <div><b>2<i>장</i></b><span>견적에 필요한<br>사진</span></div>
+  </div>
+</section>
+
 <section class="deep">
   <div class="wrap why">
     <div class="whyhead">
@@ -604,6 +686,14 @@ footer .btn-accent{background:#fff;color:#3F4999;box-shadow:none}
 
 <section>
   <div class="wrap">
+    <p class="label">For You</p>
+    <h2 class="h2">이런 분들이 많이 찾으세요</h2>
+    <div class="whogrid"><a href="#svc-restore"><img src="photos/224463095133_after.jpg" alt="" loading="lazy" width="600" height="600"><div><h3>이사를 앞둔 세입자</h3><p>정수기·식기세척기 철거와 타공 흔적 복원까지, 퇴거 점검 전에 한 번에 정리해요.</p><span>관련 작업 보기 <svg><use href="#arrow"/></svg></span></div></a><a href="#case-224429550592"><img src="photos/224429550592_after.jpg" alt="" loading="lazy" width="600" height="600"><div><h3>부모님·어르신 댁</h3><p>안전손잡이 설치, 무거운 가전 탈거처럼 혼자 하기 어려운 일을 대신해요.</p><span>관련 작업 보기 <svg><use href="#arrow"/></svg></span></div></a><a href="#svc-dish"><img src="photos/224425527882_after.jpg" alt="" loading="lazy" width="600" height="600"><div><h3>새 가전을 들이는 집</h3><p>빌트인 식기세척기, 건조기 직렬 설치. 자리가 없으면 공간부터 만들어요.</p><span>관련 작업 보기 <svg><use href="#arrow"/></svg></span></div></a><a href="#case-224365853425"><img src="photos/224365853425_after.jpg" alt="" loading="lazy" width="600" height="600"><div><h3>상가·공장·사무실</h3><p>탕비실 세탁기·건조기, 학원·매장 보수까지 현장 일정에 맞춰 방문해요.</p><span>관련 작업 보기 <svg><use href="#arrow"/></svg></span></div></a></div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
     <div class="sechead">
       <div><p class="label">Cases</p><h2 class="h2">최근 다녀온 현장</h2></div>
       <a class="link" href="#cases">시공사례 전체 보기 <svg><use href="#arrow"/></svg></a>
@@ -612,7 +702,63 @@ footer .btn-accent{background:#fff;color:#3F4999;box-shadow:none}
   </div>
 </section>
 
-<section style="padding-top:0">
+<section class="flow">
+  <div class="wrap">
+    <div class="sechead">
+      <div><p class="label">How it works</p><h2 class="h2">문자 한 통이면<br>나머지는 저희가 합니다</h2></div>
+      <a class="link" href="#process">진행 방법 자세히 <svg><use href="#arrow"/></svg></a>
+    </div>
+    <ol class="flowsteps">
+      <li><span>01</span><h3>사진 2장 + 지역</h3><p>멀리서 1장, 가까이 1장. 문자나 톡톡으로 보내주세요.</p></li>
+      <li><span>02</span><h3>바로 견적</h3><p>사진을 보고 작업 방법과 비용을 안내해 드려요.</p></li>
+      <li><span>03</span><h3>일정 확정</h3><p>편한 날짜에 맞추고, 필요한 부품을 미리 챙겨 가요.</p></li>
+      <li><span>04</span><h3>시공 · 정리</h3><p>흔적까지 정리하고, 함께 확인한 뒤 마무리해요.</p></li>
+    </ol>
+    <div class="ctas"><a class="btn btn-accent" href="sms:01058099275"><svg><use href="#chat"/></svg>문자로 사진 보내기</a><a class="btn btn-line" href="https://talk.naver.com/w5i8w9" target="_blank" rel="noopener">네이버 톡톡 문의</a></div>
+  </div>
+</section>
+
+<section style="background:var(--surface)">
+  <div class="wrap">
+    <div class="sechead">
+      <div><p class="label">Blog</p><h2 class="h2">블로그 최신 글</h2><p class="sub">작업이 끝나면 과정을 빠짐없이 블로그에 기록합니다.</p></div>
+      <a class="link" href="https://blog.naver.com/las8015" target="_blank" rel="noopener">블로그 바로가기 <svg><use href="#arrow"/></svg></a>
+    </div>
+    <div class="posts"><a href="https://blog.naver.com/las8015/224471235220" target="_blank" rel="noopener"><img src="photos/b/224471235220.jpg" alt="" loading="lazy" width="600" height="600"><small>2026.11.10 · 샤워부스·욕실</small><h3>샤워부스 프로파일 교체 오래된 쫄대 교체로 깔끔해진 욕실</h3></a><a href="https://blog.naver.com/las8015/224469943357" target="_blank" rel="noopener"><img src="photos/b/224469943357.jpg" alt="" loading="lazy" width="600" height="600"><small>2026.11.09 · 정보글</small><h3>식기세척기 어떤 제품을 골라야 할까 설치방법 정리</h3></a><a href="https://blog.naver.com/las8015/224468666985" target="_blank" rel="noopener"><img src="photos/b/224468666985.jpg" alt="" loading="lazy" width="600" height="600"><small>2026.11.07 · 식기세척기</small><h3>송파 빌트인 식기세척기 철거 새 제품 설치 전 준비</h3></a><a href="https://blog.naver.com/las8015/224463095133" target="_blank" rel="noopener"><img src="photos/b/224463095133.jpg" alt="" loading="lazy" width="600" height="600"><small>2026.11.02 · 주방</small><h3>이사 전 정수기 철거 싱크대 상판 구멍까지 복원</h3></a><a href="https://blog.naver.com/las8015/224461641478" target="_blank" rel="noopener"><img src="photos/b/224461641478.jpg" alt="" loading="lazy" width="600" height="600"><small>2026.11.01 · 식기세척기</small><h3>광명 식기세척기 전원이 안 들어올 때 빌트인 제품 탈거 후 전원 재연결</h3></a><a href="https://blog.naver.com/las8015/224457415114" target="_blank" rel="noopener"><img src="photos/b/224457415114.jpg" alt="" loading="lazy" width="600" height="600"><small>2026.10.28 · 샤워부스·욕실</small><h3>샤워부스 철거 후 벽면 구멍까지 복원</h3></a><a href="https://blog.naver.com/las8015/224456253568" target="_blank" rel="noopener"><img src="photos/b/224456253568.jpg" alt="" loading="lazy" width="600" height="600"><small>2026.10.27 · 샤워부스·욕실</small><h3>강동 욕실 세면대 배수구 교체 오래된 팝업과 트랩까지 정비</h3></a><a href="https://blog.naver.com/las8015/224446133337" target="_blank" rel="noopener"><img src="photos/b/224446133337.jpg" alt="" loading="lazy" width="600" height="600"><small>2026.10.18 · 정보글</small><h3>건조기 직렬설치와 맞춤 선반 어떤 방법이 좋을까</h3></a></div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap areabox">
+    <div>
+      <p class="label">Area</p>
+      <h2 class="h2">서울·경기·인천,<br>그리고 전국 어디든</h2>
+      <p class="sub">자주 가는 지역은 정기적으로 다니고 있어요. 목록에 없어도 주소만 알려주시면 일정을 맞춰 방문합니다.</p>
+      <div class="ctas"><a class="btn btn-accent" href="#area">출장 지역 보기</a></div>
+    </div>
+    <div class="areachips">
+      <div><b>서울</b><p>강남 · 서초 · 송파 · 강동 · 광진 · 성동 · 영등포 · 동작 · 마포 · 강서 · 노원 · 도봉</p></div>
+      <div><b>경기</b><p>용인 · 수원 · 성남 · 하남 · 광주 · 안양 · 의왕 · 화성</p></div>
+      <div><b>인천 · 충남</b><p>연수구 · 서구 · 평택 · 천안</p></div>
+      <div class="all"><b>그 외 전국</b><p>문의 주시면 일정 맞춰 출장 갑니다</p></div>
+    </div>
+  </div>
+</section>
+
+<section style="background:var(--surface)">
+  <div class="wrap faqwrap">
+    <div><p class="label">FAQ</p><h2 class="h2">자주 묻는 질문</h2><p class="sub">더 궁금한 점은 편하게 문자 주세요.</p><div class="ctas"><a class="btn btn-line" href="tel:01058099275"><svg><use href="#phone"/></svg>010-5809-9275</a></div></div>
+    <div>
+      <details><summary>견적은 어떻게 받나요?</summary><p>문자로 현장 사진(멀리서 1장, 가까이 1장)과 지역을 보내주세요. 확인 후 바로 연락드려 견적과 일정을 잡습니다.</p></details>
+      <details><summary>전월세 이사 전에 작업해도 되나요?</summary><p>네, 가능합니다. 정수기나 식기세척기 설치 때 타공하거나 바꾼 부분이 있다면 퇴거 전에 원상복구를 많이 하십니다.</p></details>
+      <details><summary>제품은 제가 사도 되나요?</summary><p>가능합니다. 구매하신 제품의 모델명을 먼저 알려주시면 설치 공간에 맞는지 확인해 드립니다.</p></details>
+      <details><summary>여러 가지를 한 번에 맡길 수 있나요?</summary><p>네. 한 번 방문할 때 여러 작업을 함께 처리해 드립니다. 문의하실 때 목록을 같이 적어주세요.</p></details>
+      <details><summary>목록에 없는 작업도 되나요?</summary><p>고객님 컨펌을 받아 말씀만 하시면 뭐든 해드립니다. 사진부터 보내주세요.</p></details>
+    </div>
+  </div>
+</section>
+
+<section>
   <div class="wrap">
     <div class="band on-blue photo" style="--ph:url(photos/224471235220_after.jpg)">
       <div><h2>고칠 곳 사진, 지금 찍어 보내주세요</h2><p>멀리서 1장, 가까이 1장과 지역만 있으면 바로 견적을 드려요.</p></div>
@@ -950,7 +1096,7 @@ document.getElementById('homeServices').innerHTML=SVC.map(svcCard).join('');
 document.getElementById('allServices').innerHTML=SVC.map(svcCard).join('');
 document.getElementById('homeCases').innerHTML=CASES.slice(0,6).map(caseCard).join('');
 document.getElementById('areaCases').innerHTML=CASES.filter(function(c){return c.info.some(function(x){return x[0]==='지역'})}).slice(0,6).map(caseCard).join('');
-document.getElementById('caseCount').textContent=CASES.length;
+document.getElementById('caseCount').textContent=CASES.length;document.querySelectorAll('.cc').forEach(function(e){e.textContent=CASES.length});
 // photo reel
 (function(){var items=[];CASES.forEach(function(c){(GAL[c.id]||[]).forEach(function(g){items.push({id:c.id,cat:c.cat,src:'photos/g/'+c.id+'_'+(g[0]<10?'0':'')+g[0]+'.jpg',cap:g[1]})})});
   var a=[],b=[];items.forEach(function(x,i){(i%2?b:a).push(x)});a=a.slice(0,16);b=b.slice(0,16);
@@ -1030,7 +1176,7 @@ function route(){
   reveal();
 }
 window.addEventListener('hashchange',route);
-var RV='.sechead,.services>*,.cgrid3>*,.princ>*,.whyhead,.feature,.steps>li,.band,.areagrid>*,.nation,.guide>*,.block,.scope>*,.gal>figure,.fcta';
+var RV='.symgrid>a,.numgrid>div,.whogrid>a,.flowsteps>li,.posts>a,.areachips>div,.faqwrap>div,.sechead,.services>*,.cgrid3>*,.princ>*,.whyhead,.feature,.steps>li,.band,.areagrid>*,.nation,.guide>*,.block,.scope>*,.gal>figure,.fcta';
 var io='IntersectionObserver' in window&&!matchMedia('(prefers-reduced-motion: reduce)').matches?new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{rootMargin:'0px 0px -8% 0px'}):null;
 function reveal(){if(!io)return;document.querySelectorAll('.view:not([hidden]) :is('+RV+'):not(.rv),footer :is('+RV+'):not(.rv)').forEach(function(el,i){el.classList.add('rv');el.style.setProperty('--d',(i%3)*70+'ms');io.observe(el)})}
 document.querySelector('header').classList.toggle('scrolled',scrollY>8);addEventListener('scroll',function(){document.querySelector('header').classList.toggle('scrolled',scrollY>8)},{passive:true});
