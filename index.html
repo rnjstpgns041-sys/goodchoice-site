@@ -679,10 +679,11 @@ body::before{background:#000}
 header{background:color-mix(in srgb,#070707 88%,transparent)}
 .strip{font-size:clamp(18px,2.2vw,26px);letter-spacing:-.02em}
 .strip div{padding-block:20px;gap:48px}
-/* 전후 비교: 화면 어디를 끌어도 가운데 선이 따라옴 */
-.compare{cursor:ew-resize;touch-action:pan-y}
-.compare input{pointer-events:none}
-.compare.hint .after{transition:clip-path .9s cubic-bezier(.6,0,.2,1)}.compare.hint .handle{transition:left .9s cubic-bezier(.6,0,.2,1)}
+/* 전후 비교: 선 고정 (움직이지 않음), 전·후 사진 나란히 */
+.compare{display:grid;grid-template-columns:1fr 1fr;gap:4px;aspect-ratio:auto;background:#fff;touch-action:auto;user-select:auto;cursor:default}
+.compare img{position:static;aspect-ratio:4/5;height:auto}
+.compare .after{clip-path:none}
+.compare .handle,.compare input{display:none}
 </style>
 
 </head>
@@ -1377,19 +1378,6 @@ route();
  setTimeout(function(){counters();stmt()},60);
 })();
 
-// 전후 비교 드래그 (손가락/마우스로 이미지 아무 곳이나 끌기)
-(function(){
- var cur=null;
- function set(c,x){var r=c.getBoundingClientRect();var v=Math.max(0,Math.min(100,(x-r.left)/r.width*100));c.style.setProperty('--pos',v+'%');var i=c.querySelector('input');if(i)i.value=Math.round(v)}
- document.addEventListener('pointerdown',function(e){var c=e.target.closest('.compare');if(!c)return;cur=c;c.classList.remove('hint');set(c,e.clientX);try{c.setPointerCapture(e.pointerId)}catch(_){}});
- document.addEventListener('pointermove',function(e){if(cur)set(cur,e.clientX)});
- function up(){cur=null}document.addEventListener('pointerup',up);document.addEventListener('pointercancel',up);
- // 처음 보일 때 선이 좌우로 한 번 움직여서 끌 수 있다는 걸 알려줌
- if(matchMedia('(prefers-reduced-motion: reduce)').matches||!('IntersectionObserver' in window))return;
- var hio=new IntersectionObserver(function(es){es.forEach(function(e){if(!e.isIntersecting)return;hio.unobserve(e.target);var c=e.target;c.classList.add('hint');var seq=['25%','75%','50%'],k=0;(function n(){if(!c.classList.contains('hint')||k>=seq.length){c.classList.remove('hint');return}c.style.setProperty('--pos',seq[k++]);setTimeout(n,950)})()})},{threshold:.6});
- function watch(){document.querySelectorAll('.view:not([hidden]) .compare:not(.hw)').forEach(function(c){c.classList.add('hw');hio.observe(c)})}
- addEventListener('hashchange',function(){setTimeout(watch,80)});setTimeout(watch,80);
-})();
 </script>
 
 </body>
