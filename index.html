@@ -600,6 +600,85 @@ body::before{background:#000}
 .areachips .all p,.areachips .all b{color:#111}
 .hero h1{line-height:1.16}
 .hero h1 span{padding:0 .1em;line-height:1.16}
+
+/* ===== v12: cinematic ===== */
+.cine{position:relative;min-height:calc(100svh - 68px);display:flex;flex-direction:column;justify-content:center;background:#070707;color:#fff;overflow:hidden;padding-block:72px 40px;isolation:isolate}
+.cine-cols{position:absolute;top:-10%;bottom:-10%;right:-4%;width:58%;display:grid;grid-template-columns:repeat(3,1fr);gap:16px;transform:rotate(-7deg) scale(1.08);z-index:-3}
+.cine-cols>div{overflow:hidden}
+.ctrk{display:flex;flex-direction:column;gap:16px}
+.ctrk img{width:100%;aspect-ratio:4/5;object-fit:cover;border-radius:18px;display:block;filter:saturate(1.05) contrast(1.05)}
+@media (prefers-reduced-motion:no-preference){.cc1 .ctrk{animation:up 48s linear infinite}.cc2 .ctrk{animation:up 60s linear infinite reverse}.cc3 .ctrk{animation:up 54s linear infinite}}
+@keyframes up{to{transform:translateY(-50%)}}
+.cine-cols .cc2{margin-top:-120px}
+.cine-shade{position:absolute;inset:0;z-index:-2;background:linear-gradient(90deg,#070707 30%,rgba(7,7,7,.86) 46%,rgba(7,7,7,.2) 75%,rgba(7,7,7,.35)),linear-gradient(0deg,#070707 0%,transparent 28%),radial-gradient(600px 400px at 18% 40%,rgba(255,214,10,.14),transparent 70%)}
+.cine-grain{position:absolute;inset:0;z-index:-1;opacity:.12;pointer-events:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+.cine-in{position:relative;width:100%}
+.cine .kicker{display:inline-flex}
+.cine-h{font-size:clamp(54px,10vw,148px);font-weight:900;letter-spacing:-.06em;line-height:.98;margin-top:28px}
+.cine-h .ln{display:block;overflow:hidden;padding-bottom:.06em}
+.cine-h .ln>span{display:inline-block}
+.cine-h em{font-style:normal;color:var(--y);position:relative;display:inline-block}
+.cine-h em::after{content:"";position:absolute;left:0;right:0;bottom:.04em;height:.1em;background:var(--y);transform-origin:left;border-radius:4px}
+.cine-rot{margin-top:28px;font-size:clamp(17px,1.8vw,22px);color:#BDBDBD;font-weight:600}
+.rotw{display:inline-block;color:#fff;border-bottom:2px solid var(--y);padding-bottom:2px}
+.rotw b{display:inline-block}
+.cine-lead{margin-top:14px;color:#9C9C9C;font-size:16px;max-width:34em}
+.cine .ctas{margin-top:34px}
+.cine .btn{min-height:62px;padding:0 28px;font-size:17px}
+.tnum{font-weight:600;opacity:.75;margin-left:4px;font-size:.92em}
+.cine-meta{position:relative;display:grid;grid-template-columns:repeat(4,1fr);margin-top:72px;border-top:1px solid rgba(255,255,255,.14);width:100%}
+.cine-meta div{padding:22px 16px 0 0;display:flex;flex-wrap:wrap;align-items:baseline;column-gap:2px}
+.cine-meta b{font-size:clamp(30px,3.4vw,46px);font-weight:900;letter-spacing:-.04em;line-height:1;font-variant-numeric:tabular-nums}
+.cine-meta i{font-style:normal;color:var(--y);font-weight:900;font-size:22px}
+.cine-meta span{flex-basis:100%;font-size:13px;color:#9C9C9C;margin-top:8px}
+.cue{position:absolute;left:50%;bottom:22px;width:26px;height:42px;border:2px solid rgba(255,255,255,.4);border-radius:14px;transform:translateX(-50%)}
+.cue span{position:absolute;left:50%;top:8px;width:4px;height:8px;margin-left:-2px;border-radius:2px;background:var(--y)}
+@media (prefers-reduced-motion:no-preference){
+ .cue span{animation:cue 1.8s ease-in-out infinite}
+ .cine-h .ln>span{transform:translateY(105%);animation:lnup 1s cubic-bezier(.2,.8,.1,1) forwards}
+ .cine-h .ln:nth-child(2)>span{animation-delay:.12s}.cine-h .ln:nth-child(3)>span{animation-delay:.24s}
+ .cine-h em::after{transform:scaleX(0);animation:sw .8s cubic-bezier(.7,0,.2,1) .9s forwards}
+ .cine .kicker,.cine-rot,.cine-lead,.cine .ctas,.cine-meta{opacity:0;animation:fin .9s ease .5s forwards}
+ .cine-rot{animation-delay:.6s}.cine-lead{animation-delay:.7s}.cine .ctas{animation-delay:.8s}.cine-meta{animation-delay:1s}.cine .kicker{animation-delay:.1s}
+ .cine-cols{animation:colsin 1.6s cubic-bezier(.2,.8,.1,1) both}
+ .rotw b.out{animation:rout .35s ease forwards}.rotw b.inn{animation:rin .45s cubic-bezier(.2,.8,.1,1)}
+}
+@keyframes lnup{to{transform:none}}
+@keyframes sw{to{transform:scaleX(1)}}
+@keyframes fin{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+@keyframes colsin{from{opacity:0;transform:rotate(-7deg) scale(1.2)}}
+@keyframes cue{0%{opacity:0;transform:translateY(0)}40%{opacity:1}100%{opacity:0;transform:translateY(14px)}}
+@keyframes rout{to{opacity:0;transform:translateY(-60%)}}
+@keyframes rin{from{opacity:0;transform:translateY(60%)}}
+@media(max-width:899px){
+ .cine{min-height:auto;padding-block:56px 64px}
+ .cine-cols{width:150%;right:-25%;top:-5%;opacity:.38;transform:rotate(-8deg)}
+ .cine-shade{background:linear-gradient(180deg,rgba(7,7,7,.55),rgba(7,7,7,.9) 55%,#070707)}
+ .cine-meta{grid-template-columns:repeat(2,1fr);margin-top:48px;row-gap:22px}
+ .cine .btn{min-height:56px;padding:0 18px;font-size:16px}
+ .tnum{display:none}
+ .cue{display:none}
+}
+/* statement */
+.stmt{background:#070707;color:#fff;padding-block:140px}
+.stmt .label{margin-bottom:34px}
+.stmt-t{font-size:clamp(30px,4.6vw,64px);font-weight:800;letter-spacing:-.045em;line-height:1.28;max-width:20em}
+.stmt-t span{color:#fff;opacity:.16;transition:opacity .25s,color .25s}
+.stmt-t span.on{opacity:1}
+.stmt-t span.hot{color:var(--y)}
+@media(max-width:700px){.stmt{padding-block:96px}}
+/* image reveal */
+@media (prefers-reduced-motion:no-preference){
+ .services>.rv img,.cgrid3>.rv img,.whogrid>.rv img{clip-path:inset(0 0 100% 0);transform:scale(1.15);transition:clip-path 1.1s cubic-bezier(.7,0,.2,1) var(--d,0ms),transform 1.6s cubic-bezier(.2,.8,.1,1) var(--d,0ms)}
+ .services>.rv.in img,.cgrid3>.rv.in img,.whogrid>.rv.in img{clip-path:inset(0);transform:none}
+ .sechead.rv .h2{clip-path:inset(0 0 100% 0);transform:translateY(24px);transition:clip-path .9s cubic-bezier(.7,0,.2,1) .1s,transform .9s cubic-bezier(.2,.8,.1,1) .1s}
+ .sechead.rv.in .h2{clip-path:inset(0 0 -10% 0);transform:none}
+}
+.h2{font-size:clamp(34px,5.4vw,64px)}
+.nums em{font-style:normal;font-variant-numeric:tabular-nums}
+header{background:color-mix(in srgb,#070707 88%,transparent)}
+.strip{font-size:clamp(18px,2.2vw,26px);letter-spacing:-.02em}
+.strip div{padding-block:20px;gap:48px}
 </style>
 
 </head>
@@ -648,38 +727,36 @@ body::before{background:#000}
 
 <!-- ================= HOME ================= -->
 <div class="view" data-view="home">
-<section class="hero on-blue">
-  <div class="hero-grid" aria-hidden="true"></div>
-  <div class="wrap hgrid">
-    <div>
-      <span class="kicker"><i></i>집수리 &amp; 리폼 전문 · 전국 출장</span>
-      <h1>집수리는<br><span>후회없는 선택</span>으로.</h1>
-      <p class="lead">식기세척기·건조기 설치, 샤워부스 철거, 이사 전 원상복구까지. 생활하며 불편했던 부분을 공간에 맞게, 실제로 쓰기 편하게 고쳐드립니다.</p>
-      <div class="ctas">
-        <a class="btn btn-accent" href="tel:01058099275"><svg><use href="#phone"/></svg>전화하기</a>
-        <a class="btn btn-ghost" href="sms:01058099275"><svg><use href="#chat"/></svg>문자하기</a>
-      </div>
-      <a class="herotel" href="tel:01058099275"><svg><use href="#phone"/></svg>전화·문자 <b>010-5809-9275</b></a>
-      <div class="facts">
-        <div><b>사진 2장</b><span>이면 바로 견적</span></div>
-        <div><b>24개 지역</b><span>정기 출장</span></div>
-        <div><b>전국</b><span>어디든 방문</span></div>
-      </div>
-    </div>
-    <div class="bento">
-      <a class="b1" href="#case-224425527882"><img src="photos/hero_main.jpg" alt="하부장 철거 후 빌트인 식기세척기를 설치한 주방" width="966" height="966" fetchpriority="high"><span>하부장 철거 · 빌트인 식기세척기</span></a>
-      <a class="b2" href="#case-224369548827"><img src="photos/224369548827_after.jpg" alt="여는 방향을 바꾼 세탁실 문" width="966" height="966"><span>세탁실 문 방향 변경</span></a>
-      <a class="b3" href="#case-224457415114"><img src="photos/hero_sub.jpg" alt="샤워부스를 철거하고 벽면을 복원한 욕실" width="966" height="966"><span>샤워부스 철거 · 벽면 복원</span></a>
-      <div class="bubble"><span class="mark"><svg><use href="#chat"/></svg></span><div><b>사진 2장이면 견적 끝</b><small>멀리서 1장 · 가까이 1장</small></div></div>
-      <div class="stamp"><b id="caseCount">18</b><span>공개한<br>시공사례</span></div>
+<section class="cine">
+  <div class="cine-cols" aria-hidden="true"><div class="cc1"><div class="ctrk"><img src="photos/224471235220_after.jpg" alt="" width="300" height="300"><img src="photos/224461641478_after.jpg" alt="" width="300" height="300"><img src="photos/224429550592_after.jpg" alt="" width="300" height="300" loading="lazy"><img src="photos/224409039077_after.jpg" alt="" width="300" height="300" loading="lazy"><img src="photos/224365853425_after.jpg" alt="" width="300" height="300" loading="lazy"><img src="photos/224235324262_after.jpg" alt="" width="300" height="300" loading="lazy"><img src="photos/hero_main.jpg" alt="" width="300" height="300" loading="lazy"><img src="photos/224471235220_after.jpg" alt="" width="300" height="300"><img src="photos/224461641478_after.jpg" alt="" width="300" height="300"><img src="photos/224429550592_after.jpg" alt="" width="300" height="300" loading="lazy"><img src="photos/224409039077_after.jpg" alt="" width="300" height="300" loading="lazy"><img src="photos/224365853425_after.jpg" alt="" width="300" height="300" loading="lazy"><img src="photos/224235324262_after.jpg" alt="" width="300" height="300" loading="lazy"><img src="photos/hero_main.jpg" alt="" width="300" height="300" loading="lazy"></div></div><div class="cc2"><div class="ctrk"><img src="photos/224468666985_after.jpg" alt="" width="300" height="300" loading="lazy"><img src="photos/224457415114_after.jpg" alt="" width="300" height="300" loading="lazy"><img src="photos/224425527882_after.jpg" alt="" width="300" height="300" loading="lazy"><img src="photos/224377017198_after.jpg" alt="" width="300" height="300" loading="lazy"><img src="photos/224325847991_after.jpg" alt="" width="300" height="300" loading="lazy"><img src="photos/224219219612_after.jpg" alt="" width="300" height="300" loading="lazy"><img src="photos/hero_sub.jpg" alt="" width="300" height="300" loading="lazy"><img src="photos/224468666985_after.jpg" alt="" width="300" height="300" loading="lazy"><img src="photos/224457415114_after.jpg" alt="" width="300" height="300" loading="lazy"><img src="photos/224425527882_after.jpg" alt="" width="300" height="300" loading="lazy"><img src="photos/224377017198_after.jpg" alt="" width="300" height="300" loading="lazy"><img src="photos/224325847991_after.jpg" alt="" width="300" height="300" loading="lazy"><img src="photos/224219219612_after.jpg" alt="" width="300" height="300" loading="lazy"><img src="photos/hero_sub.jpg" alt="" width="300" height="300" loading="lazy"></div></div><div class="cc3"><div class="ctrk"><img src="photos/224463095133_after.jpg" alt="" width="300" height="300" loading="lazy"><img src="photos/224456253568_after.jpg" alt="" width="300" height="300" loading="lazy"><img src="photos/224424461321_after.jpg" alt="" width="300" height="300" loading="lazy"><img src="photos/224369548827_after.jpg" alt="" width="300" height="300" loading="lazy"><img src="photos/224313701217_after.jpg" alt="" width="300" height="300" loading="lazy"><img src="photos/224200184402_after.jpg" alt="" width="300" height="300" loading="lazy"><img src="photos/224463095133_after.jpg" alt="" width="300" height="300" loading="lazy"><img src="photos/224456253568_after.jpg" alt="" width="300" height="300" loading="lazy"><img src="photos/224424461321_after.jpg" alt="" width="300" height="300" loading="lazy"><img src="photos/224369548827_after.jpg" alt="" width="300" height="300" loading="lazy"><img src="photos/224313701217_after.jpg" alt="" width="300" height="300" loading="lazy"><img src="photos/224200184402_after.jpg" alt="" width="300" height="300" loading="lazy"></div></div></div>
+  <div class="cine-shade" aria-hidden="true"></div>
+  <div class="cine-grain" aria-hidden="true"></div>
+  <div class="wrap cine-in">
+    <span class="kicker"><i></i>집수리 &amp; 리폼 전문 · 서울 · 경기 · 인천 · 전국</span>
+    <h1 class="cine-h"><span class="ln"><span>집수리는,</span></span><span class="ln"><span>후회없는</span></span><span class="ln"><span><em>선택</em>으로.</span></span></h1>
+    <p class="cine-rot">지금 이 순간에도 <span class="rotw"><b id="rot">빌트인 식기세척기 설치</b></span></p>
+    <p class="cine-lead">식기세척기·건조기 설치, 샤워부스 철거, 이사 전 원상복구까지. 생활하며 불편했던 곳을 공간에 맞게, 실제로 쓰기 편하게 고칩니다.</p>
+    <div class="ctas">
+      <a class="btn btn-accent mag" href="tel:01058099275"><svg><use href="#phone"/></svg>전화하기 <span class="tnum">010-5809-9275</span></a>
+      <a class="btn btn-ghost" href="sms:01058099275"><svg><use href="#chat"/></svg>문자하기</a>
     </div>
   </div>
+  <div class="wrap cine-meta">
+    <div><b data-count="52">0</b><i>+</i><span>블로그 시공 기록</span></div>
+    <div><b data-count="18">0</b><span>과정까지 공개한 사례</span></div>
+    <div><b data-count="24">0</b><span>정기 출장 지역</span></div>
+    <div><b data-count="2">0</b><i>장</i><span>견적에 필요한 사진</span></div>
+  </div>
+  <a class="cue" href="#statement" aria-label="아래로"><span></span></a>
 </section>
 
 <div class="strip" aria-hidden="true"><div>
   <span>식기세척기 설치·이전·철거</span><span>·</span><span>건조기 직렬 설치</span><span>·</span><span>AI콤보 설치</span><span>·</span><span>샤워부스 철거</span><span>·</span><span>물막이 설치</span><span>·</span><span>정수기 철거 원상복구</span><span>·</span><span>문 방향 변경</span><span>·</span><span>가구 리폼</span><span>·</span>
   <span>식기세척기 설치·이전·철거</span><span>·</span><span>건조기 직렬 설치</span><span>·</span><span>AI콤보 설치</span><span>·</span><span>샤워부스 철거</span><span>·</span><span>물막이 설치</span><span>·</span><span>정수기 철거 원상복구</span><span>·</span><span>문 방향 변경</span><span>·</span><span>가구 리폼</span><span>·</span>
 </div></div>
+
+<section class="stmt" id="statement"><div class="wrap"><p class="label">Our Standard</p><p class="stmt-t" id="stmtT"><span>물이</span> <span>넘친다고</span> <span>바로</span> <span>실리콘부터</span> <span>쏘지</span> <span>않습니다.</span> <span>어디서</span> <span>새는지</span> <span>먼저</span> <span>찾고,</span> <span>꼭</span> <span>필요한</span> <span>만큼만</span> <span>고치고,</span> <span>나사</span> <span>구멍</span> <span>하나까지</span> <span>정리하고</span> <span>나옵니다.</span> <span>그게</span> <span>굿초이스가</span> <span>말하는</span> <span>후회없는</span> <span>선택입니다.</span> </p></div></section>
+
 
 <section>
   <div class="wrap">
@@ -729,9 +806,9 @@ body::before{background:#000}
 
 <section class="nums">
   <div class="wrap numgrid">
-    <div><b>52<i>+</i></b><span>블로그에 올린<br>시공 기록</span></div>
-    <div><b class="cc">18</b><span>사진과 과정까지<br>공개한 사례</span></div>
-    <div><b>24</b><span>정기 출장<br>지역</span></div>
+    <div><b><em data-count="52">0</em><i>+</i></b><span>블로그에 올린<br>시공 기록</span></div>
+    <div><b><em data-count="18">0</em></b><span>사진과 과정까지<br>공개한 사례</span></div>
+    <div><b><em data-count="24">0</em></b><span>정기 출장<br>지역</span></div>
     <div><b>2<i>장</i></b><span>견적에 필요한<br>사진</span></div>
   </div>
 </section>
@@ -1165,7 +1242,7 @@ document.getElementById('homeServices').innerHTML=SVC.map(svcCard).join('');
 document.getElementById('allServices').innerHTML=SVC.map(svcCard).join('');
 document.getElementById('homeCases').innerHTML=CASES.slice(0,6).map(caseCard).join('');
 document.getElementById('areaCases').innerHTML=CASES.filter(function(c){return c.info.some(function(x){return x[0]==='지역'})}).slice(0,6).map(caseCard).join('');
-document.getElementById('caseCount').textContent=CASES.length;document.querySelectorAll('.cc').forEach(function(e){e.textContent=CASES.length});
+document.querySelectorAll('.cc').forEach(function(e){e.textContent=CASES.length});
 // photo reel
 (function(){var items=[];CASES.forEach(function(c){(GAL[c.id]||[]).forEach(function(g){items.push({id:c.id,cat:c.cat,src:'photos/g/'+c.id+'_'+(g[0]<10?'0':'')+g[0]+'.jpg',cap:g[1]})})});
   var a=[],b=[];items.forEach(function(x,i){(i%2?b:a).push(x)});a=a.slice(0,16);b=b.slice(0,16);
@@ -1278,6 +1355,22 @@ f.addEventListener('submit',function(e){
 });
 
 route();
+})();
+
+// v12: rotating words, counters, statement scroll
+(function(){
+ var W=['빌트인 식기세척기 설치','건조기 직렬 설치','샤워부스 철거·벽면 복원','이사 전 원상복구','문 방향 변경','세면대 배수 교체'],k=0;
+ setInterval(function(){var b=document.getElementById('rot');if(!b||document.hidden)return;b.className='out';setTimeout(function(){k=(k+1)%W.length;b.textContent=W[k];b.className='inn'},330)},2600);
+ var rm=matchMedia('(prefers-reduced-motion: reduce)').matches;
+ function run(el){var t=+el.getAttribute('data-count');if(rm){el.textContent=t;return}var t0=null,D=1600;function f(ts){if(!t0)t0=ts;var p=Math.min(1,(ts-t0)/D);el.textContent=Math.round(t*(1-Math.pow(1-p,3)));if(p<1)requestAnimationFrame(f)}requestAnimationFrame(f)}
+ var cio='IntersectionObserver' in window?new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){run(e.target);cio.unobserve(e.target)}})},{threshold:.4}):null;
+ function counters(){document.querySelectorAll('.view:not([hidden]) [data-count]:not(.cd)').forEach(function(el){el.classList.add('cd');if(cio)cio.observe(el);else el.textContent=el.getAttribute('data-count')})}
+ var HOT=['원인','필요한','정리하고','후회없는','선택입니다.'];
+ var sp=[].slice.call(document.querySelectorAll('#stmtT span'));sp.forEach(function(x){if(HOT.indexOf(x.textContent)>-1)x.dataset.hot=1});
+ function stmt(){var el=document.getElementById('stmtT');if(!el||!el.offsetParent)return;var r=el.getBoundingClientRect(),vh=innerHeight;var p=rm?1:Math.max(0,Math.min(1,(vh*.85-r.top)/(r.height+vh*.35)));var n=Math.round(p*sp.length);sp.forEach(function(x,i){x.classList.toggle('on',i<n);x.classList.toggle('hot',i<n&&!!x.dataset.hot)})}
+ addEventListener('scroll',stmt,{passive:true});addEventListener('resize',stmt);
+ addEventListener('hashchange',function(){setTimeout(function(){counters();stmt()},60)});
+ setTimeout(function(){counters();stmt()},60);
 })();
 </script>
 
