@@ -684,6 +684,31 @@ header{background:color-mix(in srgb,#070707 88%,transparent)}
 .compare img{position:static;aspect-ratio:4/5;height:auto}
 .compare .after{clip-path:none}
 .compare .handle,.compare input{display:none}
+
+/* ===== v14: 검정+노랑 유지, 흰색 배합 ===== */
+header{background:color-mix(in srgb,#fff 94%,transparent);color:#111;border-bottom:1px solid #ECECE6}
+header .tagline{color:#666}
+.menu a{color:#555}.menu a:hover{color:#111}
+.menu a[aria-current="page"]{background:var(--y);color:#111}
+.htel{color:#111}
+.burger{border-color:#DDD;color:#111}
+.hsms{color:#111!important;border-color:#CFCFCF!important}
+header.scrolled{box-shadow:0 10px 30px -22px rgba(0,0,0,.35)}
+body::before{background:#fff}
+/* 기준 문장: 흰 바탕 + 검정 글씨 + 노랑 형광펜 */
+.stmt{background:#fff;color:#111}
+.stmt-t span{color:#111;opacity:.13}
+.stmt-t span.on{opacity:1}
+.stmt-t span.hot{color:#111;background:linear-gradient(transparent 58%,var(--y) 58%,var(--y) 92%,transparent 92%)}
+/* 흰 구간 사이 리듬: 연한 회색 섹션 */
+.symp{background:#F6F6F3}
+/* 검정 구간 안의 카드는 흰색 */
+.deep .pr{background:#fff;color:#111;border:0}
+.deep .pr p{color:#555}
+.deep .pr b{background:var(--y);color:#111}
+/* 모바일 하단 바: 흰색 */
+.bar{background:color-mix(in srgb,#fff 95%,transparent);border-top:1px solid #EAEAE4}
+.bar .btn-ghost{background:#fff;color:#111;border-color:#CFCFCF}
 </style>
 
 </head>
