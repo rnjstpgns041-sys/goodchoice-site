@@ -684,6 +684,88 @@ header{background:color-mix(in srgb,#070707 88%,transparent)}
 .compare img{position:static;aspect-ratio:4/5;height:auto}
 .compare .after{clip-path:none}
 .compare .handle,.compare input{display:none}
+
+/* ===== v13: 화이트 톤 (검정 바탕 → 흰색, 노랑은 포인트) ===== */
+:root,:root[data-theme="dark"]{color-scheme:light;--bg:#FFFFFF;--surface:#FFFFFF;--ink:#111111;--muted:#5A5A5A;--line:#E8E8E4;
+ --night:#FFFFFF;--night-2:#F5F5F2;--deep:#F7F7F4;--on-night:#111111;--on-night-muted:#5A5A5A;--hl:#111111;
+ --accent:#FFD60A;--accent-ink:#111;--accent-soft:#FFF4BF;--acc-t:#111111}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){color-scheme:light;--bg:#FFFFFF;--surface:#FFFFFF;--ink:#111111;--muted:#5A5A5A;--line:#E8E8E4;
+ --night:#FFFFFF;--night-2:#F5F5F2;--deep:#F7F7F4;--on-night:#111111;--on-night-muted:#5A5A5A;--hl:#111111;--accent:#FFD60A;--accent-ink:#111;--accent-soft:#FFF4BF;--acc-t:#111111}}
+body::before{background:#fff}
+/* header */
+header{background:color-mix(in srgb,#fff 92%,transparent);color:#111;border-bottom:1px solid #EDEDE8}
+header.scrolled{box-shadow:0 10px 30px -22px rgba(0,0,0,.35)}
+.menu a{color:#555}.menu a:hover{color:#111}
+.htel{color:#111}
+.burger{border-color:#DDD;color:#111}
+.hsms{color:#111!important;border-color:#CFCFCF!important}
+/* drawer */
+.drawer{background:#fff;color:#111}
+.drawer nav a{border-color:#EEE}
+.drawer .btn-ghost{color:#111;border-color:#CFCFCF}
+/* buttons on light */
+.btn-ghost{background:#fff;color:#111;border:1.5px solid #D6D6D2}
+.btn-ghost:hover{border-color:#111}
+/* hero */
+.cine{background:#fff;color:#111}
+.cine-shade{background:linear-gradient(90deg,#fff 30%,rgba(255,255,255,.9) 46%,rgba(255,255,255,.15) 75%,rgba(255,255,255,.25)),linear-gradient(0deg,#fff 0%,transparent 26%),radial-gradient(600px 400px at 18% 40%,rgba(255,214,10,.18),transparent 70%)}
+.cine-grain{display:none}
+.cine-cols .ctrk img{box-shadow:0 20px 40px -20px rgba(0,0,0,.35)}
+.cine .kicker{color:#111!important;border-color:#E2E2DC!important;background:#fff}
+.cine-h em{color:#111;background:linear-gradient(transparent 58%,var(--y) 58%,var(--y) 92%,transparent 92%)}
+.cine-h em::after{display:none}
+.cine-rot{color:#666}.rotw{color:#111}
+.cine-lead{color:#666}
+.cine-meta{border-top-color:#E6E6E0}
+.cine-meta span{color:#777}
+.cine-meta i{color:#111}
+.cine-meta b{color:#111}
+.cue{border-color:#CCC}
+.tnum{opacity:.7}
+@media(max-width:899px){.cine-cols{opacity:.22}.cine-shade{background:linear-gradient(180deg,rgba(255,255,255,.6),rgba(255,255,255,.92) 55%,#fff)}}
+/* strip */
+.strip{border-block:0}
+/* statement */
+.stmt{background:#F7F7F4;color:#111}
+.stmt-t span{color:#111;opacity:.14}
+.stmt-t span.on{opacity:1}
+.stmt-t span.hot{color:#111;background:linear-gradient(transparent 60%,var(--y) 60%,var(--y) 92%,transparent 92%)}
+/* why / deep */
+.deep{background:#F7F7F4;color:#111}
+.pr{background:#fff;border:1px solid #E8E8E4;box-shadow:0 14px 30px -24px rgba(0,0,0,.25)}
+.pr b{background:var(--y);color:#111;font-weight:700}
+.pr p{color:#5A5A5A}
+.whyimg figcaption{color:#fff}
+/* inner page heroes */
+.phero{background:#F7F7F4;color:#111}
+.phero::after{display:none}
+.phero.img::before{background:linear-gradient(90deg,rgba(255,255,255,.97) 0%,rgba(255,255,255,.9) 50%,rgba(255,255,255,.55))}
+.phero.img{background-color:#F7F7F4}
+.crumb{color:#777}.crumb a:hover{color:#111}
+.phero p.lead{color:#555}
+.tabs a{border-color:#D9D9D3;color:#555;background:#fff}
+.tabs a[aria-current="page"]{background:var(--y);border-color:var(--y);color:#111}
+/* band / cta */
+.band{background:#FFF8D6;border:2px solid var(--y);color:#111}
+.band p{color:#555}
+.band.photo{background:linear-gradient(100deg,rgba(255,255,255,.97) 35%,rgba(255,255,255,.75)),var(--ph) center/cover;border:1px solid #EEE}
+.band h2 em,.band h2 span{color:#111;background:linear-gradient(transparent 60%,var(--y) 60%)}
+.on-blue .btn-ghost,.band .btn-ghost{color:#111;border-color:#CFCFCF;background:#fff}
+/* footer & bar */
+footer{background:#F7F7F4;color:#666;border-top:1px solid #ECECE6}
+footer .logo,footer h4,footer b{color:#111}
+footer nav a:hover{color:#111}
+.fcta{border-bottom-color:#E6E6E0}
+.bar{background:color-mix(in srgb,#fff 94%,transparent);border-top:1px solid #EAEAE4}
+.bar .btn-ghost{color:#111;border-color:#CFCFCF}
+.telcard{background:var(--y);color:#111}
+.telcard .bigtel,.bigtel{color:#111}
+.telcard .btn-ghost{background:transparent;color:#111;border-color:rgba(0,0,0,.35)}
+.telcard #copytel{background:#111!important;color:#fff!important}
+.fcta h2{color:#111}
+.flowsteps span{color:#111}
+footer .mark{background:var(--y);color:#111}
+html{background:#fff}
 </style>
 
 </head>
@@ -1069,7 +1151,7 @@ header{background:color-mix(in srgb,#070707 88%,transparent)}
     <div class="wrap fgrid">
     <div>
       <a class="logo" href="#home"><span class="mark"><svg><use href="#check"/></svg></span>굿초이스 집수리</a>
-      <p>후회없는 선택 · 언제 어디서나 최고로 시공합니다<br>전화·문자 <a href="tel:01058099275" style="color:#fff;text-decoration:none;font-weight:700">010-5809-9275</a> · <a href="https://talk.naver.com/w5i8w9" target="_blank" rel="noopener">네이버 톡톡</a><br>서울 · 경기 · 인천 · 전국 출장<br>© 2026 굿초이스 집수리</p>
+      <p>후회없는 선택 · 언제 어디서나 최고로 시공합니다<br>전화·문자 <a href="tel:01058099275" style="color:#111;text-decoration:none;font-weight:700">010-5809-9275</a> · <a href="https://talk.naver.com/w5i8w9" target="_blank" rel="noopener">네이버 톡톡</a><br>서울 · 경기 · 인천 · 전국 출장<br>© 2026 굿초이스 집수리</p>
     </div>
     <div><h4>서비스</h4><nav id="footSvc"></nav></div>
     <div><h4>안내</h4><nav><a href="#cases">시공사례</a><a href="#process">진행 방법</a><a href="#area">출장 지역</a><a href="#contact">견적 문의</a><a href="https://blog.naver.com/las8015" target="_blank" rel="noopener">네이버 블로그</a></nav></div>
