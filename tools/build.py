@@ -222,6 +222,7 @@ for p in manifest['posts']:
         bsrc = os.path.join(BLOGDIR, pid, b0 + '.jpg'); asrc = os.path.join(BLOGDIR, pid, a0 + '.jpg')
     save_img(bsrc, os.path.join(ROOT, 'photos/c', pid, 'before.jpg'), 720, square=True)
     save_img(asrc, os.path.join(ROOT, 'photos/c', pid, 'after.jpg'), 720, square=True)
+    save_img(asrc, os.path.join(ROOT, 'photos/c', pid, 'after_s.jpg'), 320, square=True, q=70)
     # 내용 요약
     paras = lambda kinds: [x[1] for s in secs if s['kind'] in kinds for x in s['items'] if x[0] == 'p']
     problem = cond(paras(('intro',)) + paras(('pre',)), 260)
@@ -683,6 +684,8 @@ for a, b in [('#service', '/service/'), ('#cases', '/cases/'), ('#process', '/pr
     home = home.replace('href="%s"' % a, 'href="%s"' % b)
 home = re.sub(r'src="photos/', 'src="/photos/', home)
 home = home.replace('url(photos/', 'url(/photos/')
+home = re.sub(r'/photos/(\d+)_after\.jpg"([^>]*?)width="120" height="120"', lambda m: '/photos/c/%s/after_s.jpg"%swidth="120" height="120"' % (m.group(1), m.group(2)), home)
+home = re.sub(r'/photos/(\d+)_after\.jpg"', lambda m: '/photos/c/%s/after.jpg"' % m.group(1), home)
 # 사진 견적 문구 통일
 home = home.replace('<h3>사진 2장이면 바로 견적</h3><p>멀리서 1장, 가까이 1장. 문자로 사진과 지역을 보내주시면 확인 후 바로 견적과 일정을 잡아드립니다.</p>', '<h3>사진으로 먼저 상담</h3><p>%s %s</p>' % (E(PHOTO_GUIDE), E(PHOTO_NOTE)))
 home = home.replace('서울·경기·인천은 물론 평택·천안까지. 어느 현장이든 같은 기준으로 시공합니다.', '서울·경기·인천은 물론 세종·천안·아산까지. 어느 현장이든 같은 기준으로 시공합니다.')
@@ -701,7 +704,7 @@ home = re.sub(r'<img ([^>]*?)alt="" ([^>]*)><div><h3>(.*?)</h3>', lambda m: '<im
 home = re.sub(r'<img ([^>]*?)alt="" ([^>]*)><small>(.*?)</small><h3>(.*?)</h3>', lambda m: '<img %salt="%s" %s><small>%s</small><h3>%s</h3>' % (m.group(1), m.group(4), m.group(2), m.group(3), m.group(4)), home)
 
 cols = [CASES[k::3][:7] for k in range(3)]
-colhtml = ''.join('<div class="cc%d"><div class="ctrk">%s</div></div>' % (k + 1, ''.join(f'<img src="/photos/c/{c["id"]}/after.jpg" alt="" width="300" height="300" loading="{"eager" if (k == 1 and j < 2) else "lazy"}">' for j, c in enumerate(col)) * 2) for k, col in enumerate(cols))
+colhtml = ''.join('<div class="cc%d"><div class="ctrk">%s</div></div>' % (k + 1, ''.join(f'<img src="/photos/c/{c["id"]}/after_s.jpg" alt="" width="300" height="300" loading="{"eager" if (k == 1 and j < 2) else "lazy"}" decoding="async">' for j, c in enumerate(col)) * 2) for k, col in enumerate(cols))
 hero = f'''<section class="cine">
   <div class="cine-cols" aria-hidden="true">{colhtml}</div>
   <div class="cine-shade" aria-hidden="true"></div>
