@@ -747,7 +747,7 @@ header{background:color-mix(in srgb,#070707 88%,transparent)}
     </div>
   </div>
   <div class="wrap cine-meta">
-    <div><b data-count="52">0</b><i>+</i><span>블로그 시공 기록</span></div>
+    <div><b data-count="1000">0</b><i>+</i><span>누적 시공 기록</span></div>
     <div><b data-count="18">0</b><span>과정까지 공개한 사례</span></div>
     <div><b data-count="24">0</b><span>정기 출장 지역</span></div>
     <div><b data-count="2">0</b><i>장</i><span>견적에 필요한 사진</span></div>
@@ -811,7 +811,7 @@ header{background:color-mix(in srgb,#070707 88%,transparent)}
 
 <section class="nums">
   <div class="wrap numgrid">
-    <div><b><em data-count="52">0</em><i>+</i></b><span>블로그에 올린<br>시공 기록</span></div>
+    <div><b><em data-count="1000">0</em><i>+</i></b><span>누적<br>시공 기록</span></div>
     <div><b><em data-count="18">0</em></b><span>사진과 과정까지<br>공개한 사례</span></div>
     <div><b><em data-count="24">0</em></b><span>정기 출장<br>지역</span></div>
     <div><b>2<i>장</i></b><span>견적에 필요한<br>사진</span></div>
@@ -1367,7 +1367,7 @@ route();
  var W=['빌트인 식기세척기 설치','건조기 직렬 설치','샤워부스 철거·벽면 복원','이사 전 원상복구','문 방향 변경','세면대 배수 교체'],k=0;
  setInterval(function(){var b=document.getElementById('rot');if(!b||document.hidden)return;b.className='out';setTimeout(function(){k=(k+1)%W.length;b.textContent=W[k];b.className='inn'},330)},2600);
  var rm=matchMedia('(prefers-reduced-motion: reduce)').matches;
- function run(el){var t=+el.getAttribute('data-count');if(rm){el.textContent=t;return}var t0=null,D=1600;function f(ts){if(!t0)t0=ts;var p=Math.min(1,(ts-t0)/D);el.textContent=Math.round(t*(1-Math.pow(1-p,3)));if(p<1)requestAnimationFrame(f)}requestAnimationFrame(f)}
+ function run(el){var t=+el.getAttribute('data-count');if(rm){el.textContent=t.toLocaleString('ko-KR');return}var t0=null,D=1600;function f(ts){if(!t0)t0=ts;var p=Math.min(1,(ts-t0)/D);el.textContent=Math.round(t*(1-Math.pow(1-p,3))).toLocaleString('ko-KR');if(p<1)requestAnimationFrame(f)}requestAnimationFrame(f)}
  var cio='IntersectionObserver' in window?new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){run(e.target);cio.unobserve(e.target)}})},{threshold:.4}):null;
  function counters(){document.querySelectorAll('.view:not([hidden]) [data-count]:not(.cd)').forEach(function(el){el.classList.add('cd');if(cio)cio.observe(el);else el.textContent=el.getAttribute('data-count')})}
  var HOT=['원인','필요한','정리하고','후회없는','선택입니다.'];
