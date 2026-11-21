@@ -366,7 +366,11 @@ def header(active):
     menu = ''.join('<a href="%s"%s>%s</a>' % (h, ' aria-current="page"' if k == active else '', t) for h, t, k in NAV)
     CHEV = '<svg class="chev" viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg>'
     cur = {'service': '/service/', 'cases': '/cases/', 'process': '/process/', 'area': '/area/', 'contact': '/contact/'}.get(active, '')
-    svrow = lambda x: '<a href="/service/%s/"><span class="dic"><svg><use href="#%s"/></svg></span><span class="dtx"><b>%s</b><small>%s</small></span>%s</a>' % (x['slug'], x['icon'], E(x['name']), E(' · '.join(x['items'][:2])), CHEV)
+    def svrow(x):
+        cs = [c for c in CASES if c['svc'] == x['slug']]
+        th = ('<img src="/photos/c/%s/after_s.jpg" alt="" width="56" height="56" loading="lazy">' % cs[0]['id']) if cs else '<svg><use href="#%s"/></svg>' % x['icon']
+        cnt = ('<em>사례 %d건</em>' % len(cs)) if cs else ''
+        return '<a href="/service/%s/"><span class="dth">%s</span><span class="dtx"><b>%s</b><small>%s%s</small></span>%s</a>' % (x['slug'], th, E(x['name']), cnt, E(x['items'][0]), CHEV)
     tile = lambda h, t, sub, ext=False: '<a href="%s"%s><b>%s</b><small>%s</small><svg class="tarr"><use href="#arrow"/></svg></a>' % (h, ' target="_blank" rel="noopener"' if ext else '', t, sub)
     dnav = ('<div class="dlabel"><span>시공 서비스</span><a href="/service/">전체 보기</a></div><nav class="dlist" aria-label="서비스 메뉴">' + ''.join(svrow(x) for x in SERVICES) + '</nav>'
             '<div class="dlabel"><span>안내</span></div><nav class="dtiles" aria-label="안내 메뉴">' + tile('/', '홈', '처음 화면') + tile('/cases/', '시공사례', '실제 현장 %d건' % len(CASES)) + tile('/process/', '진행 방법', '상담부터 마무리') + tile('/area/', '출장 지역', '서울·경기·인천') + tile('/contact/', '견적 문의', '사진으로 상담') + tile(BLOG, '네이버 블로그', '작업 일지', True) + '</nav>'
@@ -383,8 +387,9 @@ def header(active):
 <div class="drawer" id="drawer" hidden>
   <div class="dscrim" data-close></div>
   <aside class="dpanel" role="dialog" aria-modal="true" aria-label="전체 메뉴">
-    <div class="dhead">
+    <div class="dhead" style="--hbg:url(/photos/c/224461641478/after.jpg)">
       <div class="dbrand"><span class="mark"><svg><use href="#check"/></svg></span><span><b>굿초이스 집수리</b><small>설치 · 철거 · 복원 전문</small></span><button class="dclose" type="button" id="closer" aria-label="메뉴 닫기"><svg><use href="#close"/></svg></button></div>
+      <div class="dchips"><span>누적 시공 1,000건+</span><span>서울·경기·인천 출장</span></div>
       <div class="dcta"><a class="btn btn-accent" href="tel:{TELN}" data-track="call"><svg><use href="#phone"/></svg>전화 상담</a><a class="btn dsms" href="{E(SMS_HREF)}" data-sms data-track="sms"><svg><use href="#chat"/></svg>문자 견적</a></div>
     </div>
     <div class="dbody">{dnav}</div>
