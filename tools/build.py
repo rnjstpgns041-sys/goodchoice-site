@@ -364,7 +364,12 @@ def head(title, desc, path, img=None, extra=''):
 
 def header(active):
     menu = ''.join('<a href="%s"%s>%s</a>' % (h, ' aria-current="page"' if k == active else '', t) for h, t, k in NAV)
-    dnav = '<a href="/">홈 <small>HOME</small></a>' + ''.join('<a href="%s">%s <small>%s</small></a>' % (h, t, k.upper()) for h, t, k in NAV)
+    CHEV = '<svg class="chev" viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg>'
+    cur = {'service': '/service/', 'cases': '/cases/', 'process': '/process/', 'area': '/area/', 'contact': '/contact/'}.get(active, '')
+    row = lambda h, t, ext=False: '<a href="%s"%s%s>%s%s</a>' % (h, ' target="_blank" rel="noopener"' if ext else '', '', t, CHEV)
+    dnav = ('<p class="dlabel">시공 서비스</p><nav class="dlist" aria-label="서비스 메뉴">' + row('/service/', '서비스 전체 보기') + ''.join(row('/service/%s/' % x['slug'], E(x['name'])) for x in SERVICES) + '</nav>'
+            '<p class="dlabel">안내</p><nav class="dlist" aria-label="안내 메뉴">' + row('/', '홈') + row('/cases/', '시공사례') + row('/process/', '진행 방법') + row('/area/', '출장 지역') + row('/contact/', '견적 문의') + row(BLOG, '네이버 블로그', True) + '</nav>'
+            '<p class="dnote">' + E(PHOTO_GUIDE) + '<br><a href="tel:' + TELN + '" data-track="call">' + TEL + '</a></p>')
     return f'''<header>
   <div class="wrap nav">
     <a class="logo" href="/"><span class="mark"><svg><use href="#check"/></svg></span><span><span class="tagline">집수리 &amp; 리폼 전문</span>굿초이스 집수리</span></a>
@@ -375,9 +380,14 @@ def header(active):
   </div>
 </header>
 <div class="drawer" id="drawer" hidden>
-  <div class="top"><span class="logo"><span class="mark"><svg><use href="#check"/></svg></span>굿초이스 집수리</span><button class="burger" type="button" id="closer" aria-label="메뉴 닫기" style="margin:0"><svg><use href="#close"/></svg></button></div>
-  <nav aria-label="모바일 메뉴">{dnav}</nav>
-  <div style="margin-top:auto;display:grid;grid-template-columns:1fr 1fr;gap:10px"><a class="btn btn-accent" href="tel:{TELN}" data-track="call"><svg><use href="#phone"/></svg>전화하기</a><a class="btn btn-ghost" href="{E(SMS_HREF)}" data-sms data-track="sms"><svg><use href="#chat"/></svg>문자하기</a></div>
+  <div class="dscrim" data-close></div>
+  <aside class="dpanel" role="dialog" aria-modal="true" aria-label="전체 메뉴">
+    <div class="dhead">
+      <div class="dbrand"><span class="mark"><svg><use href="#check"/></svg></span><span><b>굿초이스 집수리</b><small>설치 · 철거 · 복원 · 생활 수리</small></span><button class="dclose" type="button" id="closer" aria-label="메뉴 닫기"><svg><use href="#close"/></svg></button></div>
+      <div class="dcta"><a class="btn btn-accent" href="tel:{TELN}" data-track="call"><svg><use href="#phone"/></svg>전화 상담</a><a class="btn dsms" href="{E(SMS_HREF)}" data-sms data-track="sms"><svg><use href="#chat"/></svg>문자 견적</a></div>
+    </div>
+    <div class="dbody">{dnav}</div>
+  </aside>
 </div>
 <main>
 '''
