@@ -38,7 +38,7 @@
     var close = function () { dr.classList.remove('open'); d.body.style.overflow = ''; setTimeout(function () { dr.hidden = true; }, 280); };
     d.getElementById('burger').addEventListener('click', function () { dr.hidden = false; d.body.style.overflow = 'hidden'; requestAnimationFrame(function () { requestAnimationFrame(function () { dr.classList.add('open'); }); }); });
     d.getElementById('closer').addEventListener('click', close);
-    dr.querySelectorAll('.dlist a').forEach(function (a) { if (a.getAttribute('href') === location.pathname) a.setAttribute('aria-current', 'page'); });
+    dr.querySelectorAll('.dlist a, .dtiles a').forEach(function (a) { if (a.getAttribute('href') === location.pathname) a.setAttribute('aria-current', 'page'); });
     dr.addEventListener('click', function (e) { if (e.target.closest('a') || e.target.hasAttribute('data-close')) close(); });
     d.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !dr.hidden) close(); });
   }
