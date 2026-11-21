@@ -252,7 +252,7 @@ header .mark{background:rgba(255,255,255,.2)}
 .story{list-style:none;padding:0;margin:0;display:grid;gap:0;border-left:2px solid var(--accent-soft);margin-left:10px}
 .story li{position:relative;padding:0 0 28px 28px}
 .story li::before{content:"";position:absolute;left:-8px;top:6px;width:14px;height:14px;border-radius:50%;background:var(--surface);border:3px solid var(--accent)}
-.story h4{font-size:17px;font-weight:900;margin:0}
+.story h3{font-size:17px;font-weight:900;margin:0}
 .story p{color:var(--muted);font-size:15px;margin-top:6px}
 .pager{display:grid;gap:12px;margin-top:56px}
 @media(min-width:620px){.pager{grid-template-columns:1fr 1fr}}
@@ -718,7 +718,7 @@ main{display:block}
 .note{color:var(--muted);font-size:13.5px;line-height:1.6}
 .story{list-style:none;padding:0;margin:0;display:grid;gap:22px}
 .story>li{border:1px solid var(--line);border-radius:18px;padding:20px 22px;background:var(--surface)}
-.story h4{font-size:16px;font-weight:800;margin-bottom:6px}
+.story h3{font-size:16px;font-weight:800;margin-bottom:6px}
 .story p{color:#333;font-size:15.5px}
 .dots{margin:8px 0 0;padding-left:18px;color:#333;font-size:15px}
 .dots li{margin:2px 0}
@@ -838,3 +838,6 @@ main{display:block}
 .drawer .dhead::before{background:linear-gradient(180deg,rgba(11,11,11,.78) 0%,rgba(11,11,11,.9) 60%,#0B0B0B 100%)}
 .drawer .dchips span{white-space:nowrap}
 @media(max-width:360px){.drawer .dlist em{display:inline-block}}
+/* 모바일 속도: 첫 화면 사진 기둥 무한 스크롤 끄기 (요청서 8번, 2026-11-21) */
+@media(max-width:959px){.cine .ctrk,.cine-cols{animation:none!important}.cine .cue span{animation:none!important}}
+footer h2.fh{font-size:13px;font-weight:700;color:#fff;margin:0 0 10px;letter-spacing:0}
