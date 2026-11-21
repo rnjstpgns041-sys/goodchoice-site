@@ -172,6 +172,35 @@ def region_of(visited):
     return (v.split(' ')[0] if v else '', None)
 
 
+# 블로그 제목 맨 앞 지역명이 실제 방문 지역과 다른 경우가 있어(검색용 제목), 실제 지역으로 바로잡는다.
+PLACE_OK = {'분당': ['분당구'], '판교': ['분당구', '판교'], '위례': ['위례', '위레'], '광교': ['광교', '영통구'], '동탄': ['동탄']}
+PLACE_WORDS = ['강남구', '강남', '송파', '강동', '중랑구', '중랑', '노원', '광진', '서초', '분당', '판교', '위례', '광교', '동탄',
+               '과천', '광명', '용인', '수원', '성남', '하남', '안양', '화성', '경기 광주', '광주']
+
+
+def place_label(visited):
+    v = visited or ''
+    m = re.match(r'서울(?:특별)?시?\s+(\S+?)구', v)
+    if m: return m.group(1)
+    m = re.match(r'경기도\s+(\S+?)시', v)
+    if m:
+        city = '경기 광주' if m.group(1) == '광주' else m.group(1)
+        return city + (' 위례' if ('위례' in v or '위레' in v) else '')
+    return ''
+
+
+def fix_place(title, visited):
+    v = visited or ''
+    for w in PLACE_WORDS:
+        if not title.startswith(w + ' '): continue
+        oks = PLACE_OK.get(w, [w.replace('구', '') if w.endswith('구') else w])
+        if w == '경기 광주': oks = ['광주시']
+        if any(o in v for o in oks): return title
+        lab = place_label(v)
+        return (lab + title[len(w):]) if lab else title[len(w) + 1:]
+    return title
+
+
 REGION_PAGES = [  # (key, slug, 표시명)
     ('서울', 'seoul', '서울'), ('성남', 'seongnam', '성남'), ('하남', 'hanam', '하남'),
     ('용인', 'yongin', '용인'), ('수원', 'suwon', '수원'), ('경기 광주', 'gwangju', '경기 광주'),
@@ -259,6 +288,8 @@ for p in manifest['posts']:
         faq = [(q, cond(a, 220)) for q, a in faq if a]
     L = LCASE.get(pid)
     svc = svc_for(p)
+    p = dict(p, title=fix_place(p['title'], visited))
+    if L: L = dict(L, title=fix_place(L['title'], visited))
     CASES.append(dict(
         id=pid, title=p['title'], date=hdr.get('날짜') or p['date'], visited=visited, reg=reg, gu=gu, svc=svc,
         blog=hdr.get('원문') or p['url'], problem=problem, problem_li=problem_li, result_li=result_li, steps=steps, checks=checks, result=result, rec=rec[:6], faq=faq,
