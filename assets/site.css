@@ -816,3 +816,25 @@ main{display:block}
 .drawer .dbrand>span:nth-child(2){min-width:0}
 @media(max-width:360px){.drawer .dpanel{width:94vw}.drawer .dhead{padding-inline:16px}.drawer .dbody{padding-inline:12px}.drawer .dtx b{font-size:15px}.drawer .dbrand b{font-size:18px}.drawer .dcta .btn{font-size:15px}}
 .drawer .dtiles b{padding-right:18px}
+/* v3: 사진 헤더 + 사진 썸네일 */
+.drawer .dhead{background:#0B0B0B var(--hbg) center/cover no-repeat}
+.drawer .dhead::before{right:auto;left:0;top:0;width:100%;height:100%;border-radius:0;background:linear-gradient(180deg,rgba(11,11,11,.72) 0%,rgba(11,11,11,.88) 55%,#0B0B0B 100%)}
+.drawer .dhead::after{content:"";position:absolute;right:-70px;top:-90px;width:240px;height:240px;border-radius:50%;background:radial-gradient(circle,rgba(255,214,10,.25),rgba(255,214,10,0) 70%);pointer-events:none}
+.drawer .dhead>*{position:relative;z-index:1}
+.drawer .dchips{display:flex;flex-wrap:wrap;gap:6px;margin-top:16px}
+.drawer .dchips span{font-size:12px;font-weight:700;color:#fff;padding:6px 10px;border-radius:999px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.16);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
+.drawer .dchips span:first-child{background:#FFD60A;color:#111;border-color:#FFD60A}
+.drawer .dcta{margin-top:16px}
+.drawer .dth{width:56px;height:56px;border-radius:16px;overflow:hidden;flex:none;background:#FFF3B0;display:grid;place-items:center;box-shadow:inset 0 0 0 1px rgba(0,0,0,.06)}
+.drawer .dth img{width:100%;height:100%;object-fit:cover;display:block}
+.drawer .dth svg{width:26px;height:26px;stroke:#111;fill:none}
+.drawer .dlist a{min-height:78px;gap:14px}
+.drawer .dlist em{font-style:normal;font-size:11.5px;font-weight:800;color:#111;background:#FFF3B0;padding:4px 8px;border-radius:999px;white-space:nowrap;flex:none}
+.drawer .dlist a[aria-current="page"] em{background:#FFD60A}
+.drawer .dlist a[aria-current="page"] .dth{box-shadow:0 0 0 2px #FFD60A}
+@media(max-width:360px){.drawer .dlist em{display:none}.drawer .dth{width:50px;height:50px}}
+.drawer .dlist em{display:inline-block;margin-right:6px;padding:2px 7px;font-size:11px;vertical-align:1px}
+.drawer .dtx small{margin-top:5px}
+.drawer .dhead::before{background:linear-gradient(180deg,rgba(11,11,11,.78) 0%,rgba(11,11,11,.9) 60%,#0B0B0B 100%)}
+.drawer .dchips span{white-space:nowrap}
+@media(max-width:360px){.drawer .dlist em{display:inline-block}}
