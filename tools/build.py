@@ -353,6 +353,8 @@ def head(title, desc, path, img=None, extra=''):
 <meta property="og:locale" content="ko_KR">
 <meta name="theme-color" content="#0B0B0B">
 <meta name="format-detection" content="telephone=no">
+<link rel="icon" href="/favicon.ico" sizes="any"><link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="alternate" type="application/rss+xml" title="굿초이스 집수리 시공사례" href="/rss.xml">
 {v}<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
 <link rel="stylesheet" href="/assets/site.css?v={VER}">
@@ -372,7 +374,7 @@ def header(active):
         cnt = ''
         return '<a href="/service/%s/"><span class="dth">%s</span><span class="dtx"><b>%s</b><small>%s%s</small></span>%s</a>' % (x['slug'], th, E(x['name']), cnt, E(x['items'][0]), CHEV)
     tile = lambda h, t, sub, ext=False: '<a href="%s"%s><b>%s</b><small>%s</small><svg class="tarr"><use href="#arrow"/></svg></a>' % (h, ' target="_blank" rel="noopener"' if ext else '', t, sub)
-    dnav = ('<div class="dlabel"><span>시공 서비스</span><a href="/service/">전체 보기</a></div><nav class="dlist" aria-label="서비스 메뉴">' + ''.join(svrow(x) for x in SERVICES) + '</nav>'
+    dnav = ('<div class="dlabel"><span>시공 서비스</span><a href="/service/">서비스 전체 보기</a></div><nav class="dlist" aria-label="서비스 메뉴">' + ''.join(svrow(x) for x in SERVICES) + '</nav>'
             '<div class="dlabel"><span>안내</span></div><nav class="dtiles" aria-label="안내 메뉴">' + tile('/', '홈', '처음 화면') + tile('/cases/', '시공사례', '실제 현장 기록') + tile('/process/', '진행 방법', '상담부터 마무리') + tile('/area/', '출장 지역', '서울·경기·인천') + tile('/contact/', '견적 문의', '사진으로 상담') + tile(BLOG, '네이버 블로그', '작업 일지', True) + '</nav>'
             '<div class="dnote"><p>' + E(PHOTO_GUIDE) + '</p><a href="tel:' + TELN + '" data-track="call"><svg><use href="#phone"/></svg>' + TEL + '</a></div>')
     return f'''<header>
@@ -409,8 +411,8 @@ def footer():
       <a class="logo" href="/"><span class="mark"><svg><use href="#check"/></svg></span>굿초이스 집수리</a>
       <p>집수리 &amp; 리폼 전문 · 설치부터 철거·복원까지<br>전화·문자 <a class="ftel" href="tel:{TELN}" data-track="call">{TEL}</a> · <a href="{TALK}" target="_blank" rel="noopener">네이버 톡톡</a><br>서울 · 경기 · 인천 출장 시공<br>© 2026 굿초이스 집수리</p>
     </div>
-    <div><h4>서비스</h4><nav>{svc}</nav></div>
-    <div><h4>안내</h4><nav><a href="/cases/">시공사례</a><a href="/process/">진행 방법</a><a href="/area/">출장 지역</a><a href="/contact/">견적 문의</a><a href="{BLOG}" target="_blank" rel="noopener">네이버 블로그</a></nav><h4 style="margin-top:18px">지역</h4><nav>{reg}</nav></div>
+    <div><h2 class="fh">서비스</h2><nav>{svc}</nav></div>
+    <div><h2 class="fh">안내</h2><nav><a href="/cases/">시공사례</a><a href="/process/">진행 방법</a><a href="/area/">출장 지역</a><a href="/contact/">견적 문의</a><a href="{BLOG}" target="_blank" rel="noopener">네이버 블로그</a></nav><h2 class="fh" style="margin-top:18px">지역</h2><nav>{reg}</nav></div>
   </div>
 </footer>
 <nav class="bar" aria-label="빠른 상담">
@@ -513,7 +515,7 @@ for s in SERVICES:
         for k, st in enumerate(ex['steps'][:5]):
             ph = ''.join(f'<img src="/photos/c/{ex["id"]}/{n}_s.jpg" alt="{E(st["h"])}" width="420" height="420" loading="lazy">' for n in st['imgs'][:2])
             li = ''.join('<li>%s</li>' % E(x) for x in st['li'][:4])
-            steps += f'<li><h4>STEP {k + 1} · {E(st["h"])}</h4>' + (f'<p>{E(st["t"])}</p>' if st['t'] else '') + (f'<ul class="dots">{li}</ul>' if li else '') + (f'<div class="sph">{ph}</div>' if ph else '') + '</li>'
+            steps += f'<li><h3>STEP {k + 1} · {E(st["h"])}</h3>' + (f'<p>{E(st["t"])}</p>' if st['t'] else '') + (f'<ul class="dots">{li}</ul>' if li else '') + (f'<div class="sph">{ph}</div>' if ph else '') + '</li>'
         steps += '</ol><p><a class="link" href="/cases/%s/">이 현장 전체 보기 %s</a></p></div>' % (ex['id'], ARR)
     photos = ''
     if cs:
@@ -546,6 +548,9 @@ for i, c in enumerate(CASES):
     s = SBY[c['svc']]
     t = seo_title(c)
     crumb, ld = crumbs([('시공사례', '/cases/'), (t, None)])
+    ld += '<script type="application/ld+json">%s</script>\n' % json.dumps({"@context": "https://schema.org", "@type": "Article", "headline": t[:110], "datePublished": c['date'], "dateModified": c['date'],
+        "image": [SITE + '/photos/c/%s/after.jpg' % c['id']], "author": {"@type": "Organization", "name": "굿초이스 집수리", "url": SITE + "/"},
+        "publisher": {"@type": "Organization", "name": "굿초이스 집수리"}, "mainEntityOfPage": SITE + '/cases/%s/' % c['id'], "about": SBY[c['svc']]['name'], "contentLocation": {"@type": "Place", "name": c['visited']}}, ensure_ascii=False)
     body = phero('photos/c/%s/after.jpg' % c['id'], crumb, E(t), E(c['sum']))
     info = (f'<table class="info"><tr><th>시공 지역</th><td>{E(c["visited"])}</td></tr><tr><th>작업명</th><td>{E(c["title"])}</td></tr>'
             f'<tr><th>분야</th><td><a href="/service/{s["slug"]}/">{E(s["name"])}</a></td></tr><tr><th>작업일</th><td>{E(c["date"])}</td></tr></table>')
@@ -559,7 +564,7 @@ for i, c in enumerate(CASES):
         for k, x in enumerate(c['steps']):
             li = ''.join('<li>%s</li>' % E(y) for y in x['li'][:5])
             ph = ''.join(f'<a class="gbtn" href="/photos/c/{c["id"]}/{n}.jpg" data-lb><img src="/photos/c/{c["id"]}/{n}_s.jpg" alt="{E(x["h"])}" width="420" height="420" loading="lazy"></a>' for n in x['imgs'])
-            st += f'<li><h4>STEP {k + 1} · {E(x["h"])}</h4>' + (f'<p>{E(x["t"])}</p>' if x['t'] else '') + (f'<ul class="dots">{li}</ul>' if li else '') + (f'<div class="sph">{ph}</div>' if ph else '') + '</li>'
+            st += f'<li><h3>STEP {k + 1} · {E(x["h"])}</h3>' + (f'<p>{E(x["t"])}</p>' if x['t'] else '') + (f'<ul class="dots">{li}</ul>' if li else '') + (f'<div class="sph">{ph}</div>' if ph else '') + '</li>'
         st += '</ol>'
         parts.append(f'<div class="block"><h2>작업 방법</h2>{st}</div>')
     elif c['during']:
@@ -793,4 +798,11 @@ for u in URLS:
     sm += '  <url><loc>%s%s</loc><lastmod>%s</lastmod></url>\n' % (SITE, u, lm)
 sm += '</urlset>\n'
 open(os.path.join(ROOT, 'sitemap.xml'), 'w').write(sm)
+from email.utils import format_datetime
+rss = ['<?xml version="1.0" encoding="UTF-8"?>\n<rss version="2.0"><channel><title>굿초이스 집수리 시공사례</title><link>%s/cases/</link><description>굿초이스 집수리가 직접 진행한 설치·철거·복원 시공사례</description><language>ko</language>' % SITE]
+for c in sorted(CASES, key=lambda c: c['date'], reverse=True):
+    dt = datetime.datetime.strptime(c['date'], '%Y-%m-%d').replace(hour=9, tzinfo=datetime.timezone(datetime.timedelta(hours=9)))
+    rss.append('<item><title>%s</title><link>%s/cases/%s/</link><guid>%s/cases/%s/</guid><pubDate>%s</pubDate><description>%s</description></item>' % (E(seo_title(c)), SITE, c['id'], SITE, c['id'], format_datetime(dt), E(c['problem'] or c['sum'])))
+rss.append('</channel></rss>\n')
+open(os.path.join(ROOT, 'rss.xml'), 'w').write(''.join(rss))
 print('pages', len(URLS))
