@@ -369,11 +369,11 @@ def header(active):
     def svrow(x):
         cs = [c for c in CASES if c['svc'] == x['slug']]
         th = ('<img src="/photos/c/%s/after_s.jpg" alt="" width="56" height="56" loading="lazy">' % cs[0]['id']) if cs else '<svg><use href="#%s"/></svg>' % x['icon']
-        cnt = ('<em>사례 %d건</em>' % len(cs)) if cs else ''
+        cnt = ''
         return '<a href="/service/%s/"><span class="dth">%s</span><span class="dtx"><b>%s</b><small>%s%s</small></span>%s</a>' % (x['slug'], th, E(x['name']), cnt, E(x['items'][0]), CHEV)
     tile = lambda h, t, sub, ext=False: '<a href="%s"%s><b>%s</b><small>%s</small><svg class="tarr"><use href="#arrow"/></svg></a>' % (h, ' target="_blank" rel="noopener"' if ext else '', t, sub)
     dnav = ('<div class="dlabel"><span>시공 서비스</span><a href="/service/">전체 보기</a></div><nav class="dlist" aria-label="서비스 메뉴">' + ''.join(svrow(x) for x in SERVICES) + '</nav>'
-            '<div class="dlabel"><span>안내</span></div><nav class="dtiles" aria-label="안내 메뉴">' + tile('/', '홈', '처음 화면') + tile('/cases/', '시공사례', '실제 현장 %d건' % len(CASES)) + tile('/process/', '진행 방법', '상담부터 마무리') + tile('/area/', '출장 지역', '서울·경기·인천') + tile('/contact/', '견적 문의', '사진으로 상담') + tile(BLOG, '네이버 블로그', '작업 일지', True) + '</nav>'
+            '<div class="dlabel"><span>안내</span></div><nav class="dtiles" aria-label="안내 메뉴">' + tile('/', '홈', '처음 화면') + tile('/cases/', '시공사례', '실제 현장 기록') + tile('/process/', '진행 방법', '상담부터 마무리') + tile('/area/', '출장 지역', '서울·경기·인천') + tile('/contact/', '견적 문의', '사진으로 상담') + tile(BLOG, '네이버 블로그', '작업 일지', True) + '</nav>'
             '<div class="dnote"><p>' + E(PHOTO_GUIDE) + '</p><a href="tel:' + TELN + '" data-track="call"><svg><use href="#phone"/></svg>' + TEL + '</a></div>')
     return f'''<header>
   <div class="wrap nav">
