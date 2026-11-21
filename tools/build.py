@@ -515,7 +515,7 @@ for s in SERVICES:
         for k, st in enumerate(ex['steps'][:5]):
             ph = ''.join(f'<img src="/photos/c/{ex["id"]}/{n}_s.jpg" alt="{E(st["h"])}" width="420" height="420" loading="lazy">' for n in st['imgs'][:2])
             li = ''.join('<li>%s</li>' % E(x) for x in st['li'][:4])
-            steps += f'<li><h3>STEP {k + 1} · {E(st["h"])}</h3>' + (f'<p>{E(st["t"])}</p>' if st['t'] else '') + (f'<ul class="dots">{li}</ul>' if li else '') + (f'<div class="sph">{ph}</div>' if ph else '') + '</li>'
+            steps += f'<li><h3><span class="sn">STEP {k + 1}</span>{E(st["h"])}</h3>' + (f'<p>{E(st["t"])}</p>' if st['t'] else '') + (f'<ul class="dots">{li}</ul>' if li else '') + (f'<div class="sph">{ph}</div>' if ph else '') + '</li>'
         steps += '</ol><p><a class="link" href="/cases/%s/">이 현장 전체 보기 %s</a></p></div>' % (ex['id'], ARR)
     photos = ''
     if cs:
@@ -564,7 +564,7 @@ for i, c in enumerate(CASES):
         for k, x in enumerate(c['steps']):
             li = ''.join('<li>%s</li>' % E(y) for y in x['li'][:5])
             ph = ''.join(f'<a class="gbtn" href="/photos/c/{c["id"]}/{n}.jpg" data-lb><img src="/photos/c/{c["id"]}/{n}_s.jpg" alt="{E(x["h"])}" width="420" height="420" loading="lazy"></a>' for n in x['imgs'])
-            st += f'<li><h3>STEP {k + 1} · {E(x["h"])}</h3>' + (f'<p>{E(x["t"])}</p>' if x['t'] else '') + (f'<ul class="dots">{li}</ul>' if li else '') + (f'<div class="sph">{ph}</div>' if ph else '') + '</li>'
+            st += f'<li><h3><span class="sn">STEP {k + 1}</span>{E(x["h"])}</h3>' + (f'<p>{E(x["t"])}</p>' if x['t'] else '') + (f'<ul class="dots">{li}</ul>' if li else '') + (f'<div class="sph">{ph}</div>' if ph else '') + '</li>'
         st += '</ol>'
         parts.append(f'<div class="block"><h2>작업 방법</h2>{st}</div>')
     elif c['during']:
