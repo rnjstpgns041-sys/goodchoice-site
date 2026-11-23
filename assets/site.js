@@ -91,7 +91,7 @@
     var body = '[굿초이스 견적 문의]\n작업 종류: ' + g('f-type') + '\n지역: ' + g('f-area') + (g('f-name') ? '\n이름: ' + g('f-name') : '') + (g('f-date') ? '\n희망 일정: ' + g('f-date') : '') + (g('f-msg') ? '\n내용: ' + g('f-msg') : '') + '\n※ 전체 사진 1장 + 문제 부위 사진 1장 첨부';
     var sep = /iPhone|iPad|iPod|Macintosh/.test(navigator.userAgent) ? '&' : '?';
     track('click_sms', 'contact_form');
-    done.hidden = false; done.innerHTML = '문자 앱이 열립니다. 사진 2장을 첨부해서 보내주세요. 문자 앱이 열리지 않으면 <a href="tel:01058099275">010-5809-9275</a>로 직접 보내주세요.';
+    done.hidden = false; done.innerHTML = '문자 앱이 열립니다. 전체 사진 1장 + 문제 부위 사진 1장을 첨부해서 보내주세요. 문자 앱이 열리지 않으면 <a href="tel:01058099275">010-5809-9275</a>로 직접 보내주세요.';
     location.href = 'sms:01058099275' + sep + 'body=' + encodeURIComponent(body);
   });
 
