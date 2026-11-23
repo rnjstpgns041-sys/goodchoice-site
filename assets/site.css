@@ -1080,3 +1080,89 @@ footer .mark{background:linear-gradient(135deg,#FFE04D,#FFD000)}
 .hx-note{display:block;padding-left:14px;position:relative}
 .hx-note::before{position:absolute;left:0;top:0}
 @media(max-width:959px){.hx-visual{max-width:380px;padding-bottom:20px}.hx-float{right:0}}
+
+/* ===== v21: 전체 디자인 마감 다듬기 (2026-11-24) ===== */
+/* 글씨: 조금 더 단정하게 */
+.h2{font-weight:800;letter-spacing:-.045em}
+.sub{line-height:1.75}
+/* 섹션 라벨: 무거운 노랑 블록 → 점 + 연노랑 알약 */
+.label,.on-blue .label,.deep .label,.fcta .label{font-family:var(--f-sans);font-size:12.5px;font-weight:800;letter-spacing:.14em;color:#7A5A00;background:#FFF4C2;border:1px solid #F7E08A;padding:6px 13px 6px 11px;border-radius:999px;display:inline-flex;align-items:center;gap:8px;width:fit-content}
+.label::before{display:block!important;content:"";width:7px;height:7px;border-radius:50%;background:#FFC400;box-shadow:0 0 0 3px rgba(255,196,0,.22)}
+/* 섹션 간격 (휴대폰) */
+@media(max-width:700px){section{padding-block:64px}.stmt{padding-block:72px}}
+/* 기준 문장: 인용 카드 */
+.stmt .wrap{position:relative}
+.stmt-t{position:relative;padding:34px 26px 30px;border-radius:28px;background:linear-gradient(160deg,#FFFDF4,#FFF6D6);border:1px solid #F5E6B0;box-shadow:0 30px 60px -40px rgba(200,150,0,.6);font-size:clamp(24px,4vw,46px)!important;line-height:1.42!important;font-weight:800}
+.stmt-t::before{content:"\201C";position:absolute;left:20px;top:-34px;font-size:110px;line-height:1;font-weight:900;color:#FFD000;font-family:Georgia,serif}
+@media(min-width:900px){.stmt-t{padding:56px 60px 52px}.stmt-t::before{left:44px;top:-44px;font-size:140px}}
+/* 서비스 카드 */
+.scard{border-radius:24px;border-color:#F0E8D2;box-shadow:0 14px 34px -28px rgba(120,90,0,.5)}
+.scard .ph .ic{background:linear-gradient(135deg,#FFE04D,#FFD000);border-radius:14px}
+.scard .ph .ic svg{stroke:var(--ink)}
+.scard .go{color:var(--ink)}
+@media(max-width:619px){.services{grid-template-columns:1fr 1fr;gap:12px}.scard .bd{padding:30px 14px 16px}.scard h3{font-size:16px;line-height:1.35}.scard p{display:none}.scard .ph .ic{width:42px;height:42px;left:12px;bottom:-18px}.scard .ph .ic svg{width:22px;height:22px}}
+/* 문제 목록 */
+.symgrid a{border-radius:18px;border-color:#F0E8D2;background:#fff}
+/* 시공사례 카드: 휴대폰은 2열 콤팩트 */
+.ccard{border-color:#F0E8D2;border-radius:22px;box-shadow:0 14px 34px -28px rgba(120,90,0,.5)}
+.ccard .cat{font-family:var(--f-sans);font-weight:700;letter-spacing:0;color:#9A7A10;font-size:12.5px}
+.ccard .go{color:var(--ink)}
+.ccard .go::before{content:"";width:6px;height:6px;border-radius:50%;background:#FFC400;margin-right:2px}
+@media(max-width:639px){
+ .cgrid3{grid-template-columns:1fr 1fr;gap:12px}
+ .cgrid3 .ccard{border-radius:18px}
+ .cgrid3 .ccard .pair{grid-template-columns:1fr}
+ .cgrid3 .ccard .pair figure:first-child{display:none}
+ .cgrid3 .ccard figure{aspect-ratio:1/.92}
+ .cgrid3 .ccard figcaption.af::after{content:"  전·후 보기";font-weight:600}
+ .cgrid3 .ccard .bd{padding:12px 12px 14px;gap:4px}
+ .cgrid3 .ccard h3{font-size:15px;line-height:1.38;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+ .cgrid3 .ccard h3 br{display:none}
+ .cgrid3 .ccard p{display:none}
+ .cgrid3 .ccard .cat{font-size:11.5px}
+ .cgrid3 .ccard .go{font-size:12.5px;padding-top:6px}
+ .cgrid3 .ccard .go svg{display:none}
+}
+/* 분류 칩 */
+.chips a,.chips span,.filters a,.filters button{border-radius:999px}
+/* 진행 단계 */
+.steps li::before,.flow li span{background:linear-gradient(135deg,#FFE04D,#FFD000)!important;color:var(--ink)!important;box-shadow:0 10px 20px -10px rgba(200,150,0,.7)}
+/* 자주 묻는 질문: 카드 */
+details{border:1px solid #F0E8D2!important;border-radius:18px;padding:18px 20px;background:#fff;margin-bottom:10px;transition:box-shadow .2s,border-color .2s}
+details[open]{border-color:#F5D86A!important;box-shadow:0 16px 36px -26px rgba(200,150,0,.6);background:#FFFDF6}
+summary{font-size:16px}
+summary::after{content:"";flex:none;width:26px;height:26px;border-radius:50%;background:#FFF1B0 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%232A2416' stroke-width='2.6' stroke-linecap='round'%3E%3Cpath d='M12 6v12M6 12h12'/%3E%3C/svg%3E") center/14px no-repeat;transition:transform .25s}
+details[open] summary::after{content:"";transform:rotate(45deg);background-color:#FFD000}
+/* 상담 띠 버튼: 휴대폰에서 꽉 차게 */
+@media(max-width:600px){.band .ctas{display:grid;grid-template-columns:1fr;gap:10px;width:100%}.band .ctas .btn{width:100%}.band{padding:32px 22px;border-radius:26px}}
+/* 지역 카드 */
+.acard,.areabox .rows>*{border-radius:20px}
+/* 하위 페이지 머리: 아래쪽 곡선 + 사진 살짝 더 보이게 */
+.phero{border-radius:0 0 32px 32px;margin-bottom:8px}
+.phero.img::before{background:linear-gradient(90deg,#FFFBEF 0%,rgba(255,251,239,.9) 48%,rgba(255,251,239,.45))}
+@media(max-width:700px){.phero.img::before{background:linear-gradient(180deg,rgba(255,251,239,.88),rgba(255,251,239,.96))}.phero{padding-block:40px 44px}}
+.phero h1{font-weight:800;letter-spacing:-.045em}
+.tabs a{font-weight:600}
+/* 상세 페이지 오른쪽 견적 카드 */
+.aside{border-radius:24px!important;border:1px solid #F0E8D2!important;box-shadow:0 24px 50px -36px rgba(160,120,0,.6)!important;background:linear-gradient(180deg,#fff,#FFFCF0)!important}
+/* 하단 정보: 휴대폰 2열 */
+footer{background:linear-gradient(180deg,#FFFBEF,#FFF6D6)}
+@media(max-width:899px){
+ .fgrid{display:grid;grid-template-columns:1fr 1fr;gap:28px 18px}
+ .fgrid>div:first-child{grid-column:1/-1;padding:20px;border-radius:20px;background:#fff;border:1px solid #F3E7C2}
+}
+footer nav a{padding-block:2px}
+.ftel{font-size:1.05em}
+/* 모바일 하단 바: 떠 있는 카드 */
+@media(max-width:899px){
+ .bar{left:10px;right:10px;bottom:calc(10px + env(safe-area-inset-bottom,0px));border-radius:20px;border:1px solid #F0E6C8;padding:8px;box-shadow:0 18px 40px -18px rgba(120,90,0,.45);background:rgba(255,255,255,.96)}
+ body{padding-bottom:96px}
+}
+/* 블로그 글 카드 */
+.posts a img,.posts img{border-radius:16px}
+/* 버튼 공통 */
+.btn{border-radius:14px;letter-spacing:-.01em}
+.btn-accent:hover{filter:none;box-shadow:0 14px 28px -10px rgba(232,180,0,.85)}
+@media(max-width:639px){.cgrid3 .ccard figcaption.af::after{content:none}}
+@media(max-width:699px){.whogrid{grid-template-columns:1fr 1fr;gap:12px}.whogrid a{min-height:0;aspect-ratio:3/4.4;border-radius:20px}.whogrid div{left:8px;right:8px;bottom:8px;padding:12px;border-radius:14px}.whogrid h3{font-size:15.5px}.whogrid p{display:none}.whogrid span{font-size:12px}}
+@media(min-width:640px){.cgrid3.rel{grid-template-columns:repeat(auto-fill,minmax(240px,1fr))}}

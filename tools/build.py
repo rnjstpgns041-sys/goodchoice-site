@@ -601,7 +601,7 @@ for i, c in enumerate(CASES):
         ld += '<script type="application/ld+json">%s</script>\n' % json.dumps({"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": q, "acceptedAnswer": {"@type": "Answer", "text": a}} for q, a in c['faq']]}, ensure_ascii=False)
     parts.append(f'<p><a class="link" href="{E(c["blog"])}" target="_blank" rel="noopener">네이버 블로그 원문에서 전체 과정 보기 {ARR}</a></p>')
     rel = [x for x in CASES if x['svc'] == c['svc'] and x['id'] != c['id']][:3]
-    if rel: parts.append('<div class="block" style="margin-top:56px"><h2>%s 다른 사례</h2><div class="cgrid3" style="grid-template-columns:repeat(auto-fill,minmax(240px,1fr))">%s</div><p style="margin-top:20px"><a class="link" href="/service/%s/">%s 서비스 안내 %s</a></p></div>' % (E(s['short']), ''.join(case_card(x) for x in rel), s['slug'], E(s['name']), ARR))
+    if rel: parts.append('<div class="block" style="margin-top:56px"><h2>%s 다른 사례</h2><div class="cgrid3 rel">%s</div><p style="margin-top:20px"><a class="link" href="/service/%s/">%s 서비스 안내 %s</a></p></div>' % (E(s['short']), ''.join(case_card(x) for x in rel), s['slug'], E(s['name']), ARR))
     prev, nxt = CASES[i - 1], CASES[(i + 1) % N]
     parts.append(f'<div class="pager"><a href="/cases/{prev["id"]}/"><small>← 이전 사례</small><b>{E(prev["short"])}</b></a><a class="next" href="/cases/{nxt["id"]}/"><small>다음 사례 →</small><b>{E(nxt["short"])}</b></a></div>')
     rlink = ('<a class="btn btn-line" href="/area/%s/">%s 다른 현장 보기</a>' % (RSLUG[c['reg']], E(c['reg']))) if c['reg'] in RSLUG else ''
