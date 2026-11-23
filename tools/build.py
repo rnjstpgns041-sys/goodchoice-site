@@ -776,21 +776,38 @@ home = re.sub(r'<img ([^>]*?)alt="" ([^>]*)><span><b>(.*?)</b>', lambda m: '<img
 home = re.sub(r'<img ([^>]*?)alt="" ([^>]*)><div><h3>(.*?)</h3>', lambda m: '<img %salt="%s 시공 사례" %s><div><h3>%s</h3>' % (m.group(1), m.group(3), m.group(2), m.group(3)), home)
 home = re.sub(r'<img ([^>]*?)alt="" ([^>]*)><small>(.*?)</small><h3>(.*?)</h3>', lambda m: '<img %salt="%s" %s><small>%s</small><h3>%s</h3>' % (m.group(1), m.group(4), m.group(2), m.group(3), m.group(4)), home)
 
+HBA_IDS = ['224257385115', '224252837060', '224200184402', '224365853425', '224219219612', '224266415728', '224416764953', '224424461321']
+def hba_html():
+    cards = ''
+    for k, i in enumerate([x for x in HBA_IDS if x in CBY]):
+        c = CBY[i]; sv = SBY[c['svc']]
+        lz = '' if k < 2 else ' loading="lazy"'
+        cards += (f'<a class="hba-card" href="/cases/{i}/"><div class="hba-pair">'
+                  f'<figure><img src="/photos/c/{i}/before.jpg" alt="{E(c["short"])} 작업 전" width="720" height="720"{lz} decoding="async"><figcaption>작업 전</figcaption></figure>'
+                  f'<figure><img src="/photos/c/{i}/after.jpg" alt="{E(c["short"])} 작업 후" width="720" height="720"{lz} decoding="async"><figcaption class="af">작업 후</figcaption></figure></div>'
+                  f'<div class="hba-cap"><small>{E(place(c))} · {E(sv["short"])}</small><b>{E(c["short"])}</b><span class="hba-go">사례 보기 {ARR}</span></div></a>')
+    n = cards.count('class="hba-card"')
+    dots = ''.join('<i%s></i>' % (' class="on"' if k == 0 else '') for k in range(n))
+    return f'''<section class="hba" aria-label="실제 현장 작업 전·후">
+  <div class="wrap hba-head">
+    <span class="hba-chip"><i></i>실제 현장 전·후</span>
+    <p class="hba-t">직접 다녀온 현장,<br><b>전·후</b>로 보여드립니다</p>
+  </div>
+  <div class="hba-rail" id="hbaRail">{cards}</div>
+  <div class="wrap hba-foot"><div class="hba-dots" aria-hidden="true">{dots}</div><a class="hba-all" href="/cases/">시공사례 {N}건 전체 보기 {ARR}</a></div>
+</section>
+<script>(function(){{var r=document.getElementById('hbaRail');if(!r)return;var ds=[].slice.call(document.querySelectorAll('.hba-dots i')),cs=r.querySelectorAll('.hba-card'),k=0,t=null,hold=false;
+function idx(){{var best=0,bd=1e9;for(var i=0;i<cs.length;i++){{var d=Math.abs(cs[i].offsetLeft-r.scrollLeft-r.offsetLeft*0-parseFloat(getComputedStyle(r).paddingLeft));if(d<bd){{bd=d;best=i}}}}return best}}
+r.addEventListener('scroll',function(){{k=idx();ds.forEach(function(d,i){{d.className=i===k?'on':''}})}},{{passive:true}});
+function go(){{if(hold||document.hidden)return;k=(k+1)%cs.length;r.scrollTo({{left:cs[k].offsetLeft-parseFloat(getComputedStyle(r).paddingLeft),behavior:'smooth'}})}}
+['pointerdown','touchstart','mouseenter','focusin'].forEach(function(e){{r.addEventListener(e,function(){{hold=true}},{{passive:true}})}});
+r.addEventListener('mouseleave',function(){{hold=false}});
+if(!matchMedia('(prefers-reduced-motion: reduce)').matches)t=setInterval(go,3800);}})();</script>
+'''
+
 cols = [CASES[k::3][:7] for k in range(3)]
 colhtml = ''.join('<div class="cc%d"><div class="ctrk">%s</div></div>' % (k + 1, ''.join(f'<img src="/photos/c/{c["id"]}/after_s.jpg" alt="" width="300" height="300" loading="{"eager" if (k == 1 and j < 2) else "lazy"}" decoding="async">' for j, c in enumerate(col)) * 2) for k, col in enumerate(cols))
-hero = f'''<section class="hvid" aria-label="실제 시공 현장 영상">
-  <video class="hvid-v" muted loop playsinline preload="none" poster="/assets/video/hero_m.jpg" data-m="/assets/video/hero_m.mp4" data-d="/assets/video/hero_d.mp4" data-pm="/assets/video/hero_m.jpg" data-pd="/assets/video/hero_d.jpg" aria-hidden="true"></video>
-  <div class="hvid-shade" aria-hidden="true"></div>
-  <div class="wrap hvid-in">
-    <span class="hvid-chip"><i></i>실제 시공 현장</span>
-    <p class="hvid-t">직접 다녀온 현장,<br><b>사진 그대로</b> 보여드립니다</p>
-    <p class="hvid-tags"><span>건조기 직렬 설치</span><span>식기세척기 빌트인</span><span>문 방향 변경</span><span>하부장 리폼</span></p>
-  </div>
-</section>
-<script>(function(){{var v=document.querySelector('.hvid-v');if(!v)return;var d=matchMedia('(min-width:900px)').matches;v.poster=d?v.dataset.pd:v.dataset.pm;
-var sd=navigator.connection&&navigator.connection.saveData;if(sd||matchMedia('(prefers-reduced-motion: reduce)').matches)return;
-v.src=d?v.dataset.d:v.dataset.m;v.preload='auto';var p=v.play();if(p&&p.catch)p.catch(function(){{}});}})();</script>
-<section class="hx">
+hero = hba_html() + f'''<section class="hx">
   <div class="hx-bg" aria-hidden="true"></div>
   <div class="wrap hx-grid">
     <div class="hx-copy">
