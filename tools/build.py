@@ -759,24 +759,33 @@ home = re.sub(r'<img ([^>]*?)alt="" ([^>]*)><small>(.*?)</small><h3>(.*?)</h3>',
 
 cols = [CASES[k::3][:7] for k in range(3)]
 colhtml = ''.join('<div class="cc%d"><div class="ctrk">%s</div></div>' % (k + 1, ''.join(f'<img src="/photos/c/{c["id"]}/after_s.jpg" alt="" width="300" height="300" loading="{"eager" if (k == 1 and j < 2) else "lazy"}" decoding="async">' for j, c in enumerate(col)) * 2) for k, col in enumerate(cols))
-hero = f'''<section class="cine">
-  <div class="cine-cols" aria-hidden="true">{colhtml}</div>
-  <div class="cine-shade" aria-hidden="true"></div>
-  <div class="wrap cine-in">
-    <span class="kicker"><i></i>집수리 &amp; 리폼 전문 · 누적 시공 1,000건+ · 공개 시공사례 {N}건</span>
-    <h1 class="cine-h"><span class="ln"><span>굿초이스 집수리,</span></span><span class="ln"><span>설치부터 <em>철거·복원</em>까지</span></span></h1>
-    <p class="cine-lead">빌트인 식기세척기 설치 및 철거, 건조기 직렬 설치, 샤워부스 철거, 정수기 철거 및 싱크대 상판 복원, 문 방향 변경, 가구 리폼까지. 다양한 생활 수리와 설치·철거 작업을 전문적으로 진행합니다.</p>
-    <div class="ctas">
-      <a class="btn btn-accent" href="tel:{TELN}" data-track="call"><svg><use href="#phone"/></svg>전화 상담 <span class="tnum">{TEL}</span></a>
-      <a class="btn btn-ghost" href="{E(SMS_HREF)}" data-sms data-track="sms"><svg><use href="#chat"/></svg>문자 견적</a>
+hero = f'''<section class="hx">
+  <div class="hx-bg" aria-hidden="true"></div>
+  <div class="wrap hx-grid">
+    <div class="hx-copy">
+      <div class="hx-badges"><span class="hx-b1"><svg><use href="#ok"/></svg>누적 시공 1,000건+</span><span>서울·경기·인천 출장</span></div>
+      <h1 class="hx-h">굿초이스 집수리,<br>설치부터 <mark>철거·복원</mark>까지</h1>
+      <p class="hx-lead">빌트인 식기세척기·건조기 설치부터 샤워부스 철거, 싱크대 상판 복원, 문 방향 변경, 가구 리폼까지. 다양한 생활 수리와 설치·철거 작업을 꼼꼼하게 진행합니다.</p>
+      <div class="hx-ctas">
+        <a class="btn btn-accent" href="tel:{TELN}" data-track="call"><svg><use href="#phone"/></svg>전화 상담<span class="tnum">{TEL}</span></a>
+        <a class="btn btn-ghost" href="{E(SMS_HREF)}" data-sms data-track="sms"><svg><use href="#chat"/></svg>문자 견적</a>
+      </div>
+      <p class="hx-note"><b>전체 사진 1장 + 문제 부위 사진 1장</b>만 보내주시면 확인 후 상담해 드려요.</p>
+    </div>
+    <div class="hx-visual">
+      <figure class="hx-main"><img src="/photos/c/224185310911/after.jpg" alt="건조기 직렬 설치 완료 현장" width="720" height="720" fetchpriority="high"><figcaption>건조기 직렬 설치</figcaption></figure>
+      <figure class="hx-sub s1"><img src="/photos/c/224257385115/after_s.jpg" alt="빌트인 식기세척기 설치 완료" width="320" height="320" loading="lazy"><figcaption>식기세척기 빌트인</figcaption></figure>
+      <div class="hx-float"><b>{N}건</b><span>실제 시공사례 공개</span></div>
     </div>
   </div>
-  <ul class="wrap cine-meta hl4">
-    <li><svg><use href="#ok"/></svg><b>서울·경기·인천</b><span>출장 시공</span></li>
-    <li><svg><use href="#ok"/></svg><b>현장 사진</b><span>사진으로 먼저 상담</span></li>
-    <li><svg><use href="#ok"/></svg><b>합리적인 견적</b><span>필요한 작업만 안내</span></li>
-    <li><svg><use href="#ok"/></svg><b>전문 시공</b><span>마무리 점검까지</span></li>
-  </ul>
+  <div class="wrap">
+    <ul class="hx-trust">
+      <li><svg><use href="#ok"/></svg><b>서울·경기·인천</b><span>출장 시공</span></li>
+      <li><svg><use href="#ok"/></svg><b>사진 먼저 상담</b><span>현장 사진 확인</span></li>
+      <li><svg><use href="#ok"/></svg><b>필요한 작업만</b><span>합리적인 견적</span></li>
+      <li><svg><use href="#ok"/></svg><b>마무리 점검</b><span>전문 시공</span></li>
+    </ul>
+  </div>
 </section>
 '''
 lb_ld = {"@context": "https://schema.org", "@type": "HomeAndConstructionBusiness", "name": "굿초이스 집수리", "description": "빌트인 식기세척기 설치·철거, 건조기 직렬 설치, 샤워부스 철거, 정수기 철거 및 싱크대 상판 복원, 문 방향 변경, 가구 리폼 전문.",
