@@ -789,12 +789,14 @@ hero = f'''<section class="hx">
         <a class="btn btn-accent" href="tel:{TELN}" data-track="call"><svg><use href="#phone"/></svg>전화 상담<span class="tnum">{TEL}</span></a>
         <a class="btn btn-ghost" href="{E(SMS_HREF)}" data-sms data-track="sms"><svg><use href="#chat"/></svg>문자 견적</a>
       </div>
+      <ul class="hx-stats"><li><b>1,000<i>+</i></b><span>누적 시공</span></li><li><b>{N}<i>건</i></b><span>공개 시공사례</span></li><li><b>{len(SERVICES)}<i>개</i></b><span>시공 분야</span></li></ul>
       <p class="hx-note"><b>전체 사진 1장 + 문제 부위 사진 1장</b>만 보내주시면 확인 후 상담해 드려요.</p>
     </div>
     <div class="hx-visual">
       <figure class="hx-main"><img src="/photos/c/224185310911/after.jpg" srcset="/photos/c/224185310911/after_s.jpg 320w, /photos/c/224185310911/after.jpg 720w" sizes="(max-width:959px) 320px, 440px" alt="건조기 직렬 설치 완료 현장" width="720" height="720" fetchpriority="high"><figcaption>건조기 직렬 설치</figcaption></figure>
       <figure class="hx-sub s1"><img src="/photos/c/224257385115/after_s.jpg" alt="빌트인 식기세척기 설치 완료" width="320" height="320" loading="lazy"><figcaption>식기세척기 빌트인</figcaption></figure>
       <div class="hx-float"><b>{N}건</b><span>실제 시공사례 공개</span></div>
+      <div class="hx-stamp" aria-hidden="true"><b>1,000<i>+</i></b><span>누적 시공</span></div>
     </div>
   </div>
   <div class="wrap">
