@@ -543,7 +543,26 @@ grid = '<div class="cgrid3" id="allCases">' + ''.join(case_card(c).replace('<a c
 body += '<section style="padding-top:48px"><div class="wrap">' + filt + grid + '<p style="margin-top:40px"><a class="link" href="%s" target="_blank" rel="noopener">네이버 블로그에서 작업 기록 보기 %s</a></p></div></section>' % (BLOG, ARR)
 write('/cases/', head('시공사례 %d건 | 지역별 설치·철거·복원 작업 기록 - 굿초이스 집수리' % N, '굿초이스 집수리가 서울·성남·하남·용인·수원 등에서 직접 진행한 시공사례 %d건. 식기세척기 설치, 건조기 직렬, 샤워부스 철거, 원상복구, 문 방향 변경 현장을 사진과 함께 확인하세요.' % N, '/cases/', extra=ld) + header('cases') + body + footer())
 
+CSVC = {}
+MATS = ['식기세척기 키트', '직렬 키트', '직렬 거치대', '앵글', '선반', '합판', 'PB', 'MDF', '시트지', '필름', '경첩', '힌지', '도어락', '손잡이', '스토퍼', '레일', '롤러', '물막이', '쫄대', '실리콘', '퍼티', '에폭시', '인조대리석', '타일', '줄눈', '백시멘트', '급수 호스', '배수 호스', '분배기', '수전', '트랩', '팝업', '디스펜서', '안전손잡이', '콘센트', '앵커', '피스', '브라켓', '몰딩', '마감재']
+_mc = {}
+def mats(pid):
+    """블로그 원문에 실제로 나온 자재·부품 이름만 (없으면 빈 목록)."""
+    if pid not in _mc:
+        try: t = open(os.path.join(BLOGDIR, pid, 'text.txt'), encoding='utf-8').read()
+        except OSError: t = ''
+        found = sorted([(t.find(m), m) for m in MATS if m in t])
+        out = []
+        for _, m in found:
+            if m == '힌지' and '경첩' in out: continue
+            if m == '경첩' and '힌지' in out: continue
+            out.append(m)
+        if CSVC.get(pid) != 'home-repair': out = [m for m in out if m != '콘센트']
+        _mc[pid] = out[:7]
+    return _mc[pid]
+
 # ---------- case detail
+CSVC.update({c['id']: c['svc'] for c in CASES})
 for i, c in enumerate(CASES):
     s = SBY[c['svc']]
     t = seo_title(c)
@@ -553,7 +572,7 @@ for i, c in enumerate(CASES):
         "publisher": {"@type": "Organization", "name": "굿초이스 집수리"}, "mainEntityOfPage": SITE + '/cases/%s/' % c['id'], "about": SBY[c['svc']]['name'], "contentLocation": {"@type": "Place", "name": c['visited']}}, ensure_ascii=False)
     body = phero('photos/c/%s/after.jpg' % c['id'], crumb, E(t), E(c['sum']))
     info = (f'<table class="info"><tr><th>시공 지역</th><td>{E(c["visited"])}</td></tr><tr><th>작업명</th><td>{E(c["title"])}</td></tr>'
-            f'<tr><th>분야</th><td><a href="/service/{s["slug"]}/">{E(s["name"])}</a></td></tr><tr><th>작업일</th><td>{E(c["date"])}</td></tr></table>')
+            f'<tr><th>분야</th><td><a href="/service/{s["slug"]}/">{E(s["name"])}</a></td></tr>' + (f'<tr><th>자재·부품</th><td>{E(", ".join(mats(c["id"])))}</td></tr>' if mats(c['id']) else '') + f'<tr><th>작업일</th><td>{E(c["date"])}</td></tr></table>')
     parts = [f'<div class="block"><h2>현장 정보</h2>{info}</div>']
     if c['problem'] or c['problem_li']:
         pl = ''.join('<li>%s</li>' % E(x) for x in c['problem_li'])
@@ -566,7 +585,7 @@ for i, c in enumerate(CASES):
             ph = ''.join(f'<a class="gbtn" href="/photos/c/{c["id"]}/{n}.jpg" data-lb><img src="/photos/c/{c["id"]}/{n}_s.jpg" alt="{E(x["h"])}" width="420" height="420" loading="lazy"></a>' for n in x['imgs'])
             st += f'<li><h3><span class="sn">STEP {k + 1}</span>{E(x["h"])}</h3>' + (f'<p>{E(x["t"])}</p>' if x['t'] else '') + (f'<ul class="dots">{li}</ul>' if li else '') + (f'<div class="sph">{ph}</div>' if ph else '') + '</li>'
         st += '</ol>'
-        parts.append(f'<div class="block"><h2>작업 방법</h2>{st}</div>')
+        parts.append(f'<div class="block"><h2>작업 과정 · 작업 방법</h2>{st}</div>')
     elif c['during']:
         parts.append(f'<div class="block"><h2>작업 과정 사진</h2>{gallery(c, c["during"], "작업 과정")}</div>')
     if c['after']: parts.append(f'<div class="block"><h2>시공 완료 사진</h2>{gallery(c, c["after"], "시공 완료")}</div>')
@@ -765,7 +784,7 @@ hero = f'''<section class="hx">
     <div class="hx-copy">
       <div class="hx-badges"><span class="hx-b1"><svg><use href="#ok"/></svg>누적 시공 1,000건+</span><span>서울·경기·인천 출장</span></div>
       <h1 class="hx-h">굿초이스 집수리,<br>설치부터 <mark>철거·복원</mark>까지</h1>
-      <p class="hx-lead">빌트인 식기세척기·건조기 설치부터 샤워부스 철거, 싱크대 상판 복원, 문 방향 변경, 가구 리폼까지. 다양한 생활 수리와 설치·철거 작업을 꼼꼼하게 진행합니다.</p>
+      <p class="hx-lead">빌트인 식기세척기 설치 및 철거, 건조기 직렬 설치, 샤워부스 철거, 정수기 철거 및 싱크대 상판 복원, 문 방향 변경, 가구 리폼까지. 다양한 생활 수리와 설치·철거 작업을 전문적으로 진행합니다.</p>
       <div class="hx-ctas">
         <a class="btn btn-accent" href="tel:{TELN}" data-track="call"><svg><use href="#phone"/></svg>전화 상담<span class="tnum">{TEL}</span></a>
         <a class="btn btn-ghost" href="{E(SMS_HREF)}" data-sms data-track="sms"><svg><use href="#chat"/></svg>문자 견적</a>
@@ -773,7 +792,7 @@ hero = f'''<section class="hx">
       <p class="hx-note"><b>전체 사진 1장 + 문제 부위 사진 1장</b>만 보내주시면 확인 후 상담해 드려요.</p>
     </div>
     <div class="hx-visual">
-      <figure class="hx-main"><img src="/photos/c/224185310911/after.jpg" alt="건조기 직렬 설치 완료 현장" width="720" height="720" fetchpriority="high"><figcaption>건조기 직렬 설치</figcaption></figure>
+      <figure class="hx-main"><img src="/photos/c/224185310911/after.jpg" srcset="/photos/c/224185310911/after_s.jpg 320w, /photos/c/224185310911/after.jpg 720w" sizes="(max-width:959px) 320px, 440px" alt="건조기 직렬 설치 완료 현장" width="720" height="720" fetchpriority="high"><figcaption>건조기 직렬 설치</figcaption></figure>
       <figure class="hx-sub s1"><img src="/photos/c/224257385115/after_s.jpg" alt="빌트인 식기세척기 설치 완료" width="320" height="320" loading="lazy"><figcaption>식기세척기 빌트인</figcaption></figure>
       <div class="hx-float"><b>{N}건</b><span>실제 시공사례 공개</span></div>
     </div>
@@ -781,9 +800,9 @@ hero = f'''<section class="hx">
   <div class="wrap">
     <ul class="hx-trust">
       <li><svg><use href="#ok"/></svg><b>서울·경기·인천</b><span>출장 시공</span></li>
-      <li><svg><use href="#ok"/></svg><b>사진 먼저 상담</b><span>현장 사진 확인</span></li>
-      <li><svg><use href="#ok"/></svg><b>필요한 작업만</b><span>합리적인 견적</span></li>
-      <li><svg><use href="#ok"/></svg><b>마무리 점검</b><span>전문 시공</span></li>
+      <li><svg><use href="#ok"/></svg><b>현장 사진 상담</b><span>사진 확인 후 연락</span></li>
+      <li><svg><use href="#ok"/></svg><b>합리적인 견적 안내</b><span>필요한 작업만</span></li>
+      <li><svg><use href="#ok"/></svg><b>전문 시공</b><span>마무리 점검까지</span></li>
     </ul>
   </div>
 </section>
