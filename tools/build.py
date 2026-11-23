@@ -22,7 +22,7 @@ GOOGLE_SITE_VERIFICATION = ''  # 구글 서치콘솔 (선택)
 NAVER_ANALYTICS_ID = ''        # 네이버 애널리틱스 사이트 ID (예: 'a1b2c3d4e5f6')
 GA4_ID = ''                    # 구글 애널리틱스 측정 ID (예: 'G-XXXXXXX')
 
-PHOTO_GUIDE = '전체 현장 사진 1장과 문제 부위 사진 1장을 보내주시면 확인 후 상담해 드립니다.'
+PHOTO_GUIDE = '전체 사진 1장 + 문제 부위 사진 1장을 보내주시면 확인 후 상담해 드립니다.'
 PHOTO_NOTE = '단, 사진만으로 견적이 어려운 작업은 현장 확인이 필요할 수 있습니다.'
 SMS_BODY = '[굿초이스 견적 문의]\n작업 종류: \n지역(동까지): \n※ 전체 사진 1장 + 문제 부위 사진 1장 첨부'
 SMS_HREF = 'sms:%s?body=%s' % (TELN, urllib.parse.quote(SMS_BODY))
@@ -351,7 +351,7 @@ def head(title, desc, path, img=None, extra=''):
 <meta property="og:url" content="{url}">
 <meta property="og:image" content="{img}">
 <meta property="og:locale" content="ko_KR">
-<meta name="theme-color" content="#0B0B0B">
+<meta name="theme-color" content="#FFFFFF">
 <meta name="format-detection" content="telephone=no">
 <link rel="icon" href="/favicon.ico" sizes="any"><link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="alternate" type="application/rss+xml" title="굿초이스 집수리 시공사례" href="/rss.xml">
@@ -652,7 +652,7 @@ faq_html = ''.join('<details><summary>%s</summary><p>%s</p></details>' % (E(q), 
 faq_ld = '<script type="application/ld+json">%s</script>\n' % json.dumps({"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": q, "acceptedAnswer": {"@type": "Answer", "text": a}} for q, a in FAQ]}, ensure_ascii=False)
 body += f'''<section style="padding-top:24px"><div class="wrap">
 <ol class="steps">
-<li><h3>사진 2장 + 지역</h3><p>{E(PHOTO_GUIDE)} 작업할 지역(동까지)도 함께 적어주세요.</p></li>
+<li><h3>전체 사진 1장 + 문제 부위 사진 1장</h3><p>{E(PHOTO_GUIDE)} 작업할 지역(동까지)도 함께 적어주세요.</p></li>
 <li><h3>상담 · 견적 안내</h3><p>사진 확인 후 연락드려 작업 방법과 견적을 안내합니다. {E(PHOTO_NOTE)}</p></li>
 <li><h3>일정 확정</h3><p>편한 날짜와 시간을 정하고, 필요한 부품을 미리 준비해 갑니다.</p></li>
 <li><h3>시공 · 마무리 점검</h3><p>작업 후 작동과 마감 상태를 함께 확인하고 주변 흔적까지 정리합니다.</p></li>
@@ -660,7 +660,7 @@ body += f'''<section style="padding-top:24px"><div class="wrap">
 <section style="background:var(--surface)"><div class="wrap">
 <p class="label">Photo Guide</p><h2 class="h2">이렇게 찍어 보내주세요</h2><p class="sub">{E(PHOTO_GUIDE)}<br>{E(PHOTO_NOTE)}</p>
 <div class="guide">
-<figure><img src="/photos/c/224425527882/before.jpg" alt="주방 전체가 보이게 찍은 예시" width="720" height="720" loading="lazy"><figcaption><b>① 전체 현장 사진 1장</b><span>주변 가구와 위치가 함께 보이게</span></figcaption></figure>
+<figure><img src="/photos/c/224425527882/before.jpg" alt="주방 전체가 보이게 찍은 예시" width="720" height="720" loading="lazy"><figcaption><b>① 전체 사진 1장</b><span>주변 가구와 위치가 함께 보이게</span></figcaption></figure>
 <figure><img src="/photos/c/224409039077/before.jpg" alt="문제 부위를 가까이서 찍은 예시" width="720" height="720" loading="lazy"><figcaption><b>② 문제 부위 사진 1장</b><span>고장 난 부분, 구멍, 부속이 잘 보이게</span></figcaption></figure>
 </div>
 <div class="ctas" style="margin-top:28px">{CALL}{SMS}</div>
@@ -675,9 +675,9 @@ opts = ''.join('<option>%s</option>' % E(s['name']) for s in SERVICES) + '<optio
 body += f'''<section style="padding-top:48px"><div class="wrap ctgrid">
 <div>
   <div class="telcard"><small>전화 · 문자 상담</small><a class="bigtel" id="tel" href="tel:{TELN}" data-track="call">{TEL}</a>
-  <div class="ctas"><a class="btn" href="tel:{TELN}" data-track="call" style="background:#fff;color:#111"><svg><use href="#phone"/></svg>전화하기</a><a class="btn btn-ghost" href="{TALK}" target="_blank" rel="noopener"><svg><use href="#chat"/></svg>네이버 톡톡</a></div></div>
+  <div class="ctas"><a class="btn" href="tel:{TELN}" data-track="call" style="background:#fff;color:#2A2416"><svg><use href="#phone"/></svg>전화하기</a><a class="btn btn-ghost" href="{TALK}" target="_blank" rel="noopener"><svg><use href="#chat"/></svg>네이버 톡톡</a></div></div>
   <div class="how">
-    <div><b>1</b><p>전체 현장 사진 1장<small>주변 가구와 위치가 함께 보이게</small></p></div>
+    <div><b>1</b><p>전체 사진 1장<small>주변 가구와 위치가 함께 보이게</small></p></div>
     <div><b>2</b><p>문제 부위 사진 1장<small>고장 난 부분이 잘 보이게 가까이</small></p></div>
     <div><b>3</b><p>작업 종류와 지역<small>예) 식기세척기 설치 · 하남시 위례동</small></p></div>
   </div>
@@ -701,7 +701,7 @@ body += f'''<section style="padding-top:48px"><div class="wrap ctgrid">
   <p class="privacy">개인정보 안내: 이 홈페이지는 입력하신 내용을 서버에 저장하지 않습니다. 내용은 고객님 휴대폰의 문자 앱으로만 전달되며, 받은 문자는 상담과 시공 일정 안내에만 사용하고 상담이 끝나면 삭제합니다.</p>
 </form>
 </div></section>'''
-write('/contact/', head('견적 문의 | 전화·문자 사진 견적 - 굿초이스 집수리', '굿초이스 집수리 견적 문의 010-5809-9275. ' + PHOTO_GUIDE + ' ' + PHOTO_NOTE, '/contact/', extra=ld) + header('contact') + body + footer())
+write('/contact/', head('견적 문의 | 전체 사진 1장 + 문제 부위 사진 1장 - 굿초이스 집수리', '굿초이스 집수리 견적 문의 010-5809-9275. ' + PHOTO_GUIDE + ' ' + PHOTO_NOTE, '/contact/', extra=ld) + header('contact') + body + footer())
 
 # ---------- home
 H = LEGACY_HTML
@@ -741,11 +741,13 @@ home = re.sub(r'/photos/(\d+)_after\.jpg"', lambda m: '/photos/c/%s/after.jpg"' 
 # 사진 견적 문구 통일
 home = home.replace('<h3>사진 2장이면 바로 견적</h3><p>멀리서 1장, 가까이 1장. 문자로 사진과 지역을 보내주시면 확인 후 바로 견적과 일정을 잡아드립니다.</p>', '<h3>사진으로 먼저 상담</h3><p>%s %s</p>' % (E(PHOTO_GUIDE), E(PHOTO_NOTE)))
 home = home.replace('서울·경기·인천은 물론 평택·천안까지. 어느 현장이든 같은 기준으로 시공합니다.', '서울·경기·인천은 물론 세종·천안·아산까지. 어느 현장이든 같은 기준으로 시공합니다.')
-home = home.replace('<h3>사진 2장 + 지역</h3><p>멀리서 1장, 가까이 1장. 문자나 톡톡으로 보내주세요.</p>', '<h3>사진 2장 + 지역</h3><p>전체 현장 1장, 문제 부위 1장과 지역을 문자로 보내주세요.</p>')
+home = home.replace('<h3>사진 2장 + 지역</h3><p>멀리서 1장, 가까이 1장. 문자나 톡톡으로 보내주세요.</p>', '<h3>전체 사진 1장 + 문제 부위 사진 1장</h3><p>작업할 지역(동까지)과 함께 문자로 보내주세요.</p>')
 home = home.replace('<h3>바로 견적</h3><p>사진을 보고 작업 방법과 비용을 안내해 드려요.</p>', '<h3>상담 · 견적 안내</h3><p>사진을 보고 작업 방법과 비용을 안내해 드려요. 사진만으로 어려우면 현장을 확인합니다.</p>')
 home = home.replace('<h3>시공 · 정리</h3><p>흔적까지 정리하고, 함께 확인한 뒤 마무리해요.</p>', '<h3>시공 · 마무리 점검</h3><p>작동과 마감을 함께 확인하고 흔적까지 정리해요.</p>')
 home = re.sub(r'<details><summary>견적은 어떻게 받나요\?</summary><p>.*?</p></details>', '<details><summary>견적은 어떻게 받나요?</summary><p>%s %s</p></details>' % (E(PHOTO_GUIDE), E(PHOTO_NOTE)), home)
 home = re.sub(r'<div class="band on-blue photo"[^>]*>.*?</div>\s*</div>\s*</div>', cta_band() + '\n  </div>', home, count=1, flags=re.S)
+# 과장 표현 정리 (2026-11-24)
+home = home.replace('고객님 컨펌을 받아 말씀만 하시면 뭐든 해드립니다. 사진부터 보내주세요.', '다양한 생활 수리와 설치·철거 작업을 진행합니다. 작업 가능 여부는 현장 사진과 내용을 확인한 후 안내해 드립니다.')
 # 지역 박스: 블로그 기준 지역 + 지역 페이지 링크
 home = re.sub(r'<div class="wrap areabox">.*?</section>', '<div class="wrap areabox"><div><p class="label">Area</p><h2 class="h2">서울·경기·인천<br>출장 시공</h2><p class="sub">지역을 누르면 그 동네에서 실제로 작업한 현장을 볼 수 있어요.</p><div class="ctas">' + ''.join('<a class="btn btn-line" href="/area/%s/">%s</a>' % (sl, E(nm)) for k, sl, nm in REGION_PAGES) + '</div></div><div class="areachips">' + ''.join('<div><b>%s</b><p>%s</p></div>' % (E(g), E(' · '.join(xs))) for g, xs in AREA_LIST) + '<div class="all"><b>그 외 지역</b><p>작업과 일정에 따라 출장 가능 여부를 안내해 드려요</p></div></div></div>\n</section>', home, count=1, flags=re.S)
 # 남은 sms/tel 링크 정리
