@@ -852,7 +852,7 @@ def owner_html():
     return (f'<section class="own"><div class="wrap own-w">{ph}<div><p class="label">대표 인사</p><h2 class="h2">{E(OWNER["role"])} {E(OWNER["name"])}</h2>'
             f'<p class="own-t">{E(OWNER["intro"])}</p></div></div></section>\n')
 
-HX_CHIPS = ''.join('<a href="/service/%s/">%s<i>%d</i></a>' % (x['slug'], E(x['short']), len(x['cases'])) for x in SERVICES)
+HX_CHIPS = ''.join('<a href="/service/%s/"><span class="hc-ic"><svg aria-hidden="true"><use href="#%s"/></svg></span><span class="hc-n">%s</span><i>%d</i></a>' % (x['slug'], x['icon'], E(x['short']), len(x['cases'])) for x in SERVICES)
 hero = f'''<section class="hx">
   <div class="hx-bg" aria-hidden="true"></div>
   <div class="wrap hx-grid">
