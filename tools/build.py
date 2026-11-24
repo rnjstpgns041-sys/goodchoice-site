@@ -864,15 +864,15 @@ hero = f'''<section class="hx">
   <div class="hx-bg" aria-hidden="true"></div>
   <div class="wrap hx-grid">
     <div class="hx-copy">
-      <div class="hx-badges"><span class="hx-b1"><svg><use href="#ok"/></svg>누적 시공 1,000건+</span><span>서울·경기·인천 출장</span></div>
+      <p class="hx-eyebrow"><span class="hx-dot" aria-hidden="true"></span>서울·경기·인천 출장 집수리</p>
       <h1 class="hx-h">굿초이스 집수리,<br>설치부터 <mark>철거·복원</mark>까지</h1>
       <p class="hx-lead">빌트인 식기세척기 설치 및 철거, 건조기 직렬 설치, 샤워부스 철거, 정수기 철거 및 싱크대 상판 복원, 문 방향 변경, 가구 리폼까지. 다양한 생활 수리와 설치·철거 작업을 전문적으로 진행합니다.</p>
       <div class="hx-ctas">
         <a class="btn btn-accent" href="tel:{TELN}" data-track="call"><svg><use href="#phone"/></svg>전화 상담<span class="tnum">{TEL}</span></a>
         <a class="btn btn-ghost" href="{E(SMS_HREF)}" data-sms data-track="sms"><svg><use href="#chat"/></svg>문자 견적</a>
       </div>
+      <p class="hx-note"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M4 8h3l2-3h6l2 3h3v11H4z"/><circle cx="12" cy="13" r="3.5"/></svg><span><b>전체 사진 1장 + 문제 부위 사진 1장</b>만 보내주시면 확인 후 상담해 드려요.</span></p>
       <ul class="hx-stats"><li><b>1,000<i>+</i></b><span>누적 시공</span></li><li><b>{N}<i>건</i></b><span>공개 시공사례</span></li><li><b>{len(SERVICES)}<i>개</i></b><span>시공 분야</span></li></ul>
-      <p class="hx-note"><b>전체 사진 1장 + 문제 부위 사진 1장</b>만 보내주시면 확인 후 상담해 드려요.</p>
       <div class="hx-more">
         <p class="hx-mt">시공 분야</p>
         <nav class="hx-chips" aria-label="시공 분야">{HX_CHIPS}</nav>
