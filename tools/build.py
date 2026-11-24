@@ -23,7 +23,13 @@ NAVER_ANALYTICS_ID = ''        # 네이버 애널리틱스 사이트 ID (예: 'a
 GA4_ID = ''                    # 구글 애널리틱스 측정 ID (예: 'G-XXXXXXX')
 # 실제 고객 후기만 넣기 (네이버 플레이스·숨고·문자 캡처 등 출처가 있는 것). 비어 있으면 후기 구역은 표시되지 않음.
 # 예: {'text': '설치 깔끔하게 해주셨어요', 'who': '김○○ 고객님', 'area': '성남', 'svc': '식기세척기 설치', 'src': '네이버 플레이스'}
-REVIEWS = []
+REVIEWS = [  # 당근 비즈프로필 '동네 주민 후기' 원문 그대로 (사장님이 보내준 캡처, 2026-11-25)
+    dict(date='09.22', star=5, text='일부 하부장과 문짝을 교체했는데 상부장 어울리는 색상으로 감각있게 셋팅해 주시고 작업시에도 중간중간 상세한 설명으로 체크도 잘해주시고 마지막으로 마무리까지 꼼꼼하게 해 주셔서 매우 만족했습니다 감사합니다'),
+    dict(date='09.18', star=5, text='어머니가 중문 고장으로 맘 고생하셨는데 전화 드리자마자 5분안에 오셨어요~ 너무 친절하게 상태와 조치방법 모두 알려주시고 순식간에 고쳐주셨어요!! 집에 다른 것도 불편한게 없는지 물어봐 주셨어요 우리 동네 이런 업체가 있다니!! 너무너무 감동 입니다! 번창하세요! 감사합니다~'),
+    dict(date='09.14', star=5, text='욕조 재코팅과 욕조 수전 교체를 맡겼는데 정말 만족스러웠습니다.\n\n처음 상담할 때부터 굉장히 친절하셨고, 작업하시는 모습도 꼼꼼해서 믿음이 갔습니다. 단순히 요청한 부분만 빠르게 처리하는 게 아니라 작업하면서 상태를 하나하나 확인해주시고, 왜 이렇게 수리하는지 설명도 잘 해주셔서 좋았습니다.\n\n욕조 실리콘이나 도어스토퍼, 현관 센서등, 중문 걸림 같은 부분도 같이 봐주셨고, 집안에 다른 수리가 필요한 부분에 대해서도 이것저것 물어보니 어떤 방법이 좋은지, 대략적인 비용은 어느 정도인지 자세하게 알려주셨습니다.\n\n무엇보다 불필요하게 수리를 권하기보다는 현재 상태에서 어떻게 하는 게 좋을지 솔직하게 말씀해주셔서 더 좋았습니다.'),
+    dict(date='08.25', star=5, text='ㄱ자로 튀어나온 싱크대, 1자로 리폼했는데 너무 깔끔하게 해주셨어여~~ 사장님 성격도 좋으신데 완성도가 더 맘에 듭니다~~ 싱크대 정리하고 또 사진 올려볼게요 ㅎㅎ 가격도 너무 저렴하게 잘해주셔서 감사합니다 ㅎ 또 수리 필요 시, 연락드릴게요 ^^'),
+    dict(date='08.23', star=5, text='친절한 상담부터 견적까지 정말 본인집 고치는것 처럼 꼼꼼하고 세심하게 씽크대 문짝 교체를 해 주셨어요~^^\n하나하나 달아주시는데 감탄이 나오더라고요~ …'),
+]
 # 대표 소개 (사장님 확인 후 넣기). name이 비어 있으면 구역이 표시되지 않음. photo는 저장소 안 경로 (예: 'photos/owner.jpg')
 OWNER = {'name': '', 'role': '대표', 'photo': '', 'intro': ''}
 
@@ -842,10 +848,11 @@ cols = [CASES[k::3][:7] for k in range(3)]
 colhtml = ''.join('<div class="cc%d"><div class="ctrk">%s</div></div>' % (k + 1, ''.join(f'<img src="/photos/c/{c["id"]}/after_s.jpg" alt="" width="300" height="300" loading="{"eager" if (k == 1 and j < 2) else "lazy"}" decoding="async">' for j, c in enumerate(col)) * 2) for k, col in enumerate(cols))
 def reviews_html():
     if not REVIEWS: return ''
-    cards = ''.join(f'<figure class="rvw-c"><blockquote>{E(r["text"])}</blockquote><figcaption><b>{E(r.get("who", "고객님"))}</b>'
-                    f'<span>{E(" · ".join(x for x in (r.get("area", ""), r.get("svc", "")) if x))}</span>'
-                    + (f'<small>{E(r["src"])}</small>' if r.get('src') else '') + '</figcaption></figure>' for r in REVIEWS)
-    return f'<section class="rvw"><div class="wrap"><p class="label">고객 후기</p><h2 class="h2">직접 맡겨보신 분들의 이야기</h2><div class="rvw-g">{cards}</div></div></section>\n'
+    star = '<svg class="rv-s" viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.8l2.5 5.2 5.7.8-4.1 4 1 5.7L10 14.8l-5.1 2.7 1-5.7-4.1-4 5.7-.8z"/></svg>'
+    cards = ''.join(f'<figure class="rvw-c"><div class="rv-top"><span class="rv-stars" aria-label="별점 {r["star"]}점">{star*r["star"]}</span><b>{r["star"]}.0</b><time>{E(r["date"])}</time></div>'
+                    f'<blockquote>{E(r["text"])}</blockquote><button type="button" class="rv-more" hidden>더보기</button><figcaption><svg aria-hidden="true"><use href="#ok"/></svg>당근 동네 주민 후기</figcaption></figure>' for r in REVIEWS)
+    return (f'<section class="rvw" id="reviews"><div class="wrap"><p class="label">고객 후기</p><h2 class="h2">직접 맡겨보신 분들의 이야기</h2>'
+            f'<p class="rv-sub">당근에 남겨주신 동네 주민 후기를 그대로 옮겼어요. 후기 {len(REVIEWS)}개 모두 별점 5.0이에요.</p><div class="rvw-g">{cards}</div></div></section>\n')
 def owner_html():
     if not OWNER.get('name'): return ''
     ph = f'<img src="/{OWNER["photo"]}" alt="{E(OWNER["name"])} {E(OWNER["role"])}" width="320" height="320" loading="lazy">' if OWNER.get('photo') else ''
