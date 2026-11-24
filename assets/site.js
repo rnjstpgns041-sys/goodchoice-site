@@ -98,8 +98,11 @@
   // 부드러운 등장 (움직임 최소화 설정이면 생략)
   if ('IntersectionObserver' in window && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
     var io = new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }); }, { rootMargin: '0px 0px -8% 0px' });
-    d.querySelectorAll('.symgrid>a,.whogrid>a,.flowsteps>li,.posts>a,.services>*,.cgrid3>*,.princ>*,.story>li,.rgrid>*').forEach(function (el, k) {
-      var r = el.getBoundingClientRect(); if (r.top < innerHeight) return;
+    // 위치를 한 번에 읽은 뒤 클래스를 붙여 레이아웃 재계산을 한 번으로 줄임
+    var els = [].slice.call(d.querySelectorAll('.symgrid>a,.whogrid>a,.flowsteps>li,.posts>a,.services>*,.cgrid3>*,.princ>*,.story>li,.rgrid>*'));
+    var tops = els.map(function (el) { return el.getBoundingClientRect().top; }), vh = innerHeight;
+    els.forEach(function (el, k) {
+      if (tops[k] < vh) return;
       el.classList.add('rv'); el.style.setProperty('--d', (k % 3) * 60 + 'ms'); io.observe(el);
     });
   }
