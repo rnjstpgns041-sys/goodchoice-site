@@ -1,5 +1,2 @@
-Pretendard (c) 2021 Kil Hyung-jin, with Reserved Font Name Pretendard.
-https://github.com/orioncactus/pretendard
-Licensed under the SIL Open Font License, Version 1.1 (http://scripts.sil.org/OFL).
-This file is a subset of Pretendard Variable containing only glyphs used on this site.
-MaruBuri (c) NAVER Corporation. Licensed under the SIL Open Font License, Version 1.1. maruburi-gc.woff2 is a subset of MaruBuri SemiBold.
+Wanted Sans (c) Wanted Lab Inc. Licensed under the SIL Open Font License, Version 1.1 (http://scripts.sil.org/OFL).
+wantedsans-gc.woff2 is a subset of Wanted Sans Variable containing only glyphs used on this site.

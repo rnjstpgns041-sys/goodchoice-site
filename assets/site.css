@@ -1400,3 +1400,12 @@ h3{letter-spacing:-.02em}
 .scard .ph .ic,.mark,header .mark,footer .mark,.drawer .dbrand .mark{background:#2B2A28!important}
 .areachips .all{background:#2B2A28!important}
 footer{background:#F7F6F3!important}
+
+/* ===== v30: 글꼴 Wanted Sans로 통일 (부리 글꼴 제거) ===== */
+:root,:root[data-theme="dark"]{--f-sans:'Wanted Sans GC','Pretendard Variable','Apple SD Gothic Neo','Malgun Gothic',system-ui,sans-serif;--serif:var(--f-sans)}
+body,button,input,select,textarea{font-family:var(--f-sans)!important}
+h1,h2,.h2,.hx-h,.hba-t,.stmt-t,.phero h1,.block h2,.band h2,.fcta h2{font-family:var(--f-sans)!important;font-weight:700!important;letter-spacing:-.04em!important;line-height:1.25!important}
+.stmt-t{font-weight:600!important;line-height:1.45!important}
+.hx-h{font-size:clamp(34px,9.4vw,64px)!important}
+p,.hx-lead{letter-spacing:-.015em}
+.hx-stats b{font-family:var(--f-sans)!important;font-weight:700!important;letter-spacing:-.03em}

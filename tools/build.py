@@ -365,7 +365,7 @@ def head(title, desc, path, img=None, extra=''):
 <link rel="icon" href="/favicon.ico" sizes="any"><link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="alternate" type="application/rss+xml" title="굿초이스 집수리 시공사례" href="/rss.xml">
 {v}<link rel="stylesheet" href="/assets/site.min.css?v={VER}">
-<link rel="preload" href="/assets/fonts/pretendard-gc.woff2?v={VER}" as="font" type="font/woff2" crossorigin><link rel="preload" href="/assets/fonts/maruburi-gc.woff2?v={VER}" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/wantedsans-gc.woff2?v={VER}" as="font" type="font/woff2" crossorigin>
 {extra}{an}</head>
 <body>
 {SPRITE}
@@ -907,7 +907,7 @@ for d, _, fs in os.walk(os.path.join(ROOT, 'photos/c')):
         src = os.path.join(d, f); dst = src[:-4] + '.webp'
         if os.path.exists(dst) and os.path.getmtime(dst) >= os.path.getmtime(src): continue
         Image.open(src).save(dst, 'WEBP', quality=74, method=6)
-# 글꼴: 사이트에 실제 쓰인 글자만 담은 Pretendard 한 파일 (OFL, tools/PretendardVariable.woff2 원본)
+# 글꼴: 사이트에 실제 쓰인 글자만 담은 Wanted Sans 한 파일 (OFL, tools/WantedSansVariable.ttf 원본)
 import glob, html as _html
 from fontTools import subset as _fsub
 _chars = set(chr(c) for c in range(0x20, 0x7f)) | set('·…→←↑↓“”‘’—–※★☆①②③④⑤')
@@ -915,26 +915,14 @@ for f in glob.glob(os.path.join(ROOT, '**/*.html'), recursive=True) + [os.path.j
     if '/tools/' in f: continue
     _chars |= set(_html.unescape(open(f, encoding='utf-8').read()))
 _opt = _fsub.Options(); _opt.flavor = 'woff2'; _opt.layout_features = ['kern', 'liga', 'calt', 'locl']; _opt.hinting = False; _opt.desubroutinize = True
-_font = _fsub.load_font(os.path.join(ROOT, 'tools/PretendardVariable.woff2'), _opt)
+_font = _fsub.load_font(os.path.join(ROOT, 'tools/WantedSansVariable.ttf'), _opt)
 _ss = _fsub.Subsetter(_opt); _ss.populate(text=''.join(c for c in _chars if c > ' ')); _ss.subset(_font)
 from fontTools.varLib import instancer as _inst
-_font = _inst.instantiateVariableFont(_font, {'wght': (400, 900)})
+_font = _inst.instantiateVariableFont(_font, {'wght': (400, 800)})
 os.makedirs(os.path.join(ROOT, 'assets/fonts'), exist_ok=True)
-_fsub.save_font(_font, os.path.join(ROOT, 'assets/fonts/pretendard-gc.woff2'), _opt)
-# 제목용 부리 글꼴: 마루 부리 SemiBold (OFL) — 제목에 쓰인 글자만
-_hchars = set()
-for f in glob.glob(os.path.join(ROOT, '**/*.html'), recursive=True):
-    if '/tools/' in f: continue
-    t = open(f, encoding='utf-8').read()
-    for m in re.finditer(r'<(h1|h2|h3)\b[^>]*>(.*?)</\1>', t, flags=re.S): _hchars |= set(_html.unescape(re.sub(r'<[^>]+>', '', m.group(2))))
-    for m in re.finditer(r'class="(?:hba-t|stmt-t[^"]*|hx-h|own-t-h|rvw-h)"[^>]*>(.*?)</(?:p|h1|h2|div)>', t, flags=re.S): _hchars |= set(_html.unescape(re.sub(r'<[^>]+>', '', m.group(1))))
-_hchars |= set(chr(c) for c in range(0x20, 0x7f)) | set('·…“”‘’')
-_opt2 = _fsub.Options(); _opt2.flavor = 'woff2'; _opt2.layout_features = ['kern']; _opt2.hinting = False; _opt2.desubroutinize = True
-_f2 = _fsub.load_font(os.path.join(ROOT, 'tools/MaruBuri-SemiBold.ttf'), _opt2)
-_s2 = _fsub.Subsetter(_opt2); _s2.populate(text=''.join(c for c in _hchars if c > ' ')); _s2.subset(_f2)
-_fsub.save_font(_f2, os.path.join(ROOT, 'assets/fonts/maruburi-gc.woff2'), _opt2)
-FONT_FACE = ("@font-face{font-family:'MaruBuri GC';font-style:normal;font-display:swap;font-weight:400 900;src:url(/assets/fonts/maruburi-gc.woff2?v=%s) format('woff2')}" % VER) + ("@font-face{font-family:'Pretendard Variable';font-style:normal;font-display:swap;font-weight:400 900;"
-             "src:url(/assets/fonts/pretendard-gc.woff2?v=%s) format('woff2-variations'),url(/assets/fonts/pretendard-gc.woff2?v=%s) format('woff2')}" % (VER, VER))
+_fsub.save_font(_font, os.path.join(ROOT, 'assets/fonts/wantedsans-gc.woff2'), _opt)
+FONT_FACE = ("@font-face{font-family:'Wanted Sans GC';font-style:normal;font-display:swap;font-weight:400 800;"
+             "src:url(/assets/fonts/wantedsans-gc.woff2?v=%s) format('woff2-variations'),url(/assets/fonts/wantedsans-gc.woff2?v=%s) format('woff2')}" % (VER, VER))
 css = open(os.path.join(ROOT, 'assets/site.css'), encoding='utf-8').read()
 css = re.sub(r'/\*.*?\*/', '', css, flags=re.S)
 css = re.sub(r'\s+', ' ', css)
