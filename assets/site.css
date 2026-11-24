@@ -1435,3 +1435,28 @@ p,.hx-lead{letter-spacing:-.02em}
 .band .btn-accent{background:#fff!important;color:#1F1E1C!important;box-shadow:none!important}.band .btn-accent svg{stroke:#1F1E1C}
 .band .btn-ghost{background:transparent!important;border:1px solid rgba(255,255,255,.45)!important;color:#fff!important}.band .btn-ghost svg{stroke:#fff}
 .strip,.strip>div{background:#34332F!important}.strip span{color:#F4F3F0!important}.strip::before,.strip::after{display:none!important}
+
+/* ===== v33: 흰색 · 연한 회색 · 연한 검정 리듬 배치 ===== */
+/* 밝은 구역: 흰색과 아주 연한 회색 번갈아 */
+.hx{background:#fff!important}
+.hba,section.symp+section,section:has(.whogrid),section:has(.areachips){background:#F5F4F1!important}
+.symp,.deep,section:has(.cgrid3),section:has(.posts),section:has(.faqwrap),section:has(.band){background:#fff!important}
+/* 연한 검정 구역: 작업 원칙 · 현장 사진 · 진행 순서 · 맨 아래 */
+.flow,footer{background:#34332F!important;color:#F4F3F0!important;border-color:transparent!important}
+.flow .label,footer .label{border-color:rgba(255,255,255,.28)!important;color:rgba(255,255,255,.78)!important}
+.flow .label::before{background:#fff!important}
+.flow .h2,.flow h3,.flow b,.flow strong{color:#fff!important}
+.flow p,.flow small,.flow span{color:rgba(255,255,255,.72)}
+.flow .link{color:#fff!important;box-shadow:inset 0 -1px 0 rgba(255,255,255,.45)!important}.flow .link svg{stroke:#fff}
+.flow .flowsteps li{background:rgba(255,255,255,.06)!important;border-color:rgba(255,255,255,.12)!important;box-shadow:none!important}
+.flow .flowsteps span{background:#fff!important;color:#1F1E1C!important;border-color:#fff!important}
+.flow .btn-accent{background:#fff!important;color:#1F1E1C!important;box-shadow:none!important}.flow .btn-accent svg{stroke:#1F1E1C}
+.flow .btn-line,.flow .btn-ghost{background:transparent!important;border:1px solid rgba(255,255,255,.45)!important;color:#fff!important}.flow .btn-line svg,.flow .btn-ghost svg{stroke:#fff}
+footer,footer p,footer span,footer small,footer li{color:rgba(255,255,255,.66)!important}
+footer a,footer b,footer strong,footer h2,footer .fh{color:#F4F3F0!important}
+footer nav a:hover{color:#fff!important}
+footer .fbrand,footer .fcard,footer [class*="card"]{background:rgba(255,255,255,.05)!important;border-color:rgba(255,255,255,.1)!important;box-shadow:none!important}
+footer .mark{background:#fff!important}footer .mark svg{stroke:#1F1E1C!important}
+footer hr,footer .fbot{border-color:rgba(255,255,255,.12)!important}
+footer .fgrid>div:first-child{background:rgba(255,255,255,.05)!important;border:1px solid rgba(255,255,255,.1)!important;box-shadow:none!important}footer .logo{color:#fff!important}footer .ftel{color:#fff!important}
+footer .mark{color:#1F1E1C!important}footer .mark svg{color:#1F1E1C!important;fill:none}footer .mark svg use{stroke:#1F1E1C}
