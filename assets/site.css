@@ -1627,3 +1627,18 @@ body.bar-off .bar{transform:translateY(110%);opacity:0;pointer-events:none}
 .hx-stats b{color:#fff!important}.hx-stats b i,.hx-stats span{color:rgba(255,255,255,.62)!important}
 .hx-chips a{background:#fff!important;border:1px solid #ECEAE5!important;box-shadow:0 6px 16px -12px rgba(31,30,28,.4)}
 @media(min-width:760px){.hx-strip img{height:140px}}
+.hx-mt,.hx-chips a i,.rv-top time{color:#6B6863!important}
+
+/* ===== v44: 작업 가능 지역 전체 목록 ===== */
+.areafull{margin-top:26px}
+.ag{padding:22px 0;border-top:1px solid #E7E5E0}
+.ag:first-child{border-top:0;padding-top:4px}
+.ag h3{display:flex;align-items:baseline;gap:10px;margin:0 0 14px;font-size:22px!important;font-weight:800;letter-spacing:-.03em;color:#1F1E1C}
+.ag h3 small{font-size:13px;font-weight:500;color:#6B6863;letter-spacing:0}
+.acs{display:flex;flex-wrap:wrap;gap:7px}
+.ac{display:inline-flex;align-items:center;gap:2px;height:36px;padding:0 14px;border-radius:999px;background:#fff;border:1px solid #E4E1DB;color:#3B3A37;font-size:14px;font-weight:500;text-decoration:none;white-space:nowrap}
+.ac.on{background:#34332F;border-color:#34332F;color:#fff!important;font-weight:700;padding-right:10px}
+.ac.on svg{width:14px;height:14px;fill:none;stroke:#fff;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
+a.ac.on:hover{background:#1F1E1C}
+.alegend{display:flex;flex-wrap:wrap;align-items:center;gap:8px 10px;margin:4px 0 0;padding-top:20px;border-top:1px solid #E7E5E0;font-size:13px;line-height:1.7;color:#5E5B56}
+.alegend .ac{height:24px;padding:0 10px;font-size:11.5px}

@@ -638,6 +638,26 @@ for i, c in enumerate(CASES):
     desc = desc[:150].rstrip() + ('…' if len(desc) > 150 else '')
     write('/cases/%s/' % c['id'], head(t + ' | 시공사례 - 굿초이스 집수리', desc, '/cases/%s/' % c['id'], 'photos/c/%s/after.jpg' % c['id'], ld) + header('cases') + body + footer())
 
+# ---------- 작업 가능 지역 전체 (서울 25 · 경기 31 · 인천 10), 실제 사례 있는 곳 강조
+SEOUL_GU = '강남구 강동구 강북구 강서구 관악구 광진구 구로구 금천구 노원구 도봉구 동대문구 동작구 마포구 서대문구 서초구 성동구 성북구 송파구 양천구 영등포구 용산구 은평구 종로구 중구 중랑구'.split()
+GG_SI = '가평군 고양시 과천시 광명시 광주시 구리시 군포시 김포시 남양주시 동두천시 부천시 성남시 수원시 시흥시 안산시 안성시 안양시 양주시 양평군 여주시 연천군 오산시 용인시 의왕시 의정부시 이천시 파주시 평택시 포천시 하남시 화성시'.split()
+IC_GU = '중구 동구 미추홀구 연수구 남동구 부평구 계양구 서구 강화군 옹진군'.split()
+def area_full_html():
+    def hit(cs, page):
+        if not cs: return None
+        return page or '/cases/%s/' % cs[0]['id']
+    def chip(nm, href, n):
+        if not href: return f'<span class="ac">{E(nm)}</span>'
+        return f'<a class="ac on" href="{href}" title="{E(nm)} 시공사례 {n}건">{E(nm)}<svg aria-hidden="true" viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg></a>'
+    seoul = ''.join(chip(g, hit([c for c in CASES if c['reg'] == '서울' and c['gu'] == g], None if len([c for c in CASES if c['reg'] == '서울' and c['gu'] == g]) == 1 else '/area/seoul/'), len([c for c in CASES if c['reg'] == '서울' and c['gu'] == g])) for g in SEOUL_GU)
+    def ggkey(x): return '경기 광주' if x == '광주시' else x[:-1]
+    gg = ''.join(chip(x, hit([c for c in CASES if c['reg'] == ggkey(x)], ('/area/%s/' % RSLUG[ggkey(x)]) if ggkey(x) in RSLUG else None), len([c for c in CASES if c['reg'] == ggkey(x)])) for x in GG_SI)
+    ic = ''.join(chip(x, None, 0) for x in IC_GU)
+    grp = lambda h, n, chips: f'<div class="ag"><h3>{h}<small>{n}</small></h3><div class="acs">{chips}</div></div>'
+    return ('<div class="areafull">' + grp('서울', '25개 구', seoul) + grp('경기', '31개 시·군', gg) + grp('인천', '10개 구·군', ic)
+            + '<p class="alegend"><span class="ac on" aria-hidden="true">진한 색</span>실제 시공사례가 있는 지역이에요. 누르면 그 지역 사례를 볼 수 있어요. 그 밖의 지역도 작업 내용과 일정에 따라 출장해 드려요.</p></div>')
+
+
 # ---------- area index & region pages
 by_reg = {}
 for c in CASES: by_reg.setdefault(c['reg'], []).append(c)
@@ -654,7 +674,7 @@ oth = ''.join('<li><b>%s</b> %s</li>' % (E(k), ' · '.join('<a href="/cases/%s/"
 alist = ''.join('<div class="acard"><h3>%s</h3><div class="chips">%s</div></div>' % (E(g), ''.join('<span>%s</span>' % E(x) for x in xs)) for g, xs in AREA_LIST)
 body += (f'<section style="padding-top:48px"><div class="wrap"><h2 class="h2" style="margin-top:0">지역별 시공사례</h2><div class="rgrid">{rcards}</div>'
          f'<div class="block" style="margin-top:48px"><h2>그 밖에 다녀온 지역</h2><ul class="olist">{oth}</ul></div>'
-         f'<h2 class="h2" style="margin-top:72px">출장 가능 지역</h2><div class="areagrid" style="margin-top:28px">{alist}</div>'
+         f'<h2 class="h2" style="margin-top:72px">작업 가능 지역</h2>{area_full_html()}'
          f'<div class="nation"><div><b>목록에 없는 지역도 문의해 주세요</b><p style="color:var(--muted);font-size:15px">작업 내용과 일정에 따라 출장 가능 여부를 안내해 드립니다.</p></div><div class="ctas" style="margin:0">{CALL}{SMS}</div></div></div></section>')
 write('/area/', head('출장 지역 | 서울·성남·하남·용인·수원 집수리 - 굿초이스 집수리', '굿초이스 집수리 출장 지역 안내. 서울, 성남, 하남, 용인, 수원, 경기 광주 등에서 실제로 진행한 시공사례를 지역별로 확인하세요.', '/area/', extra=ld) + header('area') + body + footer())
 
@@ -752,6 +772,7 @@ write('/contact/', head('견적 문의 | 전체 사진 1장 + 문제 부위 사�
 
 # ---------- home
 H = LEGACY_HTML
+
 home = H[H.index('<div class="strip"'):H.index('<!-- ================= SERVICE LIST')]
 home = home[:home.rindex('</div>')]  # .view 닫는 태그 제거
 # 기준 문장: 애니메이션 없이 고정
@@ -807,7 +828,7 @@ home = re.sub(r'<div class="band on-blue photo"[^>]*>.*?</div>\s*</div>\s*</div>
 # 과장 표현 정리 (2026-11-24)
 home = home.replace('고객님 컨펌을 받아 말씀만 하시면 뭐든 해드립니다. 사진부터 보내주세요.', '다양한 생활 수리와 설치·철거 작업을 진행합니다. 작업 가능 여부는 현장 사진과 내용을 확인한 후 안내해 드립니다.')
 # 지역 박스: 블로그 기준 지역 + 지역 페이지 링크
-home = re.sub(r'<div class="wrap areabox">.*?</section>', '<div class="wrap areabox"><div><p class="label">Area</p><h2 class="h2">서울·경기·인천<br>출장 시공</h2><p class="sub">지역을 누르면 그 동네에서 실제로 작업한 현장을 볼 수 있어요.</p><div class="ctas">' + ''.join('<a class="btn btn-line" href="/area/%s/">%s</a>' % (sl, E(nm)) for k, sl, nm in REGION_PAGES) + '</div></div><div class="areachips">' + ''.join('<div><b>%s</b><p>%s</p></div>' % (E(g), E(' · '.join(xs))) for g, xs in AREA_LIST) + '<div class="all"><b>그 외 지역</b><p>작업과 일정에 따라 출장 가능 여부를 안내해 드려요</p></div></div></div>\n</section>', home, count=1, flags=re.S)
+home = re.sub(r'<div class="wrap areabox">.*?</section>', lambda m: '<div class="wrap"><p class="label">Area</p><h2 class="h2">작업 가능 지역</h2><p class="sub">서울·경기·인천 지역으로 직접 찾아가요.</p>' + area_full_html() + '</div>\n</section>', home, count=1, flags=re.S)
 # 남은 sms/tel 링크 정리
 home = home.replace('href="sms:01058099275"', 'href="%s" data-sms data-track="sms"' % E(SMS_HREF)).replace('href="tel:01058099275"', 'href="tel:01058099275" data-track="call"')
 home = home.replace(' id="stmtT"', '')
@@ -849,7 +870,7 @@ colhtml = ''.join('<div class="cc%d"><div class="ctrk">%s</div></div>' % (k + 1,
 def reviews_html():
     if not REVIEWS: return ''
     star = '<svg class="rv-s" viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.8l2.5 5.2 5.7.8-4.1 4 1 5.7L10 14.8l-5.1 2.7 1-5.7-4.1-4 5.7-.8z"/></svg>'
-    cards = ''.join(f'<figure class="rvw-c"><div class="rv-top"><span class="rv-stars" aria-label="별점 {r["star"]}점">{star*r["star"]}</span><b>{r["star"]}.0</b><time>{E(r["date"])}</time></div>'
+    cards = ''.join(f'<figure class="rvw-c"><div class="rv-top"><span class="rv-stars" role="img" aria-label="별점 {r["star"]}점">{star*r["star"]}</span><b>{r["star"]}.0</b><time>{E(r["date"])}</time></div>'
                     f'<blockquote>{E(r["text"])}</blockquote><button type="button" class="rv-more" hidden>더보기</button></figure>' for r in REVIEWS)
     return (f'<section class="rvw" id="reviews"><div class="wrap"><p class="label">고객 후기</p><h2 class="h2">직접 맡겨보신 분들의 이야기</h2>'
             f'<p class="rv-sub">고객님들이 남겨주신 후기를 그대로 옮겼어요. 후기 {len(REVIEWS)}개 모두 별점 5.0이에요.</p><div class="rvw-g">{cards}</div></div></section>\n')
