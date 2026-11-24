@@ -1572,3 +1572,24 @@ body.bar-off .bar{transform:translateY(110%);opacity:0;pointer-events:none}
 .hx-chips .hc-n{grid-column:2;overflow:visible;white-space:nowrap;font-size:13.5px;line-height:1.25}
 .hx-chips a i{grid-column:2;font-size:11.5px!important;line-height:1.2}
 .hx-chips a{grid-template-rows:min-content min-content!important;align-items:center!important}.hx-chips a .hc-n{align-self:end}.hx-chips a i{align-self:start}
+
+/* ===== v38: 고객 후기 (당근 동네 주민 후기) ===== */
+.rvw{padding:52px 0 56px!important;background:#fff!important}
+.rv-sub{font-size:13.5px;color:#6E6B66;line-height:1.7;margin:10px 0 0}
+.rvw-g{display:flex!important;gap:12px!important;margin:20px -20px 0!important;padding:0 20px 6px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.rvw-g::-webkit-scrollbar{display:none}
+.rvw-c{flex:0 0 84%;scroll-snap-align:start;scroll-margin-left:20px;display:flex;flex-direction:column;margin:0!important;padding:20px!important;border:1px solid #E7E5E0!important;border-radius:18px!important;background:#FAF9F7!important}
+.rv-top{display:flex;align-items:center;gap:8px;margin-bottom:12px}
+.rv-stars{display:inline-flex;gap:1px}.rv-s{width:15px;height:15px;fill:#34332F}
+.rv-top b{font-size:14px;font-weight:800;color:#1F1E1C}
+.rv-top time{margin-left:auto;font-size:12px;color:#8A8781}
+.rvw-c blockquote{flex:1;margin:0 0 16px!important;font-size:14px!important;line-height:1.75!important;color:#2B2A28!important;white-space:pre-line;letter-spacing:-.01em}
+.rvw-c blockquote::before{display:none!important}
+.rvw-c figcaption{display:flex;align-items:center;gap:6px;padding-top:12px;border-top:1px solid #ECEAE5;font-size:12px!important;font-weight:600;color:#6E6B66!important}
+.rvw-c figcaption svg{width:14px;height:14px;stroke:#34332F;fill:none}
+@media(min-width:760px){.rvw-g{display:grid!important;grid-template-columns:repeat(3,1fr);margin:22px 0 0!important;padding:0;overflow:visible}.rvw-c{flex:none}}
+.rvw-c blockquote{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:7;overflow:hidden;flex:0 0 auto!important;margin-bottom:8px!important}
+.rvw-c.open blockquote{-webkit-line-clamp:unset;display:block}
+.rvw-c figcaption{margin-top:auto}
+.rv-more{align-self:flex-start;margin:0 0 14px;padding:0;border:0;background:none;font:inherit;font-size:13px;font-weight:700;color:#34332F;text-decoration:underline;text-underline-offset:3px;cursor:pointer}
+.rvw-g{align-items:stretch}

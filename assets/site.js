@@ -117,3 +117,12 @@
     document.body.classList.toggle('bar-off', e[0].isIntersecting || !past);
   }).observe(c);
 })();
+/* 긴 후기 더보기 */
+(function () {
+  document.querySelectorAll('.rvw-c').forEach(function (c) {
+    var q = c.querySelector('blockquote'), b = c.querySelector('.rv-more');
+    if (!q || !b || q.scrollHeight <= q.clientHeight + 2) return;
+    b.hidden = false;
+    b.addEventListener('click', function () { var o = c.classList.toggle('open'); b.textContent = o ? '접기' : '더보기'; });
+  });
+})();
