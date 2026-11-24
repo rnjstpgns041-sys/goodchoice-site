@@ -107,3 +107,13 @@
     });
   }
 })();
+/* 첫 화면 버튼이 보이는 동안 아래 고정 바 숨기기 */
+(function () {
+  var c = document.querySelector('.hx-ctas'), bar = document.querySelector('.bar');
+  if (!c || !bar || !('IntersectionObserver' in window)) return;
+  document.body.classList.add('bar-off');
+  new IntersectionObserver(function (e) {
+    var past = e[0].boundingClientRect.top < 0;
+    document.body.classList.toggle('bar-off', e[0].isIntersecting || !past);
+  }).observe(c);
+})();
