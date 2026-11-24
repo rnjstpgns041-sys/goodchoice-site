@@ -1409,3 +1409,13 @@ h1,h2,.h2,.hx-h,.hba-t,.stmt-t,.phero h1,.block h2,.band h2,.fcta h2{font-family
 .hx-h{font-size:clamp(34px,9.4vw,64px)!important}
 p,.hx-lead{letter-spacing:-.015em}
 .hx-stats b{font-family:var(--f-sans)!important;font-weight:700!important;letter-spacing:-.03em}
+
+/* ===== v31: 참고 사이트 느낌 — Pretendard, 굵고 촘촘한 제목 ===== */
+:root,:root[data-theme="dark"]{--f-sans:'Pretendard GC','Pretendard Variable','Apple SD Gothic Neo','Malgun Gothic',system-ui,sans-serif;--serif:var(--f-sans)}
+h1,h2,.h2,.hx-h,.hba-t,.phero h1,.block h2,.band h2,.fcta h2{font-weight:800!important;letter-spacing:-.045em!important;line-height:1.22!important}
+.stmt-t{font-weight:700!important}
+h3{font-weight:700;letter-spacing:-.03em}
+.hx-h{font-size:clamp(34px,9.6vw,66px)!important}
+p,.hx-lead{letter-spacing:-.02em}
+.btn{font-weight:700!important;letter-spacing:-.02em}
+.hx-stats b{font-weight:800!important;letter-spacing:-.04em}

@@ -1,2 +1,3 @@
-Wanted Sans (c) Wanted Lab Inc. Licensed under the SIL Open Font License, Version 1.1 (http://scripts.sil.org/OFL).
-wantedsans-gc.woff2 is a subset of Wanted Sans Variable containing only glyphs used on this site.
+Pretendard (c) 2021 Kil Hyung-jin, with Reserved Font Name Pretendard. https://github.com/orioncactus/pretendard
+Licensed under the SIL Open Font License, Version 1.1 (http://scripts.sil.org/OFL).
+pretendard-gc.woff2 is a subset containing only glyphs used on this site.
