@@ -841,6 +841,7 @@ def owner_html():
     return (f'<section class="own"><div class="wrap own-w">{ph}<div><p class="label">대표 인사</p><h2 class="h2">{E(OWNER["role"])} {E(OWNER["name"])}</h2>'
             f'<p class="own-t">{E(OWNER["intro"])}</p></div></div></section>\n')
 
+HX_CHIPS = ''.join('<a href="/service/%s/">%s</a>' % (x['slug'], E(x['short'])) for x in SERVICES)
 hero = f'''<section class="hx">
   <div class="hx-bg" aria-hidden="true"></div>
   <div class="wrap hx-grid">
@@ -854,6 +855,12 @@ hero = f'''<section class="hx">
       </div>
       <ul class="hx-stats"><li><b>1,000<i>+</i></b><span>누적 시공</span></li><li><b>{N}<i>건</i></b><span>공개 시공사례</span></li><li><b>{len(SERVICES)}<i>개</i></b><span>시공 분야</span></li></ul>
       <p class="hx-note"><b>전체 사진 1장 + 문제 부위 사진 1장</b>만 보내주시면 확인 후 상담해 드려요.</p>
+      <div class="hx-more">
+        <p class="hx-mt">시공 분야</p>
+        <nav class="hx-chips" aria-label="시공 분야">{HX_CHIPS}</nav>
+        <p class="hx-mt">진행 순서</p>
+        <ol class="hx-steps"><li><b>1</b>사진 문자</li><li><b>2</b>상담·견적</li><li><b>3</b>방문 시공</li><li><b>4</b>마무리 점검</li></ol>
+      </div>
     </div>
     <div class="hx-visual">
       <figure class="hx-main"><img src="/photos/c/224185310911/after.jpg" srcset="/photos/c/224185310911/after_s.webp 320w, /photos/c/224185310911/after_m.webp 480w, /photos/c/224185310911/after.webp 720w" sizes="(max-width:959px) 300px, 440px" alt="건조기 직렬 설치 완료 현장" width="720" height="720" fetchpriority="high"><figcaption>건조기 직렬 설치</figcaption></figure>
