@@ -860,12 +860,17 @@ def owner_html():
             f'<p class="own-t">{E(OWNER["intro"])}</p></div></div></section>\n')
 
 HX_CHIPS = ''.join('<a href="/service/%s/"><span class="hc-ic"><svg aria-hidden="true"><use href="#%s"/></svg></span><span class="hc-n">%s</span><i>%d</i></a>' % (x['slug'], x['icon'], E(x['short']), len(x['cases'])) for x in SERVICES)
-hero = f'''<section class="hx">
-  <div class="hx-bg" aria-hidden="true"></div>
-  <div class="wrap hx-grid">
-    <div class="hx-copy">
-      <p class="hx-eyebrow"><span class="hx-dot" aria-hidden="true"></span>서울·경기·인천 출장 집수리</p>
-      <h1 class="hx-h">굿초이스 집수리,<br>설치부터 <mark>철거·복원</mark>까지</h1>
+hero = f'''<section class="hx hx2">
+  <div class="wrap hx2-g">
+    <figure class="hx2-card">
+      <img src="/photos/c/224185310911/after.jpg" srcset="/photos/c/224185310911/after_m.webp 480w, /photos/c/224185310911/after.webp 720w" sizes="(max-width:959px) calc(100vw - 40px), 520px" alt="건조기 직렬 설치를 마친 실제 현장" width="720" height="720" fetchpriority="high">
+      <span class="hx2-pill"><span class="hx-dot" aria-hidden="true"></span>서울·경기·인천 출장 집수리</span>
+      <figcaption class="hx2-cap">
+        <h1 class="hx-h">굿초이스 집수리,<br>설치부터 <mark>철거·복원</mark>까지</h1>
+        <span class="hx2-src">실제 시공 현장 · 건조기 직렬 설치</span>
+      </figcaption>
+    </figure>
+    <div class="hx2-body">
       <p class="hx-lead">빌트인 식기세척기 설치 및 철거, 건조기 직렬 설치, 샤워부스 철거, 정수기 철거 및 싱크대 상판 복원, 문 방향 변경, 가구 리폼까지. 다양한 생활 수리와 설치·철거 작업을 전문적으로 진행합니다.</p>
       <div class="hx-ctas">
         <a class="btn btn-accent" href="tel:{TELN}" data-track="call"><svg><use href="#phone"/></svg>전화 상담<span class="tnum">{TEL}</span></a>
@@ -879,12 +884,6 @@ hero = f'''<section class="hx">
         <p class="hx-mt">진행 순서</p>
         <ol class="hx-steps"><li><b>1</b>사진 문자</li><li><b>2</b>상담·견적</li><li><b>3</b>방문 시공</li><li><b>4</b>마무리 점검</li></ol>
       </div>
-    </div>
-    <div class="hx-visual">
-      <figure class="hx-main"><img src="/photos/c/224185310911/after.jpg" srcset="/photos/c/224185310911/after_s.webp 320w, /photos/c/224185310911/after_m.webp 480w, /photos/c/224185310911/after.webp 720w" sizes="(max-width:959px) 300px, 440px" alt="건조기 직렬 설치 완료 현장" width="720" height="720" fetchpriority="high"><figcaption>건조기 직렬 설치</figcaption></figure>
-      <figure class="hx-sub s1"><img src="/photos/c/224257385115/after_s.jpg" alt="빌트인 식기세척기 설치 완료" width="320" height="320" loading="lazy"><figcaption>식기세척기 빌트인</figcaption></figure>
-      <div class="hx-float"><b>{N}건</b><span>실제 시공사례 공개</span></div>
-      <div class="hx-stamp" aria-hidden="true"><b>1,000<i>+</i></b><span>누적 시공</span></div>
     </div>
   </div>
   <div class="wrap">
