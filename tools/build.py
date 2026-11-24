@@ -859,12 +859,15 @@ def owner_html():
     return (f'<section class="own"><div class="wrap own-w">{ph}<div><p class="label">대표 인사</p><h2 class="h2">{E(OWNER["role"])} {E(OWNER["name"])}</h2>'
             f'<p class="own-t">{E(OWNER["intro"])}</p></div></div></section>\n')
 
+_HXS = [('224185310911', '건조기 직렬 설치 완료 현장'), ('224257385115', '빌트인 식기세척기 설치 완료'), ('224425527882', '하부장 철거 후 식기세척기 설치')]
+HX_STRIP = ''.join(f'<a href="/cases/{i}/"><img src="/photos/c/{i}/after_s.jpg" alt="{a}" width="320" height="320"{" fetchpriority=\"high\"" if k == 0 else ""}></a>' for k, (i, a) in enumerate(_HXS))
 HX_CHIPS = ''.join('<a href="/service/%s/"><span class="hc-ic"><svg aria-hidden="true"><use href="#%s"/></svg></span><span class="hc-n">%s</span><i>%d</i></a>' % (x['slug'], x['icon'], E(x['short']), len(x['cases'])) for x in SERVICES)
 hero = f'''<section class="hx">
   <div class="hx-bg" aria-hidden="true"></div>
   <div class="wrap hx-grid">
     <div class="hx-copy">
       <p class="hx-eyebrow"><span class="hx-dot" aria-hidden="true"></span>서울·경기·인천 출장 집수리</p>
+      <div class="hx-strip">{HX_STRIP}</div>
       <h1 class="hx-h">굿초이스 집수리,<br>설치부터 <mark>철거·복원</mark>까지</h1>
       <p class="hx-lead">빌트인 식기세척기 설치 및 철거, 건조기 직렬 설치, 샤워부스 철거, 정수기 철거 및 싱크대 상판 복원, 문 방향 변경, 가구 리폼까지. 다양한 생활 수리와 설치·철거 작업을 전문적으로 진행합니다.</p>
       <div class="hx-ctas">
