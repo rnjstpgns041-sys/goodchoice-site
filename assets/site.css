@@ -1615,3 +1615,29 @@ body.bar-off .bar{transform:translateY(110%);opacity:0;pointer-events:none}
 .hx-chips .hc-ic{background:#fff!important;width:34px;height:34px}
 .hx-chips a:hover{border-color:#D6D3CC!important}
 .hx-dot{margin-left:4px}.hx-stamp{display:none!important}
+
+/* ===== v41: 첫 화면 새 모양 — 큰 현장 사진 위에 제목 ===== */
+.hx2{background:#fff!important;padding:14px 0 8px!important;overflow:visible}
+.hx2 .hx-bg{display:none}
+.hx2-g{display:block}
+.hx2-card{position:relative;margin:0;border-radius:24px;overflow:hidden;aspect-ratio:4/5;background:#2A2926;box-shadow:0 24px 48px -28px rgba(31,30,28,.55)}
+.hx2-card img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 40%}
+.hx2-card::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(20,19,18,.35) 0%,rgba(20,19,18,0) 26%,rgba(20,19,18,0) 42%,rgba(20,19,18,.82) 100%)}
+.hx2-pill{position:absolute;z-index:2;top:16px;left:16px;display:inline-flex;align-items:center;gap:8px;height:32px;padding:0 13px 0 10px;border-radius:999px;background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.28);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);color:#fff;font-size:12px;font-weight:600;letter-spacing:.01em}
+.hx2-pill .hx-dot{margin:0;background:#fff;box-shadow:0 0 0 3px rgba(255,255,255,.25)}
+.hx2-cap{position:absolute;z-index:2;left:22px;right:22px;bottom:22px}
+.hx2 .hx-h{color:#fff!important;margin:0 0 12px!important;font-size:clamp(29px,8.4vw,52px)!important;line-height:1.2!important;letter-spacing:-.045em!important;text-shadow:0 2px 18px rgba(0,0,0,.25)}
+.hx2 .hx-h mark{background:none!important;color:#fff!important;box-shadow:inset 0 -.14em 0 rgba(255,255,255,.9)!important;padding:0!important;text-decoration:none!important;border:0!important}
+.hx2-src{display:inline-flex;align-items:center;gap:6px;font-size:11.5px;font-weight:600;color:rgba(255,255,255,.78);letter-spacing:.02em}
+.hx2-src::before{content:"";width:14px;height:1px;background:rgba(255,255,255,.6)}
+.hx2-body{padding:24px 2px 0}
+.hx2 .hx-lead{margin:0!important;font-size:14px!important;line-height:1.8!important;color:#5E5B56!important}
+.hx2 .hx-ctas{margin-top:22px!important}
+@media(min-width:960px){
+  .hx2{padding:36px 0 16px!important}
+  .hx2-g{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:56px;align-items:start}
+  .hx2-card{position:sticky;top:96px;aspect-ratio:4/5}
+  .hx2-body{padding-top:8px}
+}
+@media(max-width:959px){.hx2-card{aspect-ratio:1/1.1}}
+.hx2 .hx-trust{margin-top:28px!important}@media(min-width:960px){.hx2-card{position:relative;top:auto}}
