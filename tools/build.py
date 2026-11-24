@@ -807,7 +807,7 @@ if(!matchMedia('(prefers-reduced-motion: reduce)').matches)t=setInterval(go,3800
 
 cols = [CASES[k::3][:7] for k in range(3)]
 colhtml = ''.join('<div class="cc%d"><div class="ctrk">%s</div></div>' % (k + 1, ''.join(f'<img src="/photos/c/{c["id"]}/after_s.jpg" alt="" width="300" height="300" loading="{"eager" if (k == 1 and j < 2) else "lazy"}" decoding="async">' for j, c in enumerate(col)) * 2) for k, col in enumerate(cols))
-hero = hba_html() + f'''<section class="hx">
+hero = f'''<section class="hx">
   <div class="hx-bg" aria-hidden="true"></div>
   <div class="wrap hx-grid">
     <div class="hx-copy">
@@ -837,7 +837,7 @@ hero = hba_html() + f'''<section class="hx">
     </ul>
   </div>
 </section>
-'''
+''' + hba_html()
 lb_ld = {"@context": "https://schema.org", "@type": "HomeAndConstructionBusiness", "name": "굿초이스 집수리", "description": "빌트인 식기세척기 설치·철거, 건조기 직렬 설치, 샤워부스 철거, 정수기 철거 및 싱크대 상판 복원, 문 방향 변경, 가구 리폼 전문.",
          "telephone": "+82-10-5809-9275", "url": SITE + "/", "image": SITE + "/photos/c/224425527882/after.jpg", "areaServed": ["서울", "경기", "인천"], "sameAs": [BLOG],
          "makesOffer": [{"@type": "Offer", "itemOffered": {"@type": "Service", "name": s['name'], "url": SITE + "/service/%s/" % s['slug']}} for s in SERVICES]}
