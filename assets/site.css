@@ -1594,3 +1594,24 @@ body.bar-off .bar{transform:translateY(110%);opacity:0;pointer-events:none}
 .rv-more{align-self:flex-start;margin:0 0 14px;padding:0;border:0;background:none;font:inherit;font-size:13px;font-weight:700;color:#34332F;text-decoration:underline;text-underline-offset:3px;cursor:pointer}
 .rvw-g{align-items:stretch}
 .rvw-c .rv-more{margin-bottom:0}
+
+/* ===== v40: 첫 화면 숨 쉬게 — 중복 제거, 상자 줄이기 ===== */
+.hx-eyebrow{display:flex;align-items:center;gap:8px;margin:0 0 16px;font-size:12.5px!important;font-weight:600;color:#6E6B66;letter-spacing:.01em}
+.hx-dot{width:6px;height:6px;border-radius:50%;background:#34332F;box-shadow:0 0 0 4px #ECEAE5}
+.hx-h{line-height:1.22!important;margin-bottom:16px!important}
+.hx-lead{font-size:14px!important;line-height:1.8!important;color:#6E6B66!important;max-width:34em}
+.hx-ctas{margin-top:28px!important}
+/* 사진 안내: 상자 없이 아이콘 + 한 줄 */
+.hx-note{display:flex!important;align-items:flex-start;gap:8px;background:none!important;border:0!important;padding:0!important;margin:14px 0 0!important;font-size:12.5px!important;color:#6E6B66!important;line-height:1.6!important}
+.hx-note svg{flex:none;width:16px;height:16px;margin-top:2px;fill:none;stroke:#6E6B66;stroke-width:1.7;stroke-linejoin:round}
+.hx-note b{color:#34332F}
+/* 숫자: 상자 없이 위아래 얇은 선 */
+.hx-stats{background:none!important;border:0!important;border-top:1px solid #ECEAE5!important;border-bottom:1px solid #ECEAE5!important;border-radius:0!important;padding:18px 0!important;margin-top:28px!important}
+.hx-stats li+li{border-left:1px solid #ECEAE5!important}
+/* 시공 분야 칸: 테두리 대신 아주 연한 바탕 */
+.hx-more{margin-top:32px!important}
+.hx-chips{gap:8px!important}
+.hx-chips a{background:#F7F6F3!important;border:1px solid transparent!important;height:56px!important}
+.hx-chips .hc-ic{background:#fff!important;width:34px;height:34px}
+.hx-chips a:hover{border-color:#D6D3CC!important}
+.hx-dot{margin-left:4px}.hx-stamp{display:none!important}
