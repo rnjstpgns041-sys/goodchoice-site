@@ -1593,3 +1593,4 @@ body.bar-off .bar{transform:translateY(110%);opacity:0;pointer-events:none}
 .rvw-c figcaption{margin-top:auto}
 .rv-more{align-self:flex-start;margin:0 0 14px;padding:0;border:0;background:none;font:inherit;font-size:13px;font-weight:700;color:#34332F;text-decoration:underline;text-underline-offset:3px;cursor:pointer}
 .rvw-g{align-items:stretch}
+.rvw-c .rv-more{margin-bottom:0}
