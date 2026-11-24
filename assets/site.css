@@ -1333,3 +1333,8 @@ footer nav a{padding-block:2px}
 .drawer .dnote{background:linear-gradient(135deg,#5563D6,#3340A8);color:#fff}
 .drawer .dnote p{color:rgba(255,255,255,.8)}.drawer .dnote a{color:#fff}.drawer .dnote a svg{stroke:#fff}
 .strip{background:linear-gradient(90deg,#4553C4,#5B6BE0);color:#fff;box-shadow:none}
+
+/* ===== v26: 접근성·대비 보완 (2026-11-24) ===== */
+.info th{color:#5E637A!important}
+.batabs button[aria-selected="true"]{color:#fff!important}
+form h2.h3{font-size:22px;font-weight:900}

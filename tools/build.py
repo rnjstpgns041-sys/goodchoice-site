@@ -252,6 +252,9 @@ for p in manifest['posts']:
     save_img(bsrc, os.path.join(ROOT, 'photos/c', pid, 'before.jpg'), 720, square=True)
     save_img(asrc, os.path.join(ROOT, 'photos/c', pid, 'after.jpg'), 720, square=True)
     save_img(asrc, os.path.join(ROOT, 'photos/c', pid, 'after_s.jpg'), 320, square=True, q=70)
+    save_img(bsrc, os.path.join(ROOT, 'photos/c', pid, 'before_s.jpg'), 320, square=True, q=70)
+    for nm, sp in (('before', bsrc), ('after', asrc)):
+        save_img(sp, os.path.join(ROOT, 'photos/c', pid, nm + '_m.jpg'), 480, square=True, q=76)
     # 내용 요약
     paras = lambda kinds: [x[1] for s in secs if s['kind'] in kinds for x in s['items'] if x[0] == 'p']
     problem = cond(paras(('intro',)) + paras(('pre',)), 260)
@@ -351,6 +354,7 @@ def head(title, desc, path, img=None, extra=''):
 <meta property="og:url" content="{url}">
 <meta property="og:image" content="{img}">
 <meta property="og:locale" content="ko_KR">
+<meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#FFFFFF">
 <meta name="format-detection" content="telephone=no">
 <link rel="icon" href="/favicon.ico" sizes="any"><link rel="apple-touch-icon" href="/apple-touch-icon.png">
@@ -473,7 +477,15 @@ def aside(title, extra=''):
             f'<dl><dt>전화·문자</dt><dd><a href="tel:{TELN}" data-track="call">{TEL}</a></dd><dt>출장</dt><dd>서울·경기·인천</dd></dl>{CALL}{SMS}{extra}</aside>')
 
 
+IMG_RE = re.compile(r'<img((?:(?!srcset)[^>])*?) src="/photos/c/(\d+)/(before|after)\.jpg"((?:(?!srcset)[^>])*)>')
+def _srcset(m):
+    a, pid, nm, b = m.groups()
+    sizes = '(max-width:600px) 46vw, 340px'
+    return (f'<img{a} src="/photos/c/{pid}/{nm}.jpg" srcset="/photos/c/{pid}/{nm}_s.jpg 320w, /photos/c/{pid}/{nm}_m.jpg 480w, '
+            f'/photos/c/{pid}/{nm}.jpg 720w" sizes="{sizes}"{b}>')
 def write(path, content):
+    if '<html' in content[:300]:
+        content = IMG_RE.sub(_srcset, content)
     fp = os.path.join(ROOT, path.lstrip('/'), 'index.html') if path.endswith('/') else os.path.join(ROOT, path.lstrip('/'))
     os.makedirs(os.path.dirname(fp), exist_ok=True)
     open(fp, 'w', encoding='utf-8').write(content)
@@ -703,7 +715,7 @@ body += f'''<section style="padding-top:48px"><div class="wrap ctgrid">
   <p class="note" style="margin-top:16px">{E(PHOTO_NOTE)}</p>
 </div>
 <form id="qform" novalidate>
-  <h3>문자 견적 보내기</h3>
+  <h2 class="h3">문자 견적 보내기</h2>
   <p class="muted" style="margin:-4px 0 14px;font-size:14px">아래 내용을 적고 버튼을 누르면 휴대폰 문자 앱이 열리고 내용이 채워집니다. 사진은 문자 앱에서 첨부해 주세요.</p>
   <div class="fr">
     <label for="f-type">작업 종류<select id="f-type" name="type" required>{opts}</select></label>
@@ -781,7 +793,7 @@ def hba_html():
     cards = ''
     for k, i in enumerate([x for x in HBA_IDS if x in CBY]):
         c = CBY[i]; sv = SBY[c['svc']]
-        lz = '' if k < 2 else ' loading="lazy"'
+        lz = ' loading="lazy"'
         cards += (f'<a class="hba-card" href="/cases/{i}/"><div class="hba-pair">'
                   f'<figure><img src="/photos/c/{i}/before.jpg" alt="{E(c["short"])} 작업 전" width="720" height="720"{lz} decoding="async"><figcaption>작업 전</figcaption></figure>'
                   f'<figure><img src="/photos/c/{i}/after.jpg" alt="{E(c["short"])} 작업 후" width="720" height="720"{lz} decoding="async"><figcaption class="af">작업 후</figcaption></figure></div>'
