@@ -850,9 +850,9 @@ def reviews_html():
     if not REVIEWS: return ''
     star = '<svg class="rv-s" viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.8l2.5 5.2 5.7.8-4.1 4 1 5.7L10 14.8l-5.1 2.7 1-5.7-4.1-4 5.7-.8z"/></svg>'
     cards = ''.join(f'<figure class="rvw-c"><div class="rv-top"><span class="rv-stars" aria-label="별점 {r["star"]}점">{star*r["star"]}</span><b>{r["star"]}.0</b><time>{E(r["date"])}</time></div>'
-                    f'<blockquote>{E(r["text"])}</blockquote><button type="button" class="rv-more" hidden>더보기</button><figcaption><svg aria-hidden="true"><use href="#ok"/></svg>당근 동네 주민 후기</figcaption></figure>' for r in REVIEWS)
+                    f'<blockquote>{E(r["text"])}</blockquote><button type="button" class="rv-more" hidden>더보기</button></figure>' for r in REVIEWS)
     return (f'<section class="rvw" id="reviews"><div class="wrap"><p class="label">고객 후기</p><h2 class="h2">직접 맡겨보신 분들의 이야기</h2>'
-            f'<p class="rv-sub">당근에 남겨주신 동네 주민 후기를 그대로 옮겼어요. 후기 {len(REVIEWS)}개 모두 별점 5.0이에요.</p><div class="rvw-g">{cards}</div></div></section>\n')
+            f'<p class="rv-sub">고객님들이 남겨주신 후기를 그대로 옮겼어요. 후기 {len(REVIEWS)}개 모두 별점 5.0이에요.</p><div class="rvw-g">{cards}</div></div></section>\n')
 def owner_html():
     if not OWNER.get('name'): return ''
     ph = f'<img src="/{OWNER["photo"]}" alt="{E(OWNER["name"])} {E(OWNER["role"])}" width="320" height="320" loading="lazy">' if OWNER.get('photo') else ''
