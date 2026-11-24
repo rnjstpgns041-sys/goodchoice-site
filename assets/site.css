@@ -1538,3 +1538,23 @@ p{font-size:inherit}
 .ci-all svg{width:16px;height:16px;stroke:#fff;fill:none}
 @media(min-width:760px){.cidx{grid-template-columns:1fr 1fr}.cidx li:nth-child(2){border-top:0}}
 .hx-note::before{display:none!important}.hx-note{padding-left:14px!important}.stmt .h2{margin-top:6px!important}
+
+/* ===== v36: 첫 화면 깔끔하게 ===== */
+.bar{transition:transform .3s ease,opacity .3s ease}
+body.bar-off .bar{transform:translateY(110%);opacity:0;pointer-events:none}
+/* 시공 분야: 2열 같은 크기 칸으로 줄 맞춤 */
+.hx-chips{display:grid!important;grid-template-columns:1fr 1fr;gap:8px!important}
+.hx-chips a{height:46px!important;justify-content:space-between;padding:0 10px 0 14px!important;border-radius:12px!important;font-size:13.5px!important;white-space:nowrap;letter-spacing:-.02em}
+.hx-chips a i{background:none!important;min-width:0!important;height:auto!important;padding:0!important;color:#8A8781!important;font-size:12px!important;font-weight:600!important}
+.hx-chips a i::after{content:"건"}
+@media(min-width:760px){.hx-chips{grid-template-columns:repeat(3,1fr)}}
+/* 사진 안내: 한 줄 느낌으로 가볍게 */
+.hx-note{display:flex;align-items:center;gap:10px;background:#fff!important;border:1px dashed #D6D3CC!important;font-size:12.5px!important;line-height:1.55!important;padding:11px 14px!important;margin-top:12px!important}
+/* 여백 리듬 통일 */
+.hx-ctas{margin-top:24px!important}
+.hx-stats{margin-top:12px!important;padding:12px 0!important}
+.hx-more{margin-top:26px!important}
+.hx-mt{margin-bottom:12px!important}
+.hx-chips{margin-bottom:24px!important}
+.hx-lead{color:#5E5B56!important}
+.hx-chips a i{display:inline!important;white-space:nowrap}.hx-note{display:block!important}
