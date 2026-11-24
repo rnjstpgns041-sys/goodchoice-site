@@ -1338,3 +1338,14 @@ footer nav a{padding-block:2px}
 .info th{color:#5E637A!important}
 .batabs button[aria-selected="true"]{color:#fff!important}
 form h2.h3{font-size:22px;font-weight:900}
+.sr{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+/* 후기·대표 소개 (내용이 들어오면 표시) */
+.rvw{padding:56px 0;background:#fff}.rvw-g{display:grid;gap:14px;margin-top:22px}
+.rvw-c{margin:0;padding:22px;border:1px solid var(--line);border-radius:20px;background:#F7F8FF}
+.rvw-c blockquote{margin:0 0 14px;font-size:16px;line-height:1.7;color:var(--ink)}
+.rvw-c blockquote::before{content:"“";display:block;font-size:34px;line-height:1;color:#4553C4;font-weight:900}
+.rvw-c figcaption{display:flex;flex-wrap:wrap;gap:6px 10px;font-size:13px;color:var(--muted)}.rvw-c figcaption b{color:var(--ink)}
+.own{padding:56px 0;background:#F4F6FF}.own-w{display:grid;gap:22px;align-items:center}
+.own-w img{width:140px;height:140px;border-radius:50%;object-fit:cover;border:4px solid #fff;box-shadow:0 12px 30px -16px rgba(40,50,140,.5)}
+.own-t{font-size:16px;line-height:1.8;color:var(--muted);margin:10px 0 0}
+@media(min-width:760px){.rvw-g{grid-template-columns:repeat(3,1fr)}.own-w{grid-template-columns:200px 1fr}.own-w img{width:200px;height:200px}}

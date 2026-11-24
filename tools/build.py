@@ -21,6 +21,11 @@ NAVER_SITE_VERIFICATION = ''   # 네이버 서치어드바이저 HTML 태그의 
 GOOGLE_SITE_VERIFICATION = ''  # 구글 서치콘솔 (선택)
 NAVER_ANALYTICS_ID = ''        # 네이버 애널리틱스 사이트 ID (예: 'a1b2c3d4e5f6')
 GA4_ID = ''                    # 구글 애널리틱스 측정 ID (예: 'G-XXXXXXX')
+# 실제 고객 후기만 넣기 (네이버 플레이스·숨고·문자 캡처 등 출처가 있는 것). 비어 있으면 후기 구역은 표시되지 않음.
+# 예: {'text': '설치 깔끔하게 해주셨어요', 'who': '김○○ 고객님', 'area': '성남', 'svc': '식기세척기 설치', 'src': '네이버 플레이스'}
+REVIEWS = []
+# 대표 소개 (사장님 확인 후 넣기). name이 비어 있으면 구역이 표시되지 않음. photo는 저장소 안 경로 (예: 'photos/owner.jpg')
+OWNER = {'name': '', 'role': '대표', 'photo': '', 'intro': ''}
 
 PHOTO_GUIDE = '전체 사진 1장 + 문제 부위 사진 1장을 보내주시면 확인 후 상담해 드립니다.'
 PHOTO_NOTE = '단, 사진만으로 견적이 어려운 작업은 현장 확인이 필요할 수 있습니다.'
@@ -359,9 +364,8 @@ def head(title, desc, path, img=None, extra=''):
 <meta name="format-detection" content="telephone=no">
 <link rel="icon" href="/favicon.ico" sizes="any"><link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="alternate" type="application/rss+xml" title="굿초이스 집수리 시공사례" href="/rss.xml">
-{v}<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
-<link rel="stylesheet" href="/assets/site.css?v={VER}">
+{v}<link rel="stylesheet" href="/assets/site.min.css?v={VER}">
+<link rel="preload" href="/assets/fonts/pretendard-gc.woff2?v={VER}" as="font" type="font/woff2" crossorigin>
 {extra}{an}</head>
 <body>
 {SPRITE}
@@ -481,11 +485,17 @@ IMG_RE = re.compile(r'<img((?:(?!srcset)[^>])*?) src="/photos/c/(\d+)/(before|af
 def _srcset(m):
     a, pid, nm, b = m.groups()
     sizes = '(max-width:600px) 46vw, 340px'
-    return (f'<img{a} src="/photos/c/{pid}/{nm}.jpg" srcset="/photos/c/{pid}/{nm}_s.jpg 320w, /photos/c/{pid}/{nm}_m.jpg 480w, '
-            f'/photos/c/{pid}/{nm}.jpg 720w" sizes="{sizes}"{b}>')
+    return (f'<img{a} src="/photos/c/{pid}/{nm}.jpg" srcset="/photos/c/{pid}/{nm}_s.webp 320w, /photos/c/{pid}/{nm}_m.webp 480w, '
+            f'/photos/c/{pid}/{nm}.webp 720w" sizes="{sizes}"{b}>')
+IMG1_RE = re.compile(r'<img((?:(?!srcset)[^>])*?) src="(/photos/c/\d+/[\w]+)\.jpg"((?:(?!srcset)[^>])*)>')
 def write(path, content):
     if '<html' in content[:300]:
         content = IMG_RE.sub(_srcset, content)
+        content = IMG1_RE.sub(lambda m: f'<img{m.group(1)} src="{m.group(2)}.jpg" srcset="{m.group(2)}.webp"{m.group(3)}>', content)
+        content = re.sub(r'url\((/photos/c/\d+/\w+)\.jpg\)', r'url(\1.webp)', content)
+        m = re.search(r'class="phero img" style="background-image:url\((/photos/c/\d+/\w+\.webp)\)', content)
+        if m:
+            content = content.replace('</head>', '<link rel="preload" as="image" href="%s" fetchpriority="high">\n</head>' % m.group(1), 1)
     fp = os.path.join(ROOT, path.lstrip('/'), 'index.html') if path.endswith('/') else os.path.join(ROOT, path.lstrip('/'))
     os.makedirs(os.path.dirname(fp), exist_ok=True)
     open(fp, 'w', encoding='utf-8').write(content)
@@ -552,7 +562,7 @@ crumb, ld = crumbs([('시공사례', None)])
 body = phero('photos/c/224468666985/after.jpg', crumb, '굿초이스 집수리 시공사례', '직접 다녀온 현장 %d곳을 지역, 문제, 작업 과정, 완료 사진까지 정리했습니다. 분야를 눌러 비슷한 사례를 찾아보세요.' % N)
 filt = '<div class="filters" id="filters" role="group" aria-label="분야 선택" style="margin-top:0"><button type="button" data-f="all" aria-pressed="true">전체 %d</button>' % N + ''.join('<button type="button" data-f="%s" aria-pressed="false">%s %d</button>' % (s['slug'], E(s['short']), len(s['cases'])) for s in SERVICES) + '</div>'
 grid = '<div class="cgrid3" id="allCases">' + ''.join(case_card(c).replace('<a class="ccard"', '<a class="ccard" data-svc="%s"' % c['svc'], 1) for c in CASES) + '</div>'
-body += '<section style="padding-top:48px"><div class="wrap">' + filt + grid + '<p style="margin-top:40px"><a class="link" href="%s" target="_blank" rel="noopener">네이버 블로그에서 작업 기록 보기 %s</a></p></div></section>' % (BLOG, ARR)
+body += '<section style="padding-top:48px"><div class="wrap"><h2 class="sr">시공사례 목록</h2>' + filt + grid + '<p style="margin-top:40px"><a class="link" href="%s" target="_blank" rel="noopener">네이버 블로그에서 작업 기록 보기 %s</a></p></div></section>' % (BLOG, ARR)
 write('/cases/', head('시공사례 %d건 | 지역별 설치·철거·복원 작업 기록 - 굿초이스 집수리' % N, '굿초이스 집수리가 서울·성남·하남·용인·수원 등에서 직접 진행한 시공사례 %d건. 식기세척기 설치, 건조기 직렬, 샤워부스 철거, 원상복구, 문 방향 변경 현장을 사진과 함께 확인하세요.' % N, '/cases/', extra=ld) + header('cases') + body + footer())
 
 CSVC = {}
@@ -681,7 +691,7 @@ FAQ = [
 ]
 faq_html = ''.join('<details><summary>%s</summary><p>%s</p></details>' % (E(q), E(a)) for q, a in FAQ)
 faq_ld = '<script type="application/ld+json">%s</script>\n' % json.dumps({"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": q, "acceptedAnswer": {"@type": "Answer", "text": a}} for q, a in FAQ]}, ensure_ascii=False)
-body += f'''<section style="padding-top:24px"><div class="wrap">
+body += f'''<section style="padding-top:24px"><div class="wrap"><h2 class="sr">진행 순서</h2>
 <ol class="steps">
 <li><h3>전체 사진 1장 + 문제 부위 사진 1장</h3><p>{E(PHOTO_GUIDE)} 작업할 지역(동까지)도 함께 적어주세요.</p></li>
 <li><h3>상담 · 견적 안내</h3><p>사진 확인 후 연락드려 작업 방법과 견적을 안내합니다. {E(PHOTO_NOTE)}</p></li>
@@ -819,6 +829,18 @@ if(!matchMedia('(prefers-reduced-motion: reduce)').matches)t=setInterval(go,3800
 
 cols = [CASES[k::3][:7] for k in range(3)]
 colhtml = ''.join('<div class="cc%d"><div class="ctrk">%s</div></div>' % (k + 1, ''.join(f'<img src="/photos/c/{c["id"]}/after_s.jpg" alt="" width="300" height="300" loading="{"eager" if (k == 1 and j < 2) else "lazy"}" decoding="async">' for j, c in enumerate(col)) * 2) for k, col in enumerate(cols))
+def reviews_html():
+    if not REVIEWS: return ''
+    cards = ''.join(f'<figure class="rvw-c"><blockquote>{E(r["text"])}</blockquote><figcaption><b>{E(r.get("who", "고객님"))}</b>'
+                    f'<span>{E(" · ".join(x for x in (r.get("area", ""), r.get("svc", "")) if x))}</span>'
+                    + (f'<small>{E(r["src"])}</small>' if r.get('src') else '') + '</figcaption></figure>' for r in REVIEWS)
+    return f'<section class="rvw"><div class="wrap"><p class="label">고객 후기</p><h2 class="h2">직접 맡겨보신 분들의 이야기</h2><div class="rvw-g">{cards}</div></div></section>\n'
+def owner_html():
+    if not OWNER.get('name'): return ''
+    ph = f'<img src="/{OWNER["photo"]}" alt="{E(OWNER["name"])} {E(OWNER["role"])}" width="320" height="320" loading="lazy">' if OWNER.get('photo') else ''
+    return (f'<section class="own"><div class="wrap own-w">{ph}<div><p class="label">대표 인사</p><h2 class="h2">{E(OWNER["role"])} {E(OWNER["name"])}</h2>'
+            f'<p class="own-t">{E(OWNER["intro"])}</p></div></div></section>\n')
+
 hero = f'''<section class="hx">
   <div class="hx-bg" aria-hidden="true"></div>
   <div class="wrap hx-grid">
@@ -834,7 +856,7 @@ hero = f'''<section class="hx">
       <p class="hx-note"><b>전체 사진 1장 + 문제 부위 사진 1장</b>만 보내주시면 확인 후 상담해 드려요.</p>
     </div>
     <div class="hx-visual">
-      <figure class="hx-main"><img src="/photos/c/224185310911/after.jpg" srcset="/photos/c/224185310911/after_s.jpg 320w, /photos/c/224185310911/after.jpg 720w" sizes="(max-width:959px) 320px, 440px" alt="건조기 직렬 설치 완료 현장" width="720" height="720" fetchpriority="high"><figcaption>건조기 직렬 설치</figcaption></figure>
+      <figure class="hx-main"><img src="/photos/c/224185310911/after.jpg" srcset="/photos/c/224185310911/after_s.webp 320w, /photos/c/224185310911/after_m.webp 480w, /photos/c/224185310911/after.webp 720w" sizes="(max-width:959px) 300px, 440px" alt="건조기 직렬 설치 완료 현장" width="720" height="720" fetchpriority="high"><figcaption>건조기 직렬 설치</figcaption></figure>
       <figure class="hx-sub s1"><img src="/photos/c/224257385115/after_s.jpg" alt="빌트인 식기세척기 설치 완료" width="320" height="320" loading="lazy"><figcaption>식기세척기 빌트인</figcaption></figure>
       <div class="hx-float"><b>{N}건</b><span>실제 시공사례 공개</span></div>
       <div class="hx-stamp" aria-hidden="true"><b>1,000<i>+</i></b><span>누적 시공</span></div>
@@ -849,7 +871,7 @@ hero = f'''<section class="hx">
     </ul>
   </div>
 </section>
-''' + hba_html()
+''' + hba_html() + reviews_html() + owner_html()
 lb_ld = {"@context": "https://schema.org", "@type": "HomeAndConstructionBusiness", "name": "굿초이스 집수리", "description": "빌트인 식기세척기 설치·철거, 건조기 직렬 설치, 샤워부스 철거, 정수기 철거 및 싱크대 상판 복원, 문 방향 변경, 가구 리폼 전문.",
          "telephone": "+82-10-5809-9275", "url": SITE + "/", "image": SITE + "/photos/c/224425527882/after.jpg", "areaServed": ["서울", "경기", "인천"], "sameAs": [BLOG],
          "makesOffer": [{"@type": "Offer", "itemOffered": {"@type": "Service", "name": s['name'], "url": SITE + "/service/%s/" % s['slug']}} for s in SERVICES]}
@@ -878,4 +900,32 @@ for c in sorted(CASES, key=lambda c: c['date'], reverse=True):
     rss.append('<item><title>%s</title><link>%s/cases/%s/</link><guid>%s/cases/%s/</guid><pubDate>%s</pubDate><description>%s</description></item>' % (E(seo_title(c)), SITE, c['id'], SITE, c['id'], format_datetime(dt), E(c['problem'] or c['sum'])))
 rss.append('</channel></rss>\n')
 open(os.path.join(ROOT, 'rss.xml'), 'w').write(''.join(rss))
+# ---------- webp 변환 + CSS 압축
+for d, _, fs in os.walk(os.path.join(ROOT, 'photos/c')):
+    for f in fs:
+        if not f.endswith('.jpg'): continue
+        src = os.path.join(d, f); dst = src[:-4] + '.webp'
+        if os.path.exists(dst) and os.path.getmtime(dst) >= os.path.getmtime(src): continue
+        Image.open(src).save(dst, 'WEBP', quality=74, method=6)
+# 글꼴: 사이트에 실제 쓰인 글자만 담은 Pretendard 한 파일 (OFL, tools/PretendardVariable.woff2 원본)
+import glob, html as _html
+from fontTools import subset as _fsub
+_chars = set(chr(c) for c in range(0x20, 0x7f)) | set('·…→←↑↓“”‘’—–※★☆①②③④⑤')
+for f in glob.glob(os.path.join(ROOT, '**/*.html'), recursive=True) + [os.path.join(ROOT, 'assets/site.js')]:
+    if '/tools/' in f: continue
+    _chars |= set(_html.unescape(open(f, encoding='utf-8').read()))
+_opt = _fsub.Options(); _opt.flavor = 'woff2'; _opt.layout_features = ['kern', 'liga', 'calt', 'locl']; _opt.hinting = False; _opt.desubroutinize = True
+_font = _fsub.load_font(os.path.join(ROOT, 'tools/PretendardVariable.woff2'), _opt)
+_ss = _fsub.Subsetter(_opt); _ss.populate(text=''.join(c for c in _chars if c > ' ')); _ss.subset(_font)
+from fontTools.varLib import instancer as _inst
+_font = _inst.instantiateVariableFont(_font, {'wght': (400, 900)})
+os.makedirs(os.path.join(ROOT, 'assets/fonts'), exist_ok=True)
+_fsub.save_font(_font, os.path.join(ROOT, 'assets/fonts/pretendard-gc.woff2'), _opt)
+FONT_FACE = ("@font-face{font-family:'Pretendard Variable';font-style:normal;font-display:swap;font-weight:400 900;"
+             "src:url(/assets/fonts/pretendard-gc.woff2?v=%s) format('woff2-variations'),url(/assets/fonts/pretendard-gc.woff2?v=%s) format('woff2')}" % (VER, VER))
+css = open(os.path.join(ROOT, 'assets/site.css'), encoding='utf-8').read()
+css = re.sub(r'/\*.*?\*/', '', css, flags=re.S)
+css = re.sub(r'\s+', ' ', css)
+css = re.sub(r'\s*([{};,>])\s*', r'\1', css).replace(';}', '}')
+open(os.path.join(ROOT, 'assets/site.min.css'), 'w', encoding='utf-8').write(FONT_FACE + css.strip())
 print('pages', len(URLS))
