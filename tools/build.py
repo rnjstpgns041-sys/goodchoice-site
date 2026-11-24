@@ -694,7 +694,7 @@ opts = ''.join('<option>%s</option>' % E(s['name']) for s in SERVICES) + '<optio
 body += f'''<section style="padding-top:48px"><div class="wrap ctgrid">
 <div>
   <div class="telcard"><small>전화 · 문자 상담</small><a class="bigtel" id="tel" href="tel:{TELN}" data-track="call">{TEL}</a>
-  <div class="ctas"><a class="btn" href="tel:{TELN}" data-track="call" style="background:#fff;color:#2A2416"><svg><use href="#phone"/></svg>전화하기</a><a class="btn btn-ghost" href="{TALK}" target="_blank" rel="noopener"><svg><use href="#chat"/></svg>네이버 톡톡</a></div></div>
+  <div class="ctas"><a class="btn" href="tel:{TELN}" data-track="call" style="background:#fff;color:#181B2B"><svg><use href="#phone"/></svg>전화하기</a><a class="btn btn-ghost" href="{TALK}" target="_blank" rel="noopener"><svg><use href="#chat"/></svg>네이버 톡톡</a></div></div>
   <div class="how">
     <div><b>1</b><p>전체 사진 1장<small>주변 가구와 위치가 함께 보이게</small></p></div>
     <div><b>2</b><p>문제 부위 사진 1장<small>고장 난 부분이 잘 보이게 가까이</small></p></div>
