@@ -1491,3 +1491,50 @@ p{font-size:inherit}
 .hx-steps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
 .hx-steps li{display:flex;flex-direction:column;align-items:center;gap:6px;padding:10px 4px;border-radius:14px;background:#fff;border:1px solid #E7E5E0;font-size:12.5px;font-weight:600;color:#3B3A37;text-align:center}
 .hx-steps b{display:grid;place-items:center;width:22px;height:22px;border-radius:50%;background:#34332F;color:#fff;font-size:11px}
+
+/* ===== v35: 첫 화면 정돈 + 차콜 구역 '분야별 시공사례' ===== */
+/* 버튼 */
+.hx-ctas{gap:8px!important}
+.hx-ctas .btn{border-radius:14px!important;min-height:52px;font-weight:700!important;letter-spacing:-.02em}
+.hx-ctas .btn .tnum{font-weight:500;opacity:.72;font-size:13px;margin-left:6px}
+/* 숫자 3개: 한 장의 카드 + 세로 구분선 */
+.hx-stats{display:grid!important;grid-template-columns:repeat(3,1fr)!important;gap:0!important;background:#fff;border:1px solid #E7E5E0;border-radius:18px;padding:14px 0!important;margin-top:16px!important}
+.hx-stats li{background:none!important;border:0!important;border-radius:0!important;padding:2px 8px!important;text-align:center;display:flex;flex-direction:column;align-items:center;gap:3px}
+.hx-stats li+li{border-left:1px solid #ECEAE5!important}
+.hx-stats b{font-size:clamp(21px,5.6vw,28px)!important;line-height:1.1}
+.hx-stats b i{font-style:normal;font-size:.55em;font-weight:700;margin-left:1px;color:#6E6B66}
+.hx-stats span{font-size:12px!important;color:#6E6B66!important;font-weight:500}
+/* 사진 안내 */
+.hx-note{background:#F5F4F1!important;border:0!important;border-radius:14px!important;padding:12px 14px 12px 16px!important;font-size:13px!important;line-height:1.6!important;color:#4A4844!important}
+/* 시공 분야 칩: 건수 표시 */
+.hx-more{border-top:0!important;padding-top:0!important;margin-top:22px!important}
+.hx-mt{display:flex;align-items:center;gap:10px;font-size:11.5px!important;font-weight:700!important;letter-spacing:.08em!important;color:#8A8781!important}
+.hx-mt::after{content:"";flex:1;height:1px;background:#ECEAE5}
+.hx-chips{gap:6px!important}
+.hx-chips a{height:36px!important;padding:0 6px 0 14px!important;gap:8px;background:#fff!important;border:1px solid #E2DFD9!important;font-size:13.5px!important;font-weight:600!important;transition:border-color .2s,background .2s}
+.hx-chips a i{font-style:normal;display:grid;place-items:center;min-width:24px;height:24px;padding:0 6px;border-radius:999px;background:#F1EFEB;color:#5E5B56;font-size:11.5px;font-weight:700}
+.hx-chips a:hover{border-color:#34332F!important}
+/* 진행 순서: 선으로 이어진 타임라인 */
+.hx-steps{position:relative;gap:0!important;margin-top:4px!important}
+.hx-steps::before{content:"";position:absolute;left:12.5%;right:12.5%;top:13px;height:1px;background:repeating-linear-gradient(90deg,#BDB9B1 0 4px,transparent 4px 8px)}
+.hx-steps li{position:relative;background:none!important;border:0!important;padding:0 2px!important;gap:8px!important;font-size:12.5px!important;color:#3B3A37!important}
+.hx-steps b{width:27px!important;height:27px!important;font-size:12px!important;background:#fff!important;color:#1F1E1C!important;border:1.5px solid #34332F;box-shadow:0 0 0 4px #fff}
+.hx-steps li:first-child b{background:#34332F!important;color:#fff!important}
+
+/* 차콜 구역: 분야별 시공사례 목록 */
+.stmt{padding-top:52px!important;padding-bottom:56px!important}
+.stmt .h2{color:#F4F3F0!important;margin-top:12px}
+.ci-sub{color:rgba(255,255,255,.62)!important;font-size:13.5px!important;line-height:1.7;margin:10px 0 22px;max-width:34em}
+.cidx{list-style:none;margin:0;padding:0;border-top:1px solid rgba(255,255,255,.12);display:grid;grid-template-columns:1fr;column-gap:32px}
+.cidx li{border-bottom:1px solid rgba(255,255,255,.12)}
+.cidx a{display:flex;align-items:center;gap:14px;padding:12px 2px;color:#F4F3F0;text-decoration:none}
+.cidx img{width:52px;height:52px;border-radius:12px;object-fit:cover;flex:none;background:#2A2926}
+.ci-n{flex:1;font-size:15.5px;font-weight:700;letter-spacing:-.02em}
+.ci-c{font-size:20px;font-weight:800;letter-spacing:-.03em;color:#fff;font-variant-numeric:tabular-nums}
+.ci-c i{font-style:normal;font-size:12px;font-weight:600;color:rgba(255,255,255,.55);margin-left:2px}
+.ci-a{width:16px;height:16px;fill:none;stroke:rgba(255,255,255,.45);stroke-width:2;flex:none;transition:transform .2s}
+.cidx a:hover .ci-a{transform:translateX(3px);stroke:#fff}
+.ci-all{display:inline-flex;align-items:center;gap:8px;margin-top:22px;height:46px;padding:0 20px;border-radius:999px;border:1px solid rgba(255,255,255,.4);color:#fff!important;font-size:14px;font-weight:600;text-decoration:none}
+.ci-all svg{width:16px;height:16px;stroke:#fff;fill:none}
+@media(min-width:760px){.cidx{grid-template-columns:1fr 1fr}.cidx li:nth-child(2){border-top:0}}
+.hx-note::before{display:none!important}.hx-note{padding-left:14px!important}.stmt .h2{margin-top:6px!important}

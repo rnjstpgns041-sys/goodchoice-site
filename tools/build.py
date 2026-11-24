@@ -749,7 +749,18 @@ H = LEGACY_HTML
 home = H[H.index('<div class="strip"'):H.index('<!-- ================= SERVICE LIST')]
 home = home[:home.rindex('</div>')]  # .view 닫는 태그 제거
 # 기준 문장: 애니메이션 없이 고정
-home = re.sub(r'<section class="stmt" id="statement">.*?</section>', '<section class="stmt" id="statement"><div class="wrap"><p class="label">Our Standard</p><p class="stmt-t static">물이 넘친다고 바로 실리콘부터 쏘지 않습니다. 어디서 새는지 먼저 찾고, 꼭 필요한 만큼만 고치고, 나사 구멍 하나까지 정리하고 나옵니다.</p></div></section>', home, flags=re.S)
+def _cidx():
+    rows = ''
+    for s in sorted(SERVICES, key=lambda x: -len(x['cases'])):
+        if not s['cases']: continue
+        t = s['cases'][0]['id']
+        rows += (f'<li><a href="/service/{s["slug"]}/"><img src="/photos/c/{t}/after_s.jpg" alt="" width="56" height="56" loading="lazy">'
+                 f'<span class="ci-n">{E(s["name"])}</span><span class="ci-c">{len(s["cases"])}<i>건</i></span>'
+                 f'<svg class="ci-a" viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg></a></li>')
+    return ('<section class="stmt" id="statement"><div class="wrap"><p class="label">Case Index</p>'
+            '<h2 class="h2">분야별로 쌓인<br>실제 시공사례</h2><p class="ci-sub">블로그에 올린 현장을 분야별로 정리했어요. 누르면 분야 안내와 사례를 볼 수 있어요.</p>'
+            f'<ul class="cidx">{rows}</ul><a class="ci-all" href="/cases/">시공사례 {N}건 전체 보기 {ARR}</a></div></section>')
+home = re.sub(r'<section class="stmt" id="statement">.*?</section>', lambda m: _cidx(), home, flags=re.S)
 home = home.replace('<div class="services" id="homeServices"></div>', '<div class="services">' + ''.join(svc_card(s) for s in SERVICES) + '</div>')
 # 전후 비교 탭: 정적 패널
 ba_ids = ['224409039077', '224369548827', '224457415114', '224325847991']
@@ -841,7 +852,7 @@ def owner_html():
     return (f'<section class="own"><div class="wrap own-w">{ph}<div><p class="label">대표 인사</p><h2 class="h2">{E(OWNER["role"])} {E(OWNER["name"])}</h2>'
             f'<p class="own-t">{E(OWNER["intro"])}</p></div></div></section>\n')
 
-HX_CHIPS = ''.join('<a href="/service/%s/">%s</a>' % (x['slug'], E(x['short'])) for x in SERVICES)
+HX_CHIPS = ''.join('<a href="/service/%s/">%s<i>%d</i></a>' % (x['slug'], E(x['short']), len(x['cases'])) for x in SERVICES)
 hero = f'''<section class="hx">
   <div class="hx-bg" aria-hidden="true"></div>
   <div class="wrap hx-grid">
