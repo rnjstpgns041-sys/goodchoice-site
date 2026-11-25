@@ -1708,3 +1708,4 @@ a.ac.on:hover{background:#1F1E1C}
 .pr-g li{align-items:flex-start!important}
 .pr-dot{align-self:flex-start!important;margin-top:.85em}
 .pr-v{align-self:flex-start}
+.pr-v.pr-ask{font-size:14px!important;font-weight:600!important;color:rgba(255,255,255,.8)!important}

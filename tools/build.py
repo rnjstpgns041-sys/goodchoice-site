@@ -923,11 +923,12 @@ PRICES = [
     ('세탁실', [('건조기 랙 설치', '', '26~30만원'), ('상부장 철거', '', '15~20만원')]),
     ('욕실', [('욕조 코팅', '', '38~45만원'), ('세면대 코팅', '', '28~30만원'), ('안전손잡이 설치', '1개 추가마다 8만원', '25만원부터')]),
     ('복원·보수', [('크랙 복원', '', '20~65만원'), ('문짝 필름 보수', '', '20~30만원'), ('인조대리석 연마 광택', '', '30~80만원'), ('타일 보수', '1장 추가마다 8만원', '20만원부터')]),
+    ('도배·바닥', [('실크 도배', '1평 기준', '9~18만원'), ('합지 도배', '1평 기준', '8~18만원'), ('마루', '1평 기준', '11~15만원'), ('장판', '', '상담 문의'), ('전체 인테리어', '', '별도 문의')]),
 ]
 def price_html():
     grp = ''
     for g, rows in PRICES:
-        li = ''.join(f'<li><span class="pr-n">{E(n)}{f"<small>{E(d)}</small>" if d else ""}</span><i class="pr-dot" aria-hidden="true"></i><b class="pr-v">{E(v.split("만원")[0])}<small>만원{v.split("만원")[1]}</small></b></li>' for n, d, v in rows)
+        li = ''.join(f'<li><span class="pr-n">{E(n)}{f"<small>{E(d)}</small>" if d else ""}</span><i class="pr-dot" aria-hidden="true"></i>{f'<b class="pr-v">{E(v.split("만원")[0])}<small>만원{v.split("만원")[1]}</small></b>' if "만원" in v else f'<b class="pr-v pr-ask">{E(v)}</b>'}</li>' for n, d, v in rows)
         grp += f'<div class="pr-g"><h3>{E(g)}</h3><ul>{li}</ul></div>'
     return ('<section class="price" id="price"><div class="wrap"><p class="label">Price</p><h2 class="h2">가격 안내</h2><p class="pr-sub">자주 맡기시는 작업의 기준 가격이에요.</p>'
             '<div class="pr-base"><span>기본 설치</span><b>15<small>만원</small><i>부터</i></b></div>'
