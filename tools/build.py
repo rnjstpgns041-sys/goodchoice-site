@@ -217,6 +217,9 @@ REGION_PAGES = [  # (key, slug, 표시명)
     ('용인', 'yongin', '용인'), ('수원', 'suwon', '수원'), ('경기 광주', 'gwangju', '경기 광주'),
 ]
 RSLUG = {k: s for k, s, _ in REGION_PAGES}
+SEOUL_GU = '강남구 강동구 강북구 강서구 관악구 광진구 구로구 금천구 노원구 도봉구 동대문구 동작구 마포구 서대문구 서초구 성동구 성북구 송파구 양천구 영등포구 용산구 은평구 종로구 중구 중랑구'.split()
+GG_SI = '가평군 고양시 과천시 광명시 광주시 구리시 군포시 김포시 남양주시 동두천시 부천시 성남시 수원시 시흥시 안산시 안성시 안양시 양주시 양평군 여주시 연천군 오산시 용인시 의왕시 의정부시 이천시 파주시 평택시 포천시 하남시 화성시'.split()
+IC_GU = '중구 동구 미추홀구 연수구 남동구 부평구 계양구 서구 강화군 옹진군'.split()
 
 # ------------------------------------------------------------------ images
 def trim_border(im):
@@ -437,9 +440,25 @@ def header(active):
 '''
 
 
+def foot_area_html():
+    """푸터 '출장 지역' 목록: 서울 25 · 경기 31 · 인천 10, 'OO 집수리' 형식."""
+    def strip(x):
+        return x if len(x) <= 2 else x[:-1]
+    def link(label, href):
+        return f'<a href="{href}">{E(label)} 집수리</a>'
+    seoul = ''.join(link('서울 ' + strip(g), '/area/seoul/') for g in SEOUL_GU)
+    def gg(x):
+        k = '경기 광주' if x == '광주시' else x[:-1]
+        return link(k, '/area/%s/' % RSLUG[k] if k in RSLUG else '/area/')
+    ggs = ''.join(gg(x) for x in GG_SI)
+    ic = ''.join(link('인천 ' + strip(g), '/area/') for g in IC_GU)
+    row = lambda h, items: f'<div class="far"><h3>{h}</h3><nav>{items}</nav></div>'
+    return ('<div class="wrap farea"><h2 class="fh">출장 지역</h2>'
+            + row('서울', seoul) + row('경기', ggs) + row('인천', ic) + '</div>')
+
+
 def footer():
     svc = ''.join('<a href="/service/%s/">%s</a>' % (s['slug'], E(s['name'])) for s in SERVICES)
-    reg = ''.join('<a href="/area/%s/">%s</a>' % (sl, E(nm)) for k, sl, nm in REGION_PAGES)
     return f'''</main>
 <footer>
   <div class="wrap fgrid">
@@ -448,8 +467,9 @@ def footer():
       <p>집수리 &amp; 리폼 전문 · 설치부터 철거·복원까지<br>전화·문자 <a class="ftel" href="tel:{TELN}" data-track="call">{TEL}</a> · <a href="{TALK}" target="_blank" rel="noopener">네이버 톡톡</a><br>서울 · 경기 · 인천 출장 시공<br>© 2026 굿초이스 집수리</p>
     </div>
     <div><h2 class="fh">서비스</h2><nav>{svc}</nav></div>
-    <div><h2 class="fh">안내</h2><nav><a href="/cases/">시공사례</a><a href="/process/">진행 방법</a><a href="/area/">출장 지역</a><a href="/contact/">견적 문의</a><a href="{BLOG}" target="_blank" rel="noopener">네이버 블로그</a></nav><h2 class="fh" style="margin-top:18px">지역</h2><nav>{reg}</nav></div>
+    <div><h2 class="fh">안내</h2><nav><a href="/cases/">시공사례</a><a href="/process/">진행 방법</a><a href="/area/">출장 지역</a><a href="/contact/">견적 문의</a><a href="{BLOG}" target="_blank" rel="noopener">네이버 블로그</a></nav></div>
   </div>
+  {foot_area_html()}
 </footer>
 <nav class="bar" aria-label="빠른 상담">
   <a class="btn btn-accent" href="tel:{TELN}" data-track="call"><svg><use href="#phone"/></svg>전화 상담</a>
@@ -661,9 +681,6 @@ for i, c in enumerate(CASES):
     write('/cases/%s/' % c['id'], head(t + ' | 시공사례 - 굿초이스 집수리', desc, '/cases/%s/' % c['id'], 'photos/c/%s/after.jpg' % c['id'], ld) + header('cases') + body + footer())
 
 # ---------- 작업 가능 지역 전체 (서울 25 · 경기 31 · 인천 10), 실제 사례 있는 곳 강조
-SEOUL_GU = '강남구 강동구 강북구 강서구 관악구 광진구 구로구 금천구 노원구 도봉구 동대문구 동작구 마포구 서대문구 서초구 성동구 성북구 송파구 양천구 영등포구 용산구 은평구 종로구 중구 중랑구'.split()
-GG_SI = '가평군 고양시 과천시 광명시 광주시 구리시 군포시 김포시 남양주시 동두천시 부천시 성남시 수원시 시흥시 안산시 안성시 안양시 양주시 양평군 여주시 연천군 오산시 용인시 의왕시 의정부시 이천시 파주시 평택시 포천시 하남시 화성시'.split()
-IC_GU = '중구 동구 미추홀구 연수구 남동구 부평구 계양구 서구 강화군 옹진군'.split()
 def area_full_html():
     def hit(cs, page):
         if not cs: return None
