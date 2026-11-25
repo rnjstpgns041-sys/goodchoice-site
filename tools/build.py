@@ -881,7 +881,20 @@ def owner_html():
             f'<p class="own-t">{E(OWNER["intro"])}</p></div></div></section>\n')
 
 _HXS = [('224185310911', '건조기 직렬 설치 완료 현장'), ('224257385115', '빌트인 식기세척기 설치 완료'), ('224425527882', '하부장 철거 후 식기세척기 설치')]
-HX_STRIP = ''.join(f'<a href="/cases/{i}/"><img src="/photos/c/{i}/after_s.jpg" alt="{a}" width="320" height="320"{" fetchpriority=\"high\"" if k == 0 else ""}></a>' for k, (i, a) in enumerate(_HXS))
+_seen = {i for i, _ in _HXS}
+for _s in SERVICES:  # 분야마다 실제 사례 사진을 더해 띠를 채운다
+    for _c in _s['cases'][:2]:
+        if _c['id'] not in _seen and len(_HXS) < 10:
+            _HXS.append((_c['id'], _s['short'] + ' 시공 현장')); _seen.add(_c['id'])
+def _hxs_set(dup):
+    out = ''
+    for k, (i, a) in enumerate(_HXS):
+        attr = ' fetchpriority="high"' if (k == 0 and not dup) else ('' if (k < 3 and not dup) else ' loading="lazy"')
+        alt = '' if dup else a
+        tab = ' tabindex="-1"' if dup else ''
+        out += f'<a href="/cases/{i}/"{tab}><img src="/photos/c/{i}/after_s.jpg" alt="{alt}" width="320" height="320"{attr}></a>'
+    return out
+HX_STRIP = f'<div class="hx-track">{_hxs_set(False)}<span class="hx-dup" aria-hidden="true">{_hxs_set(True)}</span></div>'
 # ---------- 가격 안내 (사장님이 보내준 가격, 2026-11-25)
 PRICES = [
     ('주방', [('식기세척기 설치', '하부장 빼고 설치', '20~30만원'), ('싱크대 하부장 제작', '', '35~45만원')]),
