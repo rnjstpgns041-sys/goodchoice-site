@@ -1642,3 +1642,23 @@ body.bar-off .bar{transform:translateY(110%);opacity:0;pointer-events:none}
 a.ac.on:hover{background:#1F1E1C}
 .alegend{display:flex;flex-wrap:wrap;align-items:center;gap:8px 10px;margin:4px 0 0;padding-top:20px;border-top:1px solid #E7E5E0;font-size:13px;line-height:1.7;color:#5E5B56}
 .alegend .ac{height:24px;padding:0 10px;font-size:11.5px}
+
+/* ===== v45: 가격 안내 ===== */
+.price{padding:56px 0!important;background:#F5F4F1!important}
+.pr-base{display:flex;align-items:center;justify-content:space-between;margin:22px 0 14px;padding:18px 20px;border-radius:18px;background:#34332F;color:#fff}
+.pr-base span{font-size:14px;font-weight:600;color:rgba(255,255,255,.8)}
+.pr-base b{font-size:24px;font-weight:800;letter-spacing:-.03em}
+.pr-base b i{font-style:normal;font-size:14px;font-weight:600;margin-left:3px;color:rgba(255,255,255,.75)}
+.pr-grid{display:grid;gap:12px}
+.pr-g{background:#fff;border:1px solid #E7E5E0;border-radius:18px;padding:16px 18px 6px}
+.pr-g h3{margin:0 0 4px;font-size:12px!important;font-weight:700;letter-spacing:.08em;color:#6B6863}
+.pr-g ul{list-style:none;margin:0;padding:0}
+.pr-g li{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 0;border-top:1px solid #F0EEEA}
+.pr-g li:first-child{border-top:0}
+.pr-n{display:flex;flex-direction:column;gap:2px;font-size:15px;font-weight:600;color:#1F1E1C;letter-spacing:-.02em}
+.pr-n small{font-size:12px;font-weight:500;color:#6B6863}
+.pr-v{flex:none;font-size:16px;font-weight:800;color:#1F1E1C;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.pr-note{display:flex;gap:8px;align-items:flex-start;margin:16px 2px 0;font-size:13px;line-height:1.65;color:#5E5B56}
+.pr-note svg{flex:none;width:16px;height:16px;margin-top:2px;fill:none;stroke:#5E5B56;stroke-width:1.8;stroke-linecap:round}
+.pr-cta{display:grid;grid-template-columns:1.1fr 1fr;gap:8px;margin-top:20px}
+@media(min-width:760px){.pr-grid{grid-template-columns:repeat(2,1fr)}.pr-cta{max-width:460px}}

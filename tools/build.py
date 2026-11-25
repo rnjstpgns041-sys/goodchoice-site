@@ -882,6 +882,25 @@ def owner_html():
 
 _HXS = [('224185310911', '건조기 직렬 설치 완료 현장'), ('224257385115', '빌트인 식기세척기 설치 완료'), ('224425527882', '하부장 철거 후 식기세척기 설치')]
 HX_STRIP = ''.join(f'<a href="/cases/{i}/"><img src="/photos/c/{i}/after_s.jpg" alt="{a}" width="320" height="320"{" fetchpriority=\"high\"" if k == 0 else ""}></a>' for k, (i, a) in enumerate(_HXS))
+# ---------- 가격 안내 (사장님이 보내준 가격, 2026-11-25)
+PRICES = [
+    ('주방', [('식기세척기 설치', '하부장 빼고 설치', '20~30만원'), ('싱크대 하부장 제작', '', '35~45만원')]),
+    ('세탁실', [('건조기 랙 설치', '', '26~30만원'), ('상부장 철거', '', '15~20만원')]),
+    ('욕실', [('욕조 코팅', '', '38~45만원'), ('세면대 코팅', '', '28~30만원')]),
+    ('복원', [('크랙 복원', '', '20~65만원')]),
+]
+def price_html():
+    grp = ''
+    for g, rows in PRICES:
+        li = ''.join(f'<li><span class="pr-n">{E(n)}{f"<small>{E(d)}</small>" if d else ""}</span><b class="pr-v">{E(v)}</b></li>' for n, d, v in rows)
+        grp += f'<div class="pr-g"><h3>{E(g)}</h3><ul>{li}</ul></div>'
+    return ('<section class="price" id="price"><div class="wrap"><p class="label">Price</p><h2 class="h2">가격 안내</h2>'
+            '<div class="pr-base"><span>기본 설치</span><b>15만원<i>부터</i></b></div>'
+            f'<div class="pr-grid">{grp}</div>'
+            '<p class="pr-note"><svg aria-hidden="true" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16.5v.01"/></svg>현장 상태와 자재에 따라 금액이 달라질 수 있어요. 사진을 보내주시면 확인 후 정확한 견적을 안내해 드려요.</p>'
+            f'<div class="pr-cta"><a class="btn btn-accent" href="tel:{TELN}" data-track="call"><svg><use href="#phone"/></svg>전화 상담</a><a class="btn btn-ghost" href="{E(SMS_HREF)}" data-sms data-track="sms"><svg><use href="#chat"/></svg>문자 견적</a></div>'
+            '</div></section>\n')
+
 HX_CHIPS = ''.join('<a href="/service/%s/"><span class="hc-ic"><svg aria-hidden="true"><use href="#%s"/></svg></span><span class="hc-n">%s</span><i>%d</i></a>' % (x['slug'], x['icon'], E(x['short']), len(x['cases'])) for x in SERVICES)
 hero = f'''<section class="hx">
   <div class="hx-bg" aria-hidden="true"></div>
@@ -920,7 +939,7 @@ hero = f'''<section class="hx">
     </ul>
   </div>
 </section>
-''' + hba_html() + reviews_html() + owner_html()
+''' + hba_html() + reviews_html() + price_html() + owner_html()
 lb_ld = {"@context": "https://schema.org", "@type": "HomeAndConstructionBusiness", "name": "굿초이스 집수리", "description": "빌트인 식기세척기 설치·철거, 건조기 직렬 설치, 샤워부스 철거, 정수기 철거 및 싱크대 상판 복원, 문 방향 변경, 가구 리폼 전문.",
          "telephone": "+82-10-5809-9275", "url": SITE + "/", "image": SITE + "/photos/c/224425527882/after.jpg", "areaServed": ["서울", "경기", "인천"], "sameAs": [BLOG],
          "makesOffer": [{"@type": "Offer", "itemOffered": {"@type": "Service", "name": s['name'], "url": SITE + "/service/%s/" % s['slug']}} for s in SERVICES]}
