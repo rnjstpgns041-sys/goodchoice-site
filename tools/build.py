@@ -219,10 +219,32 @@ REGION_PAGES = [  # (key, slug, 표시명)
 RSLUG = {k: s for k, s, _ in REGION_PAGES}
 
 # ------------------------------------------------------------------ images
+def trim_border(im):
+    """블로그 사진 가장자리에 남은 검은·흰 테두리 줄을 잘라내고, 남은 잔선이 보이지 않게 1.5%를 더 다듬는다."""
+    import numpy as np
+    g = np.asarray(im.convert('L'), dtype=np.float32)
+    h, w = g.shape
+    def is_border(line):
+        m, sd = line.mean(), line.std()
+        return sd < 14 and (m < 60 or m > 232)
+    lim_y, lim_x = int(h * .08), int(w * .08)
+    t = 0
+    while t < lim_y and is_border(g[t]): t += 1
+    b = 0
+    while b < lim_y and is_border(g[h - 1 - b]): b += 1
+    l = 0
+    while l < lim_x and is_border(g[:, l]): l += 1
+    r = 0
+    while r < lim_x and is_border(g[:, w - 1 - r]): r += 1
+    py, px = int(h * .015) + 1, int(w * .015) + 1
+    return im.crop((l + px, t + py, w - r - px, h - b - py))
+
+
 def save_img(src, dst, maxw, square=False, q=78):
     if os.path.exists(dst) and os.path.getmtime(dst) >= os.path.getmtime(src): return
     os.makedirs(os.path.dirname(dst), exist_ok=True)
     im = Image.open(src); im = ImageOps.exif_transpose(im).convert('RGB')
+    im = trim_border(im)
     if square:
         w, h = im.size; s = min(w, h)
         im = im.crop(((w - s) // 2, (h - s) // 2, (w - s) // 2 + s, (h - s) // 2 + s))
