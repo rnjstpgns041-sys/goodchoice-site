@@ -1674,3 +1674,37 @@ a.ac.on:hover{background:#1F1E1C}
 @keyframes hxroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 @media(prefers-reduced-motion:reduce){.hx-track{animation:none}.hx-strip{overflow-x:auto}}
 @media(min-width:760px){.hx-strip{margin:0 0 26px!important}.hx-strip a{width:180px}.hx-strip a:nth-child(3n+1){width:220px}.hx-strip img{height:140px!important}}
+
+/* ===== v47: 가격 안내 프리미엄 — 차콜 메뉴판 ===== */
+.price{background:#2B2A28!important;color:#F4F3F0;padding:64px 0 60px!important}
+.price .label{background:transparent!important;border-color:rgba(255,255,255,.25)!important;color:rgba(255,255,255,.75)!important}
+.price .label::before{background:#fff!important}
+.price .h2{color:#fff!important}
+.pr-sub{margin:10px 0 0;font-size:13.5px;color:rgba(255,255,255,.6)}
+.pr-base{position:relative;flex-direction:column;align-items:flex-start;gap:6px;margin:28px 0 30px!important;padding:22px 22px 20px!important;background:none!important;border:1px solid rgba(255,255,255,.22);border-radius:4px!important}
+.pr-base::before,.pr-base::after{content:"";position:absolute;width:14px;height:14px;border-color:#fff;border-style:solid}
+.pr-base::before{top:-1px;left:-1px;border-width:2px 0 0 2px}
+.pr-base::after{bottom:-1px;right:-1px;border-width:0 2px 2px 0}
+.pr-base span{font-size:12px!important;letter-spacing:.14em;color:rgba(255,255,255,.6)!important;font-weight:600}
+.pr-base b{font-size:44px!important;font-weight:800;letter-spacing:-.04em;line-height:1;color:#fff}
+.pr-base b small{font-size:18px;font-weight:700;margin-left:3px;letter-spacing:-.02em}
+.pr-base b i{font-size:15px!important;color:rgba(255,255,255,.6)!important;margin-left:6px}
+.pr-grid{gap:30px!important}
+.pr-g{background:none!important;border:0!important;border-radius:0!important;padding:0!important}
+.pr-g h3{display:flex;align-items:center;gap:12px;margin:0 0 6px!important;font-size:12px!important;letter-spacing:.18em!important;color:rgba(255,255,255,.55)!important;font-weight:700}
+.pr-g h3::after{content:"";flex:1;height:1px;background:rgba(255,255,255,.14)}
+.pr-g li{align-items:baseline!important;gap:10px!important;padding:13px 0!important;border-top:0!important}
+.pr-n{flex:none;color:#fff!important;font-size:15.5px!important;font-weight:600!important}
+.pr-n small{color:rgba(255,255,255,.5)!important;font-size:12px}
+.pr-dot{flex:1;min-width:16px;height:1px;align-self:center;background:repeating-linear-gradient(90deg,rgba(255,255,255,.3) 0 2px,transparent 2px 6px);font-style:normal}
+.pr-v{color:#fff!important;font-size:18px!important;font-weight:700!important;letter-spacing:-.01em!important}
+.pr-v small{font-size:12px;font-weight:600;margin-left:2px;color:rgba(255,255,255,.65)}
+.pr-note{margin-top:26px!important;padding-top:18px;border-top:1px solid rgba(255,255,255,.12);color:rgba(255,255,255,.62)!important}
+.pr-note svg{stroke:rgba(255,255,255,.6)!important}
+.price .pr-cta .btn-accent{background:#fff!important;color:#1F1E1C!important;box-shadow:none!important}.price .pr-cta .btn-accent svg{stroke:#1F1E1C}
+.price .pr-cta .btn-ghost{background:transparent!important;color:#fff!important;border-color:rgba(255,255,255,.35)!important}.price .pr-cta .btn-ghost svg{stroke:#fff}
+@media(min-width:760px){.pr-grid{column-gap:56px!important}}
+.price{background:#1F1E1C!important}
+.pr-g li{align-items:flex-start!important}
+.pr-dot{align-self:flex-start!important;margin-top:.85em}
+.pr-v{align-self:flex-start}

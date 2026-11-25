@@ -905,10 +905,10 @@ PRICES = [
 def price_html():
     grp = ''
     for g, rows in PRICES:
-        li = ''.join(f'<li><span class="pr-n">{E(n)}{f"<small>{E(d)}</small>" if d else ""}</span><b class="pr-v">{E(v)}</b></li>' for n, d, v in rows)
+        li = ''.join(f'<li><span class="pr-n">{E(n)}{f"<small>{E(d)}</small>" if d else ""}</span><i class="pr-dot" aria-hidden="true"></i><b class="pr-v">{E(v.replace("만원", ""))}<small>만원</small></b></li>' for n, d, v in rows)
         grp += f'<div class="pr-g"><h3>{E(g)}</h3><ul>{li}</ul></div>'
-    return ('<section class="price" id="price"><div class="wrap"><p class="label">Price</p><h2 class="h2">가격 안내</h2>'
-            '<div class="pr-base"><span>기본 설치</span><b>15만원<i>부터</i></b></div>'
+    return ('<section class="price" id="price"><div class="wrap"><p class="label">Price</p><h2 class="h2">가격 안내</h2><p class="pr-sub">자주 맡기시는 작업의 기준 가격이에요.</p>'
+            '<div class="pr-base"><span>기본 설치</span><b>15<small>만원</small><i>부터</i></b></div>'
             f'<div class="pr-grid">{grp}</div>'
             '<p class="pr-note"><svg aria-hidden="true" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16.5v.01"/></svg>현장 상태와 자재에 따라 금액이 달라질 수 있어요. 사진을 보내주시면 확인 후 정확한 견적을 안내해 드려요.</p>'
             f'<div class="pr-cta"><a class="btn btn-accent" href="tel:{TELN}" data-track="call"><svg><use href="#phone"/></svg>전화 상담</a><a class="btn btn-ghost" href="{E(SMS_HREF)}" data-sms data-track="sms"><svg><use href="#chat"/></svg>문자 견적</a></div>'
