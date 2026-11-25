@@ -1713,3 +1713,13 @@ a.ac.on:hover{background:#1F1E1C}
 /* v52 footer logo check visible */
 .mark svg{color:#fff}
 footer .mark svg{color:#1F1E1C!important;stroke:currentColor!important}
+
+/* v57 footer 출장 지역 */
+.farea{margin-top:36px;padding-top:28px;border-top:1px solid rgba(255,255,255,.12)}
+.farea .fh{margin:0 0 14px}
+.far{display:grid;grid-template-columns:44px 1fr;gap:10px;padding:12px 0;border-top:1px solid rgba(255,255,255,.06)}
+.far:first-of-type{border-top:0;padding-top:0}
+.far h3{margin:0;font-size:12px;font-weight:700;letter-spacing:.02em;color:rgba(255,255,255,.9)!important;line-height:22px}
+.far nav{display:flex;flex-wrap:wrap;gap:2px 14px}
+footer .far nav a{font-size:12.5px;font-weight:400;line-height:22px;color:rgba(255,255,255,.55)!important;padding:0;white-space:nowrap}
+footer .far nav a:hover{color:#fff!important}
