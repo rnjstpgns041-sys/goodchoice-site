@@ -17,7 +17,7 @@ TALK = 'https://talk.naver.com/w5i8w9'
 BLOG = 'https://blog.naver.com/las8015'
 
 # ---- 사장님 계정이 필요한 값 (받으면 여기에 넣고 다시 빌드) ----
-NAVER_SITE_VERIFICATION = ''   # 네이버 서치어드바이저 HTML 태그의 content 값
+NAVER_SITE_VERIFICATION = '20955a9d6047bec65633ecb6a04f4e3c730c7475'
 GOOGLE_SITE_VERIFICATION = ''  # 구글 서치콘솔 (선택)
 NAVER_ANALYTICS_ID = ''        # 네이버 애널리틱스 사이트 ID (예: 'a1b2c3d4e5f6')
 GA4_ID = ''                    # 구글 애널리틱스 측정 ID (예: 'G-XXXXXXX')
