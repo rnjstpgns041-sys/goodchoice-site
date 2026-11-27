@@ -1,0 +1,42 @@
+# main 에 tools/indexnow-urls.txt 가 바뀌어 올라오면(매일 아침 새 검색어 페이지),
+# GitHub Pages 배포가 끝나길 기다렸다가 네이버·빙 IndexNow 로 새 주소를 보냅니다.
+name: indexnow
+on:
+  push:
+    branches: [main]
+    paths: [tools/indexnow-urls.txt]
+  workflow_dispatch:
+jobs:
+  submit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Wait for GitHub Pages deploy
+        run: |
+          first=$(head -n1 tools/indexnow-urls.txt)
+          for i in $(seq 1 40); do
+            code=$(curl -s -o /dev/null -w '%{http_code}' "$first")
+            echo "try $i: $first -> $code"
+            [ "$code" = "200" ] && exit 0
+            sleep 30
+          done
+          echo "page still not live after 20 min"; exit 1
+      - name: Submit to Naver and Bing (IndexNow)
+        run: |
+          python3 - <<'PY'
+          import json, urllib.request
+          KEY = '71686cc371f297ddacfe26c8bca6ccb2'
+          urls = [u.strip() for u in open('tools/indexnow-urls.txt') if u.strip()]
+          body = json.dumps({'host': 'las8015.com', 'key': KEY, 'keyLocation': 'https://las8015.com/%s.txt' % KEY, 'urlList': urls}).encode()
+          bad = 0
+          for ep in ['https://searchadvisor.naver.com/indexnow', 'https://api.indexnow.org/indexnow']:
+              req = urllib.request.Request(ep, data=body, headers={'Content-Type': 'application/json; charset=utf-8'})
+              try:
+                  r = urllib.request.urlopen(req, timeout=30); code = r.status
+              except urllib.error.HTTPError as e:
+                  code = e.code
+              print('%s -> %s (%d urls)' % (ep, code, len(urls)))
+              print('::notice title=IndexNow::%s %s (%d urls)' % (ep, code, len(urls)))
+              if code not in (200, 202): bad += 1
+          raise SystemExit(1 if bad else 0)
+          PY
