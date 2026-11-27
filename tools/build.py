@@ -467,7 +467,7 @@ def footer():
       <p>집수리 &amp; 리폼 전문 · 설치부터 철거·복원까지<br>전화·문자 <a class="ftel" href="tel:{TELN}" data-track="call">{TEL}</a> · <a href="{TALK}" target="_blank" rel="noopener">네이버 톡톡</a><br>서울 · 경기 · 인천 출장 시공<br>© 2026 굿초이스 집수리</p>
     </div>
     <div><h2 class="fh">서비스</h2><nav>{svc}</nav></div>
-    <div><h2 class="fh">안내</h2><nav><a href="/cases/">시공사례</a><a href="/process/">진행 방법</a><a href="/area/">출장 지역</a><a href="/contact/">견적 문의</a><a href="{BLOG}" target="_blank" rel="noopener">네이버 블로그</a></nav></div>
+    <div><h2 class="fh">안내</h2><nav><a href="/cases/">시공사례</a><a href="/process/">진행 방법</a><a href="/area/">출장 지역</a><a href="/k/">지역별 안내</a><a href="/contact/">견적 문의</a><a href="{BLOG}" target="_blank" rel="noopener">네이버 블로그</a></nav></div>
   </div>
   {foot_area_html()}
 </footer>
@@ -1001,6 +1001,9 @@ lb_ld = {"@context": "https://schema.org", "@type": "HomeAndConstructionBusiness
 extra = '<script type="application/ld+json">%s</script>\n' % json.dumps(lb_ld, ensure_ascii=False)
 write('/index.html', head('굿초이스 집수리 | 식기세척기·건조기 설치, 샤워부스 철거, 원상복구', '굿초이스 집수리: 빌트인 식기세척기 설치·철거, 건조기 직렬 설치, 샤워부스 철거, 정수기 철거와 싱크대 상판 복원, 문 방향 변경, 가구 리폼. 서울·경기·인천 출장, 사진으로 먼저 상담합니다. 010-5809-9275', '/', extra=extra) + header('') + hero + home + footer())
 
+# ---------- 지역 × 작업 검색어 페이지 (/k/), tools/kw_published.json 기준
+exec(open(os.path.join(ROOT, 'tools/kw_pages.py'), encoding='utf-8').read())
+
 # ---------- 404
 write('/404.html', head('페이지를 찾을 수 없습니다 - 굿초이스 집수리', '요청하신 페이지를 찾을 수 없습니다.', '/404.html').replace('index,follow', 'noindex') + header('') + '<section class="phero"><div class="wrap"><h1>페이지를 찾을 수 없어요</h1><p class="lead">주소가 바뀌었을 수 있어요. 아래에서 찾아보세요.</p><div class="ctas"><a class="btn btn-accent" href="/">홈으로</a><a class="btn btn-ghost" href="/cases/">시공사례</a><a class="btn btn-ghost" href="/service/">서비스</a></div></div></section>' + footer())
 URLS.remove('/404.html')
@@ -1013,6 +1016,10 @@ for u in URLS:
     lm = today
     m = re.match(r'/cases/(\d+)/', u)
     if m: lm = CBY[m.group(1)]['date']
+    m = re.match(r'/k/([a-z0-9-]+)/', u)
+    if m:
+        for (_t, _r), _dd in KDATE.items():
+            if kurl(_t, _r) == u: lm = _dd
     sm += '  <url><loc>%s%s</loc><lastmod>%s</lastmod></url>\n' % (SITE, u, lm)
 sm += '</urlset>\n'
 open(os.path.join(ROOT, 'sitemap.xml'), 'w').write(sm)
@@ -1021,6 +1028,9 @@ rss = ['<?xml version="1.0" encoding="UTF-8"?>\n<rss version="2.0"><channel><tit
 for c in sorted(CASES, key=lambda c: c['date'], reverse=True):
     dt = datetime.datetime.strptime(c['date'], '%Y-%m-%d').replace(hour=9, tzinfo=datetime.timezone(datetime.timedelta(hours=9)))
     rss.append('<item><title>%s</title><link>%s/cases/%s/</link><guid>%s/cases/%s/</guid><pubDate>%s</pubDate><description>%s</description></item>' % (E(seo_title(c)), SITE, c['id'], SITE, c['id'], format_datetime(dt), E(c['problem'] or c['sum'])))
+for _d, _t, _r in sorted(KPAGES, reverse=True)[:100]:  # 최근 공개된 지역별 안내 페이지
+    dt = datetime.datetime.strptime(_d, '%Y-%m-%d').replace(hour=8, tzinfo=datetime.timezone(datetime.timedelta(hours=9)))
+    rss.append('<item><title>%s</title><link>%s%s</link><guid>%s%s</guid><pubDate>%s</pubDate><description>%s</description></item>' % (E(ktitle(_t, _r)), SITE, kurl(_t, _r), SITE, kurl(_t, _r), format_datetime(dt), E(KT[_t]['lead'].format(R=KR[_r][1], RF=KR[_r][2]))))
 rss.append('</channel></rss>\n')
 open(os.path.join(ROOT, 'rss.xml'), 'w').write(''.join(rss))
 # ---------- webp 변환 + CSS 압축
